@@ -16,13 +16,22 @@ int	main(void)
 
 	//Test 3 - %c & %s
 	int	total3 = ft_printf("H%cl%co%so%s3", 'e', 'l', ", W", "rld");
-	printf("\n%d\n", total3);*/
+	printf("\n%d\n", total3);
 
 	//Test 4 - %p
 	char	str[] = "Hello, World";
 	void	*ptr = &str[0];
 	int	total4 = ft_printf("%p", ptr);
-	printf("\n%p\n", ptr);
 	printf("\n%d\n", total4);
+	int	total4_2 = printf("%p", ptr);
+	printf("\n%d\n", total4_2);*/
+
+	
+	ft_printf("%x\n", 179526);
+	printf("%x\n", 179526);
+	ft_printf("%X\n", 179526);
+	printf("%X\n", 179526);
+	//ft_printf("%%%%\n");
+	printf("%%%%\n");
 	return (0);
 }

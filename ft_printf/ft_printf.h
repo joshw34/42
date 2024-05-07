@@ -14,5 +14,8 @@ void	ft_print_char(char c, size_t *char_count);
 void	ft_print_str(char *str, size_t *char_count);
 void	ft_print_ptr(void *ptr, size_t *char_count);
 void	ft_print_hex_lower(unsigned long num, size_t *char_count);
+void	ft_print_hex_upper(unsigned long num, size_t *char_count);
+void	ft_print_int(int num, size_t *char_count);
+void	ft_print_uint(unsigned int num, size_t *char_count);
 
 #endif

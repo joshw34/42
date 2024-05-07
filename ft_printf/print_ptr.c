@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-ft_print_ptr(void *ptr, size_t *char_count)
+void	ft_print_ptr(void *ptr, size_t *char_count)
 {
 	unsigned long	addr;
 

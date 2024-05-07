@@ -8,6 +8,16 @@ void	ft_format_type(va_list args, char *str, size_t *char_count)
 		ft_print_str(va_arg(args, char *), char_count);
 	else if (*str == 'p')
 		ft_print_ptr(va_arg(args, void *), char_count);
+	else if (*str == 'd' || *str == 'i')
+		ft_print_int(va_arg(args, int), char_count);
+	else if (*str == 'u')
+		ft_print_uint(va_arg(args, unsigned int), char_count);
+	else if (*str == 'x')
+		ft_print_hex_lower(va_arg(args, unsigned long), char_count);
+	else if (*str == 'X')
+		ft_print_hex_upper(va_arg(args, unsigned long), char_count);
+	else if (*str == '%')
+		ft_print_char(*str, char_count);
 }
 
 int	ft_printf(const char *str, ...)
