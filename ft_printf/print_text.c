@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_text.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/09 11:23:57 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/05/09 11:24:11 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_print_char(char c, size_t *char_count)
@@ -14,7 +26,7 @@ void	ft_print_str(char *str, size_t *char_count)
 	if (str == NULL)
 	{
 		ft_print_str("(null)", char_count);
-		return;
+		return ;
 	}
 	len = ft_strlen(str);
 	i = 0;

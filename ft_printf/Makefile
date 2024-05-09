@@ -1,4 +1,4 @@
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 C_FILES =	ft_printf.c \
 			print_dec.c \
