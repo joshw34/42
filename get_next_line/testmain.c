@@ -3,17 +3,36 @@
 
 int	main(void)
 {
-	int	fd;
+	// Full page
+	
+	/*int	fd;
 	int	i;
 
-	//fd = open("testfile.txt", O_RDONLY);
-	fd = 0;
+	fd = open("testfile.txt", O_RDONLY);
 	i = 0;
 	while (i < 32)
 	{
 		printf("%s", get_next_line(fd));
 		i++;
 		sleep(1);
-	}
+	}*/
+
+	// First Line
+
+	int fd;
+	fd = open("testfile.txt", O_RDONLY);
+	char *line;
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+
+
+	// From stdin
+
+	/*int fd;
+	fd = 0;
+	printf("%s", get_next_line(fd));*/
+
+
 	return (0);
 }
