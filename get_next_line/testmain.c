@@ -19,12 +19,12 @@ int	main(void)
 
 	// First Line
 
-	int fd;
+	/*int fd;
 	fd = open("testfile.txt", O_RDONLY);
 	char *line;
 	line = get_next_line(fd);
 	printf("%s", line);
-	free(line);
+	free(line);*/
 
 
 	// From stdin
@@ -32,6 +32,18 @@ int	main(void)
 	/*int fd;
 	fd = 0;
 	printf("%s", get_next_line(fd));*/
+
+	int fd = open("testfile.txt", O_RDONLY);
+	char *line;
+	int i = 0;
+
+	while (i < 32)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		sleep(1);
+		i++;
+	}
 
 
 	return (0);
