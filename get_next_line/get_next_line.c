@@ -78,6 +78,7 @@ char	*read_file(int	fd, char *total)
 		if (bytes_read == -1)
 		{
 			free(temp);
+			free(total);
 			return (NULL);
 		}
 		temp[bytes_read] = '\0';
@@ -94,7 +95,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
