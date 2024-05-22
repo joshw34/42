@@ -1,93 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/22 11:31:28 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/05/22 11:50:16 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <stdio.h>
 
-char	*join_free(char *total, char *buffer)
+char	*leftover(char *buffer)
 {
-	char	*joined;
-
-	joined = gnl_strjoin(total, buffer);
-	free(total);
-	return (joined);
-}
-
-char	*leftover(char *total)
-{
+	int		i;
+	int		j;
 	char	*leftover;
-	int	i;
-	int	j;
 
 	i = 0;
 	j = 0;
-	while (total[i] && total[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (total[i] == '\0')
+	if (!buffer[i])
 	{
-		free(total);
+		free(buffer);
 		return (NULL);
 	}
-	leftover = gnl_calloc(gnl_strlen(total) - i + 1, sizeof(char));
+	leftover = (char *)malloc((gnl_strlen(buffer) - i + 1) * sizeof(char));
 	if (!leftover)
 		return (NULL);
 	i++;
-	while (total[i])
-	{
-		leftover[j] = total[i];
-		i++;
-		j++;
-	}
-	free(total);
+	while (buffer[i])
+		leftover[j++] = buffer[i++];
+	leftover[j] = '\0';
+	free(buffer);
 	return (leftover);
 }
 
-char	*next_line(char *total)
+char	*next_line(char *buffer)
 {
+	int		i;
 	char	*result;
-	size_t	i;
 
 	i = 0;
-	if (total[i] == '\0')
+	if (!buffer[i])
 		return (NULL);
-	while (total[i] && total[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	result = gnl_calloc(i + 2, sizeof(char));
+	result = (char *)malloc((i + 2) * sizeof(char));
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (total[i] && total[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 	{
-		result[i] = total[i];
+		result[i] = buffer[i];
 		i++;
 	}
-	if (total[i] && total[i] =='\n')
-		result[i++] = '\n';
+	if (buffer[i] == '\n')
+	{
+		result[i] = buffer[i];
+		i++;
+	}
+	result[i] = '\0';
 	return (result);
 }
 
-char	*read_file(int	fd, char *total)
+char	*read_file(int fd, char *buffer)
 {
 	char	*temp;
 	int		bytes_read;
 
-	if (!total)
-		total = gnl_calloc(1, 1);
-	temp = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!temp)
+		return (NULL);
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (!gnl_strchr(buffer, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
 			free(temp);
-			free(total);
 			return (NULL);
 		}
 		temp[bytes_read] = '\0';
-		total = join_free(total, temp);
-		if (gnl_strchr(temp, '\n') != 0)
-			break ;
+		buffer = gnl_strjoin(buffer, temp);
 	}
 	free(temp);
-	return (total);
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (0);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
