@@ -41,10 +41,11 @@ int	main(void)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
-		sleep(1);
+		free(line);
+		//sleep(1);
 		i++;
 	}
-
+	close(fd);
 
 	return (0);
 }
