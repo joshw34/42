@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:14:38 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:08:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	void	*ptr;
-	size_t	total_size;
+	unsigned char				*d;
+	const unsigned char			*s;
+	size_t						i;
 
-	if (nmemb == 0 || size == 0)
+	d = (unsigned char *) dest;
+	s = (const unsigned char *) src;
+	i = 0;
+	if (dest + i == NULL && src + i == NULL)
+		return (NULL);
+	while (i < n)
 	{
-		nmemb = 1;
-		size = 1;
+		d[i] = s[i];
+		i++;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	return (dest);
 }

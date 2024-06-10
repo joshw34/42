@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/05/01 12:58:49 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:12:53 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	void	*ptr;
-	size_t	total_size;
+	t_list	*temp;
+	t_list	*result;
 
-	if (nmemb == 0 || size == 0)
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	temp = ft_lstnew(f(lst->content));
+	lst = lst->next;
+	if (temp == NULL)
+		return (NULL);
+	result = temp;
+	while (lst != NULL)
 	{
-		nmemb = 1;
-		size = 1;
+		temp = ft_lstnew(f(lst->content));
+		if (temp == NULL)
+		{
+			del(result);
+			return (NULL);
+		}
+		ft_lstadd_back(&result, temp);
+		lst = lst->next;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	return (result);
 }

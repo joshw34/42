@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:18:23 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:11:23 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	void	*ptr;
-	size_t	total_size;
+	size_t	i;
+	char	*result;
 
-	if (nmemb == 0 || size == 0)
+	i = 0;
+	result = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (result == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		nmemb = 1;
-		size = 1;
+		result[i] = f(i, s[i]);
+		i++;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	result[i] = '\0';
+	return (result);
 }

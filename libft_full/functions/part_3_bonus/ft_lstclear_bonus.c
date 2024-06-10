@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/30 15:01:02 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:12:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	void	*ptr;
-	size_t	total_size;
+	t_list	*temp;
 
-	if (nmemb == 0 || size == 0)
+	if (*lst == NULL)
+		return ;
+	while (*lst != NULL)
 	{
-		nmemb = 1;
-		size = 1;
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = temp;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	*lst = NULL;
 }

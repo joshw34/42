@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   print_text.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/05/09 11:23:57 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/05/09 11:24:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "ft_printf.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_print_char(char c, size_t *char_count)
 {
-	void	*ptr;
-	size_t	total_size;
+	write(1, &c, 1);
+	*char_count += 1;
+}
 
-	if (nmemb == 0 || size == 0)
+void	ft_print_str(char *str, size_t *char_count)
+{
+	size_t	len;
+	size_t	i;
+
+	if (str == NULL)
 	{
-		nmemb = 1;
-		size = 1;
+		ft_print_str("(null)", char_count);
+		return ;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	len = ft_strlen(str);
+	i = 0;
+	while (i < len)
+	{
+		ft_print_char(str[i], char_count);
+		i++;
+	}
 }

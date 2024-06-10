@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:18 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:17:23 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:09:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <limits.h>
+#include "../../libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	void	*ptr;
-	size_t	total_size;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
-	if (nmemb == 0 || size == 0)
+	i = ft_strlen(dst);
+	j = 0;
+	len = (ft_strlen(dst) + ft_strlen(src));
+	if ((size == 0) || (size < i))
+		return (ft_strlen(src) + size);
+	while (i < (size - 1) && src[j] != '\0')
 	{
-		nmemb = 1;
-		size = 1;
+		dst[i] = src[j];
+		i++;
+		j++;
 	}
-	if (size > (INT_MAX / nmemb))
-		return (NULL);
-	total_size = nmemb * size;
-	ptr = malloc(total_size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero(ptr, total_size);
-	return (ptr);
+	dst[i] = '\0';
+	return (len);
 }

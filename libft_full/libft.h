@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:21 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/10 12:32:17 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:07:06 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+int	ft_printf(const char *str, ...);
+char	*get_next_line(int fd);
 
 #endif
