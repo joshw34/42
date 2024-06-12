@@ -18,6 +18,19 @@ typedef struct s_stack_node
 
 }	t_stack_node;
 
-char	**split_argv(char *arg_list);
+/* error_checking.c */
+bool	check_error(char **input);
+bool	check_format(char *str);
+bool	check_repeat(char *str, char **input);
+
+/* free_quit.c*/
+void	quit_error(void);
+void	quit_error_free(char **argv, int start_pos);
+void	free_argv(char **argv);
+
+/* create_stack_a.c */
+bool	create_stack_a(t_stack_node **stack_a, char **input, int start_pos);
+
+/* stack_tools.c */
 
 #endif

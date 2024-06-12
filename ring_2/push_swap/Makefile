@@ -5,7 +5,10 @@ INC_DIR = ./inc
 LIBFT_DIR = ./libft
 
 SRC_FILES =	$(SRC_DIR)/push_swap.c \
-			$(SRC_DIR)/split_argv.c \
+			$(SRC_DIR)/error_checking.c \
+			$(SRC_DIR)/free_quit.c \
+			$(SRC_DIR)/create_stack_a.c \
+			$(SRC_DIR)/stack_tools.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
