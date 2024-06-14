@@ -25,7 +25,7 @@ static	long	ft_atol(const char *nptr)
 	return (sign * result);
 }
 
-bool	check_repeat(char *str, char **input)
+static	bool	check_repeat(char *str, char **input)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ bool	check_repeat(char *str, char **input)
 	return (true);
 }
 
-bool	check_format(char *str)
+static	bool	check_format(char *str)
 {
 	int		i;
 	long	nbr;
