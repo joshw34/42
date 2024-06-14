@@ -6,11 +6,16 @@ void	quit_error(void)
 	exit (1);
 }
 
-void	quit_error_free(char **argv, int start_pos)
+void	free_stack(t_stack_node **stack)
 {
-	if (start_pos == 0)
-		free_argv(argv);
-	quit_error();
+	t_stack_node	*temp;
+
+	while (*stack != NULL)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
 }
 
 void	free_argv(char **argv)
@@ -24,4 +29,13 @@ void	free_argv(char **argv)
 		i++;
 	}
 	free(argv);
+}
+
+void	quit_error_free(t_stack_node **stack, char **argv, int start_pos)
+{
+	if (start_pos == 0)
+		free_argv(argv);
+	if (*stack != NULL)
+		free_stack(stack);
+	quit_error();
 }

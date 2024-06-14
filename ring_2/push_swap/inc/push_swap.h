@@ -25,12 +25,16 @@ bool	check_repeat(char *str, char **input);
 
 /* free_quit.c*/
 void	quit_error(void);
-void	quit_error_free(char **argv, int start_pos);
+void	quit_error_free(t_stack_node **stack, char **argv, int start_pos);
 void	free_argv(char **argv);
+void	free_stack(t_stack_node **stack);
 
 /* create_stack_a.c */
 bool	create_stack_a(t_stack_node **stack_a, char **input, int start_pos);
 
 /* stack_tools.c */
+t_stack_node	*last_node(t_stack_node *node);
+t_stack_node	*new_node(int nbr);
+bool			add_node(t_stack_node **stack, int nbr);
 
 #endif

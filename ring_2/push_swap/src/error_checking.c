@@ -1,5 +1,30 @@
 #include "../inc/push_swap.h"
 
+static	long	ft_atol(const char *nptr)
+{
+	int		i;
+	int		sign;
+	long	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((nptr[i] > 8 && nptr[i] < 14) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == 43 || nptr[i] == 45)
+	{
+		if (nptr[i] == 45)
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] > 47 && nptr[i] < 58)
+	{
+		result = (result * 10) + (nptr[i] - 48);
+		i++;
+	}
+	return (sign * result);
+}
+
 bool	check_repeat(char *str, char **input)
 {
 	int	i;
@@ -19,7 +44,8 @@ bool	check_repeat(char *str, char **input)
 
 bool	check_format(char *str)
 {
-	int	i;
+	int		i;
+	long	nbr;
 
 	i = 0;
 	if (ft_isdigit(str[i]) == 0 && str[i] != '+' && str[i] != '-')
@@ -32,6 +58,9 @@ bool	check_format(char *str)
 			return (false);
 		i++;
 	}
+	nbr = ft_atol(str);
+	if (nbr > INT_MAX || nbr < INT_MIN)
+		return (false);
 	return (true);
 }
 

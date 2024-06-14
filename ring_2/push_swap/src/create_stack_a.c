@@ -2,15 +2,16 @@
 
 bool	create_stack_a(t_stack_node **stack_a, char **input, int start_pos)
 {
-	//int		i;
-	//long	num;
+	int		i;
 
-	//i = 1;
-	(void)stack_a;
+	i = start_pos;
 	if (!check_error(input + start_pos))
+		quit_error_free(stack_a, input, start_pos);
+	while (input[i])
 	{
-		quit_error_free(input, start_pos);
-		return (false);
+		if (!add_node(stack_a, ft_atoi(input[i])))
+			quit_error_free(stack_a, input, start_pos);
+		i++;
 	}
 	if (start_pos == 0)
 		free_argv(input);
