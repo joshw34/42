@@ -17,5 +17,12 @@ int	main(int argc, char **argv)
 		start_pos = 0;
 	}
 	create_stack_a(&a, argv, start_pos);
+	/*while (a != NULL)
+	{
+		ft_printf("Nbr: %d, Ind: %d, Top: %d, Current: %p, Next: %p, Prev: %p\n", a->nbr, a->current_index, a->top_half, a, a->next, a->prev);
+		ft_printf("\n");
+		a = a->next;
+	}*/
+	free_stack(&a);
 	return (0);
 }

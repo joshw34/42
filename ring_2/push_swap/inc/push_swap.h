@@ -20,8 +20,6 @@ typedef struct s_stack_node
 
 /* error_checking.c */
 bool	check_error(char **input);
-bool	check_format(char *str);
-bool	check_repeat(char *str, char **input);
 
 /* free_quit.c*/
 void	quit_error(void);
@@ -36,5 +34,5 @@ bool	create_stack_a(t_stack_node **stack_a, char **input, int start_pos);
 t_stack_node	*last_node(t_stack_node *node);
 t_stack_node	*new_node(int nbr);
 bool			add_node(t_stack_node **stack, int nbr);
-
+void			curr_index_top_half(t_stack_node *stack);
 #endif
