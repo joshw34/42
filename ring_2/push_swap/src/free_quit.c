@@ -31,9 +31,9 @@ void	free_argv(char **argv)
 	free(argv);
 }
 
-void	quit_error_free(t_stack_node **stack, char **argv, int start_pos)
+void	quit_error_free(t_stack_node **stack, char **argv, int start)
 {
-	if (start_pos == 0)
+	if (start == 0)
 		free_argv(argv);
 	if (*stack != NULL)
 		free_stack(stack);

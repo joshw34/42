@@ -67,7 +67,7 @@ static	bool	check_format(char *str)
 bool	check_error(char **input)
 {
 	int	i;
-	
+
 	i = 0;
 	while (input[i])
 	{
@@ -79,4 +79,3 @@ bool	check_error(char **input)
 	}
 	return (true);
 }
-

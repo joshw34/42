@@ -1,9 +1,22 @@
 #include "../inc/push_swap.h"
 
+int	count_nodes(t_stack_node *stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack != NULL)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
+}
+
 void	curr_index_top_half(t_stack_node *stack)
 {
-	int i;
-	int	midpoint;
+	int				i;
+	int				midpoint;
 	t_stack_node	*temp;
 
 	i = 1;
@@ -51,8 +64,8 @@ t_stack_node	*new_node(int nbr)
 
 bool	add_node(t_stack_node **stack, int nbr)
 {
-	t_stack_node *temp;
-	t_stack_node *new;
+	t_stack_node	*temp;
+	t_stack_node	*new;
 
 	new = new_node(nbr);
 	if (new == NULL)
