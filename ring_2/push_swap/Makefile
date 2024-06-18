@@ -7,7 +7,7 @@ LIBFT_DIR = ./libft
 SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/error_handling/error_checking.c \
 			$(SRC_DIR)/error_handling/free_quit.c \
-			$(SRC_DIR)/stack_utils/create_stack_a.c \
+			$(SRC_DIR)/stack_utils/create_stacks.c \
 			$(SRC_DIR)/stack_utils/node_utils.c \
 			$(SRC_DIR)/stack_utils/push_cost.c \
 			$(SRC_DIR)/stack_utils/target_node.c \

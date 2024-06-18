@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 17:26:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:56:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void			free_stack(t_stack_node **stack);
 void			free_argv(char **argv);
 void			quit_error_free(t_stack_node **stack, char **argv, int start);
 
-/* create_stack_a.c */
+/* create_stacks.c */
 bool			create_stack_a(t_stack_node **stack, char **input, int start);
+void			create_stack_b(t_stack_node **a, t_stack_node **b);
 
 /* node_utils.c */
 int				count_nodes(t_stack_node *stack);
