@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:35 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 16:36:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:48:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_stack_node	*last_node(t_stack_node *node)
 	return (node);
 }
 
-static	t_stack_node	*new_node(int nbr)
+static	t_stack_node	*new_node(long nbr)
 {
 	t_stack_node	*new;
 
@@ -45,7 +45,7 @@ static	t_stack_node	*new_node(int nbr)
 	return (new);
 }
 
-bool	add_node(t_stack_node **stack, int nbr)
+bool	add_node(t_stack_node **stack, long nbr)
 {
 	t_stack_node	*temp;
 	t_stack_node	*new;

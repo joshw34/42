@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 17:56:43 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:48:59 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct s_stack_node
 {
-	int					nbr;
+	long				nbr;
 	int					current_index;
 	int					push_cost;
 	bool				top_half;
@@ -31,7 +31,8 @@ typedef struct s_stack_node
 }	t_stack_node;
 
 /* error_checking.c */
-bool			check_error(char **input);
+bool			check_nbr_repeat(t_stack_node *stack);
+bool			check_format_error(char **input);
 
 /* free_quit.c */
 void			quit_error(void);
@@ -46,7 +47,7 @@ void			create_stack_b(t_stack_node **a, t_stack_node **b);
 /* node_utils.c */
 int				count_nodes(t_stack_node *stack);
 t_stack_node	*last_node(t_stack_node *node);
-bool			add_node(t_stack_node **stack, int nbr);
+bool			add_node(t_stack_node **stack, long nbr);
 
 /* push_cost.c */
 void			set_cost(t_stack_node *src, t_stack_node *dest);
@@ -76,12 +77,9 @@ void			pa_pb(t_stack_node **src, t_stack_node **dest);
 void			sort(t_stack_node **a, t_stack_node **b);
 
 /* check_stacks.c */
-bool	check_stacks(t_stack_node *a, t_stack_node *b);
-
-
-
+bool			check_stacks(t_stack_node *a, t_stack_node *b);
 
 /* TESTING */
-void	print_stack(t_stack_node *node);
+void			print_stack(t_stack_node *node);
 
 #endif
