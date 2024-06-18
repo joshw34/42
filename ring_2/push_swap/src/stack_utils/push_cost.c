@@ -1,4 +1,16 @@
-#include "../inc/push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_cost.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/18 16:36:40 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/push_swap.h"
 
 static	void	cheapest(t_stack_node *stack)
 {
@@ -66,33 +78,4 @@ void	set_cost(t_stack_node *src, t_stack_node *dest)
 		src = src->next;
 	}
 	cheapest(temp);
-}
-
-void	target_a_to_b(t_stack_node *a, t_stack_node *b)
-{
-	t_stack_node	*temp_b;
-	t_stack_node	*result;
-	t_stack_node	*largest;
-
-	temp_b = b;
-	result = NULL;
-	largest = NULL;
-	while (a != NULL)
-	{
-		while (temp_b != NULL)
-		{
-			if ((temp_b->nbr < a->nbr) && (result == NULL
-					|| temp_b->nbr > result->nbr))
-				result = temp_b;
-			if (largest == NULL || temp_b->nbr > largest->nbr)
-				largest = temp_b;
-			temp_b = temp_b->next;
-		}
-		a->target_node = result;
-		if (result == NULL)
-			a->target_node = largest;
-		a = a->next;
-		temp_b = b;
-		result = NULL;
-	}
 }

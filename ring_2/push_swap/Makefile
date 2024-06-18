@@ -4,13 +4,21 @@ SRC_DIR = ./src
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
 
-SRC_FILES =	$(SRC_DIR)/push_swap.c \
-			$(SRC_DIR)/error_checking.c \
-			$(SRC_DIR)/free_quit.c \
-			$(SRC_DIR)/create_stack_a.c \
-			$(SRC_DIR)/stack_tools.c \
-			$(SRC_DIR)/stack_tools_2.c \
-			$(SRC_DIR)/swap.c \
+SRC_FILES =	$(SRC_DIR)/main.c \
+			$(SRC_DIR)/error_handling/error_checking.c \
+			$(SRC_DIR)/error_handling/free_quit.c \
+			$(SRC_DIR)/stack_utils/create_stack_a.c \
+			$(SRC_DIR)/stack_utils/node_utils.c \
+			$(SRC_DIR)/stack_utils/push_cost.c \
+			$(SRC_DIR)/stack_utils/target_node.c \
+			$(SRC_DIR)/stack_utils/index_half.c \
+			$(SRC_DIR)/stack_operations/swap.c \
+			$(SRC_DIR)/stack_operations/rotate.c \
+			$(SRC_DIR)/stack_operations/rev_rotate.c \
+			$(SRC_DIR)/stack_operations/push.c \
+			$(SRC_DIR)/sort_stack/sort.c \
+			$(SRC_DIR)/sort_stack/check_stacks.c \
+			$(SRC_DIR)/print_test.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
