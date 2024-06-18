@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/17 17:29:31 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:17:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ t_stack_node	*new_node(int nbr);
 bool			add_node(t_stack_node **stack, int nbr);
 
 /* stack_tools_2.c */
+void			set_cost(t_stack_node *src, t_stack_node *dest);
 void			target_a_to_b(t_stack_node *a, t_stack_node *b);
+
+/* swap.c */
+
 
 #endif

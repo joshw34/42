@@ -10,6 +10,7 @@ SRC_FILES =	$(SRC_DIR)/push_swap.c \
 			$(SRC_DIR)/create_stack_a.c \
 			$(SRC_DIR)/stack_tools.c \
 			$(SRC_DIR)/stack_tools_2.c \
+			$(SRC_DIR)/swap.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
