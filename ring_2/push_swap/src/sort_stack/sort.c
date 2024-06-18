@@ -12,8 +12,4 @@ void	sort(t_stack_node **a, t_stack_node **b)
 		return ;
 	else
 		create_stack_b(a, b);
-	ft_printf("Stack A:\n");
-	print_stack(*a);
-	ft_printf("\nStack B:\n");
-	print_stack(*b);
 }
