@@ -6,13 +6,20 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:35 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 19:48:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:23:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
 
-int	count_nodes(t_stack_node *stack)
+t_node	*find_cheapest(t_node *stack)
+{
+	while (stack->cheapest == false)
+		stack=stack->next;
+	return (stack);
+}
+
+int	count_nodes(t_node *stack)
 {
 	int	i;
 
@@ -25,7 +32,7 @@ int	count_nodes(t_stack_node *stack)
 	return (i);
 }
 
-t_stack_node	*last_node(t_stack_node *node)
+t_node	*last_node(t_node *node)
 {
 	if (node->next == NULL)
 		return (node);
@@ -34,21 +41,21 @@ t_stack_node	*last_node(t_stack_node *node)
 	return (node);
 }
 
-static	t_stack_node	*new_node(long nbr)
+static	t_node	*new_node(long nbr)
 {
-	t_stack_node	*new;
+	t_node	*new;
 
-	new = ft_calloc(1, sizeof(t_stack_node));
+	new = ft_calloc(1, sizeof(t_node));
 	if (new == NULL)
 		return (NULL);
 	new->nbr = nbr;
 	return (new);
 }
 
-bool	add_node(t_stack_node **stack, long nbr)
+bool	add_node(t_node **stack, long nbr)
 {
-	t_stack_node	*temp;
-	t_stack_node	*new;
+	t_node	*temp;
+	t_node	*new;
 
 	new = new_node(nbr);
 	if (new == NULL)

@@ -6,17 +6,17 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 16:36:40 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:25:17 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
 
-static	void	cheapest(t_stack_node *stack)
+static	void	cheapest(t_node *stack)
 {
-	t_stack_node	*temp;
-	int				lowest;
-	int				result_ind;
+	t_node	*temp;
+	int		lowest;
+	int		result_ind;
 
 	temp = stack;
 	lowest = INT_MAX;
@@ -39,7 +39,7 @@ static	void	cheapest(t_stack_node *stack)
 	}
 }
 
-static	int	calc_cost(t_stack_node *node, int len)
+static	int	calc_cost(t_node *node, int len)
 {
 	int	result;
 
@@ -56,13 +56,13 @@ static	int	calc_cost(t_stack_node *node, int len)
 	return (result);
 }
 
-void	set_cost(t_stack_node *src, t_stack_node *dest)
+void	set_cost(t_node *src, t_node *dest)
 {
 	int				src_len;
 	int				dest_len;
 	int				s_cost;
 	int				d_cost;
-	t_stack_node	*temp;
+	t_node	*temp;
 
 	src_len = count_nodes(src);
 	dest_len = count_nodes(dest);

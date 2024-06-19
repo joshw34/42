@@ -6,21 +6,21 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:35:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 19:55:23 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:53:52 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
 
-bool	check_nbr_repeat(t_stack_node *stack)
+bool	check_nbr_repeat(t_node *stack)
 {
-	t_stack_node	*temp1;
-	t_stack_node	*temp2;
+	t_node	*temp1;
+	t_node	*temp2;
 	
 	temp1 = stack;
 	while (temp1 != NULL)
 	{
-		if (temp1->nbr > 2147483647 || temp1->nbr < -2147483648)
+		if (temp1->nbr > INT_MAX || temp1->nbr < INT_MIN)
 			return (false);
 		temp2 = temp1->next;
 		while (temp2 != NULL)

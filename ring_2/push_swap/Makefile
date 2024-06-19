@@ -18,6 +18,9 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/stack_operations/push.c \
 			$(SRC_DIR)/sort_stack/sort.c \
 			$(SRC_DIR)/sort_stack/check_stacks.c \
+			$(SRC_DIR)/sort_stack/three_node_sort.c \
+			$(SRC_DIR)/sort_stack/full_sort.c \
+			$(SRC_DIR)/sort_stack/push_a_to_b.c \
 			$(SRC_DIR)/print_test.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

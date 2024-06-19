@@ -6,17 +6,17 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 16:42:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:56:29 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
 
-void	target_a_to_b(t_stack_node *a, t_stack_node *b)
+void	target_a_to_b(t_node *a, t_node *b)
 {
-	t_stack_node	*temp_b;
-	t_stack_node	*result;
-	t_stack_node	*largest;
+	t_node	*temp_b;
+	t_node	*result;
+	t_node	*largest;
 
 	temp_b = b;
 	result = NULL;

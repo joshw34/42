@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 20:00:04 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:59:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ static	long	ft_atol(const char *nptr)
 	return (sign * result);
 }
 
-void	create_stack_b(t_stack_node **a, t_stack_node **b)
+void	create_stack_b(t_node **a, t_node **b)
 {
-	pa_pb(a, b);
-	pa_pb(a, b);
+	pa_pb(a, b, 'b');
+	if (count_nodes(*a) > 3)
+		pa_pb(a, b, 'b');
 }
 
-bool	create_stack_a(t_stack_node **stack, char **input, int start)
+bool	create_stack_a(t_node **stack, char **input, int start)
 {
 	int		i;
 

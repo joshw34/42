@@ -6,17 +6,17 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:32 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 16:43:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:56:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
 
-void	curr_index_top_half(t_stack_node *stack)
+void	curr_index_top_half(t_node *stack)
 {
 	int				i;
 	int				midpoint;
-	t_stack_node	*temp;
+	t_node	*temp;
 
 	i = 1;
 	temp = stack;

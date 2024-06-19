@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:02 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/18 16:36:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:54:16 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	quit_error(void)
 	exit (1);
 }
 
-void	free_stack(t_stack_node **stack)
+void	free_stack(t_node **stack)
 {
-	t_stack_node	*temp;
+	t_node	*temp;
 
 	while (*stack != NULL)
 	{
@@ -43,7 +43,7 @@ void	free_argv(char **argv)
 	free(argv);
 }
 
-void	quit_error_free(t_stack_node **stack, char **argv, int start)
+void	quit_error_free(t_node **stack, char **argv, int start)
 {
 	if (start == 0)
 		free_argv(argv);
