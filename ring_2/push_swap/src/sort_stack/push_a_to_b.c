@@ -10,7 +10,7 @@ static	void	diff_half(t_node **a, t_node **b, t_node *nd, t_node *tgt)
 		rra_rrb(a, 'a', nd->push_cost);
 	if (tgt->current_index == 2)
 		sa_sb(b, 'b');
-	if (tgt->top_half == true)
+	else if (tgt->top_half == true)
 		ra_rb(b, 'b', tgt->push_cost);
 	else
 		rra_rrb(b, 'b', tgt->push_cost);
@@ -49,7 +49,7 @@ static	void	bring_to_top(t_node **a, t_node **b)
 	tgt = nd->target_node;
 	if (nd->current_index == 2 && tgt->current_index ==2)
 		ss(a, b);
-	else if (nd->push_cost == tgt->push_cost && nd->top_half == tgt->top_half)
+	if (nd->push_cost == tgt->push_cost && nd->top_half == tgt->top_half)
 	{
 		if (nd->top_half == true)
 			rr(a, b, nd->push_cost);
@@ -83,5 +83,6 @@ void	push_a_to_b(t_node **a, t_node **b)
 		set_node_data(*a, *b);
 		a_nodes--;
 	}
+	set_node_data(*a, *b);
 	
 }
