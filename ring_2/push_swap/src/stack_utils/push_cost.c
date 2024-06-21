@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 17:25:17 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:10:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,24 @@ static	void	cheapest(t_node *stack)
 {
 	t_node	*temp;
 	int		lowest;
-	int		result_ind;
 
 	temp = stack;
 	lowest = INT_MAX;
 	while (temp != NULL)
 	{
-		if (temp->push_cost < lowest)
-		{
-			lowest = temp->push_cost;
-			result_ind = temp->current_index;
-		}
+		if (temp->total_cost < lowest)
+			lowest = temp->total_cost;
 		temp = temp->next;
 	}
 	while (stack != NULL)
 	{
-		if (stack->current_index == result_ind)
+		if (stack->total_cost == lowest)
 			stack->cheapest = true;
 		else
 			stack->cheapest = false;
 		stack = stack->next;
 	}
+	
 }
 
 static	int	calc_cost(t_node *node, int len)
@@ -52,29 +49,31 @@ static	int	calc_cost(t_node *node, int len)
 	else if (node->current_index == len)
 		result = 1;
 	else if (node->current_index < len && node->top_half == false)
-		result = len - node->current_index + 1;
+		result = (len - node->current_index) + 1;
 	return (result);
 }
 
 void	set_cost(t_node *src, t_node *dest)
 {
-	int				src_len;
-	int				dest_len;
-	int				s_cost;
-	int				d_cost;
+	int		s_cost;
+	int		d_cost;
 	t_node	*temp;
 
-	src_len = count_nodes(src);
-	dest_len = count_nodes(dest);
 	temp = src;
 	while (src != NULL)
 	{
-		s_cost = calc_cost(src, src_len);
-		d_cost = calc_cost(src->target_node, dest_len);
+		s_cost = calc_cost(src, count_nodes(src));
+		d_cost = calc_cost(src->target_node, count_nodes(dest));
+		src->push_cost = s_cost;
+		src->target_node->push_cost = d_cost;
 		if (s_cost == d_cost && src->top_half == src->target_node->top_half)
-			src->push_cost = s_cost;
+			src->total_cost = s_cost;
+		else if (s_cost > d_cost && src->target_node->top_half == src->top_half)
+			src->total_cost = s_cost;
+		else if (s_cost < d_cost && src->target_node->top_half == src->top_half)
+			src->total_cost = d_cost;
 		else
-			src->push_cost = s_cost + d_cost;
+			src->total_cost = s_cost + d_cost;
 		src = src->next;
 	}
 	cheapest(temp);

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 17:26:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:08:44 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 
 typedef struct s_node
 {
-	long				nbr;
-	int					current_index;
-	int					push_cost;
-	bool				top_half;
-	bool				cheapest;
+	long			nbr;
+	int				current_index;
+	int				push_cost;
+	int				total_cost;
+	bool			top_half;
+	bool			cheapest;
 	struct s_node	*target_node;
 	struct s_node	*prev;
 	struct s_node	*next;
@@ -90,6 +91,7 @@ void	full_sort(t_node **a, t_node **b);
 void	push_a_to_b(t_node **a, t_node **b);
 
 /* TESTING */
-void	print_stack(t_node *node);
+void	print_stack_a(t_node *node);
+void	print_stack_b(t_node *node);
 
 #endif
