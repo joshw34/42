@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:14 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 17:00:55 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:56:23 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rra_rrb(t_node **stack, char op, int reps)
 {
 	t_node	*first;
 	t_node	*last;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (i < reps)

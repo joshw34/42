@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/21 16:10:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:59:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static	void	cheapest(t_node *stack)
 			stack->cheapest = false;
 		stack = stack->next;
 	}
-	
 }
 
 static	int	calc_cost(t_node *node, int len)

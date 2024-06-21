@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:35 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 17:23:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:59:13 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_node	*find_cheapest(t_node *stack)
 {
 	while (stack->cheapest == false)
-		stack=stack->next;
+		stack = stack->next;
 	return (stack);
 }
 

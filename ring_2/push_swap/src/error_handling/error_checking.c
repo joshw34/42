@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:35:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 14:53:52 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:54:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	check_nbr_repeat(t_node *stack)
 {
 	t_node	*temp1;
 	t_node	*temp2;
-	
+
 	temp1 = stack;
 	while (temp1 != NULL)
 	{
@@ -43,7 +43,8 @@ bool	check_format_error(char **input)
 	while (input[i])
 	{
 		j = 0;
-		if (ft_isdigit(input[i][j]) == 0 && input[i][j] != '+' && input[i][j] != '-')
+		if (ft_isdigit(input[i][j]) == 0 && input[i][j] != '+'
+			&& input[i][j] != '-')
 			return (false);
 		if (input[i][j] == '+' || input[i][j] == '-')
 			j++;

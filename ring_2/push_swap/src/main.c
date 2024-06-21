@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 14:56:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:57:23 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	int				start_pos;
+	int		start_pos;
 
 	a = NULL;
 	b = NULL;

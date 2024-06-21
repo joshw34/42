@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:09:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/19 16:03:04 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/21 19:03:44 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sort(t_node **a, t_node **b)
 {
 	int	stack_len;
-	
+
 	if (check_stacks(*a, *b) == true)
 		return ;
 	stack_len = count_nodes(*a);
