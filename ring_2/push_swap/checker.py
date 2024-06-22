@@ -1,23 +1,20 @@
-def can_be_sorted_by_rotation(numbers):
-    n = len(numbers)
-    for i in range(n):
-        rotated_list = numbers[i:] + numbers[:i]
-        if rotated_list == sorted(numbers, reverse=True):
-            return True
-    return False
-
-def read_numbers_from_file(filename):
+def check_reverse_order(filename):
+    numbers = []
+    
     with open(filename, 'r') as file:
-        numbers = [int(line.strip()) for line in file]
-    return numbers
-
-def main():
-    filename = 'result.txt'
-    numbers = read_numbers_from_file(filename)
-    if can_be_sorted_by_rotation(numbers):
-        print("The list can be sorted into reverse numerical order by rotations.")
-    else:
-        print("The list cannot be sorted into reverse numerical order by rotations.")
+        for line in file:
+            line = line.strip()
+            if line.isdigit() or (line[0] == '-' and line[1:].isdigit()):  # Check if the line is a number
+                numbers.append(int(line))
+    
+    for i in range(1, len(numbers)):
+        if numbers[i] > numbers[i - 1]:
+            return False
+    return True
 
 if __name__ == "__main__":
-    main()
+    filename = "result.txt"
+    if check_reverse_order(filename):
+        print("The numbers are in reverse numerical order.")
+    else:
+        print("The numbers are not in reverse numerical order.")

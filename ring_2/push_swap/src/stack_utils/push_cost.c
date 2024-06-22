@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/21 18:59:55 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 13:12:10 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	int	calc_cost(t_node *node, int len)
 	return (result);
 }
 
-void	set_cost(t_node *src, t_node *dest)
+void	a_to_b_cost(t_node *src, t_node *dest)
 {
 	int		s_cost;
 	int		d_cost;

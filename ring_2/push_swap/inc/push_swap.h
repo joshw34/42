@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/21 16:08:44 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:41:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ t_node	*last_node(t_node *node);
 bool	add_node(t_node **stack, long nbr);
 
 /* push_cost.c */
-void	set_cost(t_node *src, t_node *dest);
+void	a_to_b_cost(t_node *src, t_node *dest);
 
 /* target_node.c */
+void	target_b_to_a(t_node *a, t_node *b);
 void	target_a_to_b(t_node *a, t_node *b);
 
 /* index_half.c */
@@ -76,19 +77,20 @@ void	rrr(t_node **a, t_node **b, int reps);
 void	pa_pb(t_node **src, t_node **dest, char to);
 
 /* sort.c */
+void	full_sort(t_node **a, t_node **b);
+void	three_node_sort(t_node **stack);
 void	sort(t_node **a, t_node **b);
 
-/* check_stacks.c */
+/* sort_utils.c */
+void	smallest_to_top(t_node **stack);
+void	largest_to_top(t_node **stack);
 bool	check_stacks(t_node *a, t_node *b);
-
-/* three_node_sort.c */
-void	three_node_sort(t_node **stack);
-
-/* full_sort.c */
-void	full_sort(t_node **a, t_node **b);
 
 /* push_a_to_b.c */
 void	push_a_to_b(t_node **a, t_node **b);
+
+/* push_b_to_a.c */
+void	push_b_to_a(t_node	**a, t_node **b);
 
 /* TESTING */
 void	print_stack_a(t_node *node);

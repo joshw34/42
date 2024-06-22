@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:03:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/21 19:03:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:22:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,24 @@ static	void	set_node_data(t_node *a, t_node *b)
 	curr_index_top_half(a);
 	curr_index_top_half(b);
 	target_a_to_b(a, b);
-	set_cost(a, b);
+	a_to_b_cost(a, b);
 }
 
 void	push_a_to_b(t_node **a, t_node **b)
 {
-	int	a_nodes;
+	int		a_nodes;
+	t_node	**temp_a;
+	t_node	**temp_b;
 
 	a_nodes = count_nodes(*a);
+	temp_a = a;
+	temp_b = b;
 	while (a_nodes > 3)
 	{
-		set_node_data(*a, *b);
-		bring_to_top(a, b);
+		set_node_data(*temp_a, *temp_b);
+		bring_to_top(temp_a, temp_b);
 		pa_pb(a, b, 'b');
 		a_nodes--;
 	}
 	set_node_data(*a, *b);
-	print_stack_a(*a);
-	print_stack_b(*b);
 }
