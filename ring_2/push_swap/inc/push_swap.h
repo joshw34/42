@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 15:41:11 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:58:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	push_a_to_b(t_node **a, t_node **b);
 void	push_b_to_a(t_node	**a, t_node **b);
 
 /* TESTING */
-void	print_stack_a(t_node *node);
-void	print_stack_b(t_node *node);
-
+void	print_final(t_node *final);
+void	print_stack_b(t_node *b);
+void	print_stack(t_node *a, t_node *b);
 #endif

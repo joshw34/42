@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 15:52:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 20:12:10 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	}
 	create_stack_a(&a, argv, start_pos);
 	sort(&a, &b);
+	//print_final(a);
 	free_stack(&a);
-	free_stack(&b);
 	return (0);
 }

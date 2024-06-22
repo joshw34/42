@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/20 12:07:59 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 18:46:31 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,4 @@ void	pa_pb(t_node **src, t_node **dest, char to)
 	}
 	ft_printf("p%c\n", to);
 }
+

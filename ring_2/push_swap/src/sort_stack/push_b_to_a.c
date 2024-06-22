@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:11:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 15:43:19 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 20:01:53 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,10 @@ static	void	set_node_data(t_node *a, t_node *b)
 
 void	push_b_to_a(t_node	**a, t_node **b)
 {
-	int	b_nodes;
-
-	b_nodes = count_nodes(*b);
-	while (b_nodes > 0)
+	while (*b != NULL)
 	{
 		set_node_data(*a, *b);
 		bring_to_top(a, b);
 		pa_pb(b, a, 'a');
-		b_nodes--;
 	}
 }

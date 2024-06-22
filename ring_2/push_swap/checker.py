@@ -1,4 +1,4 @@
-def check_reverse_order(filename):
+def check_ascending_order(filename):
     numbers = []
     
     with open(filename, 'r') as file:
@@ -8,13 +8,14 @@ def check_reverse_order(filename):
                 numbers.append(int(line))
     
     for i in range(1, len(numbers)):
-        if numbers[i] > numbers[i - 1]:
+        if numbers[i] < numbers[i - 1]:
             return False
     return True
 
 if __name__ == "__main__":
     filename = "result.txt"
-    if check_reverse_order(filename):
-        print("The numbers are in reverse numerical order.")
+    if check_ascending_order(filename):
+        print("The numbers are in ascending numerical order.")
     else:
-        print("The numbers are not in reverse numerical order.")
+        print("The numbers are not in ascending numerical order.")
+

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 13:12:10 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/06/22 16:57:22 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ static	int	calc_cost(t_node *node, int len)
 		result = 0;
 	else if (node->current_index == 2)
 		result = 1;
-	else if (node->current_index > 2 && node->top_half == true)
-		result = node->current_index - 1;
 	else if (node->current_index == len)
 		result = 1;
-	else if (node->current_index < len && node->top_half == false)
+	else if (node->top_half == true)
+		result = node->current_index - 1;
+	else if (node->top_half == false)
 		result = (len - node->current_index) + 1;
+	/*else if (node->current_index > 2 && node->top_half == true)
+		result = node->current_index - 1;
+	
+	else if (node->current_index < len && node->top_half == false)
+		result = (len - node->current_index) + 1;*/
 	return (result);
 }
 
@@ -59,21 +64,21 @@ void	a_to_b_cost(t_node *src, t_node *dest)
 	t_node	*temp;
 
 	temp = src;
-	while (src != NULL)
+	while (temp != NULL)
 	{
-		s_cost = calc_cost(src, count_nodes(src));
-		d_cost = calc_cost(src->target_node, count_nodes(dest));
-		src->push_cost = s_cost;
-		src->target_node->push_cost = d_cost;
-		if (s_cost == d_cost && src->top_half == src->target_node->top_half)
-			src->total_cost = s_cost;
-		else if (s_cost > d_cost && src->target_node->top_half == src->top_half)
-			src->total_cost = s_cost;
-		else if (s_cost < d_cost && src->target_node->top_half == src->top_half)
-			src->total_cost = d_cost;
+		s_cost = calc_cost(temp, count_nodes(src));
+		d_cost = calc_cost(temp->target_node, count_nodes(dest));
+		temp->push_cost = s_cost;
+		temp->target_node->push_cost = d_cost;
+		if (s_cost == d_cost && temp->top_half == temp->target_node->top_half)
+			temp->total_cost = s_cost;
+		else if (s_cost > d_cost && temp->target_node->top_half == temp->top_half)
+			temp->total_cost = s_cost;
+		else if (s_cost < d_cost && temp->target_node->top_half == temp->top_half)
+			temp->total_cost = d_cost;
 		else
-			src->total_cost = s_cost + d_cost;
-		src = src->next;
+			temp->total_cost = s_cost + d_cost;
+		temp = temp->next;
 	}
-	cheapest(temp);
+	cheapest(src);
 }
