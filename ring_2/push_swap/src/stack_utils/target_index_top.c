@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   target_node.c                                      :+:      :+:    :+:   */
+/*   target_index_top.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:36:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 13:34:47 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:51:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	target_b_to_a(t_node *a, t_node *b)
 	smallest = NULL;
 	while (temp_a != NULL)
 	{
-		if (temp_a->nbr > b->nbr && (result == NULL || temp_a->nbr < result->nbr))
+		if (temp_a->nbr > b->nbr && (result == NULL
+				|| temp_a->nbr < result->nbr))
 			result = temp_a;
 		if (smallest == NULL || temp_a->nbr < smallest->nbr)
 			smallest = temp_a;
@@ -61,5 +62,34 @@ void	target_a_to_b(t_node *a, t_node *b)
 		a = a->next;
 		temp_b = b;
 		result = NULL;
+	}
+}
+
+void	curr_index_top_half(t_node *stack)
+{
+	int		i;
+	int		midpoint;
+	t_node	*temp;
+
+	i = 1;
+	temp = stack;
+	while (temp != NULL)
+	{
+		temp->current_index = i;
+		temp = temp->next;
+		i++;
+	}
+	i--;
+	if (i % 2 == 0)
+		midpoint = i / 2;
+	else
+		midpoint = (i / 2) + 1;
+	while (stack != NULL)
+	{
+		if (stack->current_index <= midpoint)
+			stack->top_half = true;
+		else
+			stack->top_half = false;
+		stack = stack->next;
 	}
 }

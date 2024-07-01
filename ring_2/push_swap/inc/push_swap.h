@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 19:58:38 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:59:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	free_argv(char **argv);
 void	quit_error_free(t_node **stack, char **argv, int start);
 
 /* create_stacks.c */
-bool	create_stack_a(t_node **stack, char **input, int start);
 void	create_stack_b(t_node **a, t_node **b);
+bool	create_stack_a(t_node **stack, char **input, int start);
 
 /* node_utils.c */
 t_node	*find_cheapest(t_node *stack);
@@ -54,11 +54,9 @@ bool	add_node(t_node **stack, long nbr);
 /* push_cost.c */
 void	a_to_b_cost(t_node *src, t_node *dest);
 
-/* target_node.c */
+/* target_index_top.c */
 void	target_b_to_a(t_node *a, t_node *b);
 void	target_a_to_b(t_node *a, t_node *b);
-
-/* index_half.c */
 void	curr_index_top_half(t_node *stack);
 
 /* swap.c */

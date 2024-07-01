@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:11:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/06/22 20:01:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:43:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	void	set_node_data(t_node *a, t_node *b)
 {
 	curr_index_top_half(a);
 	curr_index_top_half(b);
-	target_b_to_a(a,b);
+	target_b_to_a(a, b);
 }
 
 void	push_b_to_a(t_node	**a, t_node **b)

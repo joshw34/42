@@ -10,8 +10,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/stack_utils/create_stacks.c \
 			$(SRC_DIR)/stack_utils/node_utils.c \
 			$(SRC_DIR)/stack_utils/push_cost.c \
-			$(SRC_DIR)/stack_utils/target_node.c \
-			$(SRC_DIR)/stack_utils/index_half.c \
+			$(SRC_DIR)/stack_utils/target_index_top.c \
 			$(SRC_DIR)/stack_operations/swap.c \
 			$(SRC_DIR)/stack_operations/rotate.c \
 			$(SRC_DIR)/stack_operations/rev_rotate.c \
