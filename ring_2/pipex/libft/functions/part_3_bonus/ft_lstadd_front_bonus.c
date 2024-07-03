@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/30 13:19:06 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:12:20 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../../libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
-
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	if (lst && new)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		new->next = *lst;
+		*lst = new;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
 }

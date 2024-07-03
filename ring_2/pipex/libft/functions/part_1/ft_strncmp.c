@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:18:49 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:09:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../../libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	size_t			i;
+	unsigned char	cmp_1;
+	unsigned char	cmp_2;
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	i = 0;
+	while (i < n)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		cmp_1 = (unsigned char) s1[i];
+		cmp_2 = (unsigned char) s2[i];
+		if (cmp_1 != cmp_2)
+		{
+			return (cmp_1 - cmp_2);
+		}
+		if (cmp_1 == '\0')
+			break ;
+		i++;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
 	return (0);
 }

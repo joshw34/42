@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:05:54 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/04/29 12:06:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
-
-int	main(int argc, char **argv)
+int	ft_atoi(const char *nptr)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	int	i;
+	int	sign;
+	int	result;
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((nptr[i] > 8 && nptr[i] < 14) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == 43 || nptr[i] == 45)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		if (nptr[i] == 45)
+			sign = -1;
+		i++;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
+	while (nptr[i] > 47 && nptr[i] < 58)
+	{
+		result = (result * 10) + (nptr[i] - 48);
+		i++;
+	}
+	return (sign * result);
 }

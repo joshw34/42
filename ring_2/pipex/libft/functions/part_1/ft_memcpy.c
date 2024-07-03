@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:14:38 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:08:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../../libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	unsigned char				*d;
+	const unsigned char			*s;
+	size_t						i;
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	d = (unsigned char *) dest;
+	s = (const unsigned char *) src;
+	i = 0;
+	if (dest + i == NULL && src + i == NULL)
+		return (NULL);
+	while (i < n)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		d[i] = s[i];
+		i++;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
+	return (dest);
 }

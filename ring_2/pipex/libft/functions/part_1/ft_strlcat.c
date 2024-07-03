@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:17:23 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:09:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../../libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	i = ft_strlen(dst);
+	j = 0;
+	len = (ft_strlen(dst) + ft_strlen(src));
+	if ((size == 0) || (size < i))
+		return (ft_strlen(src) + size);
+	while (i < (size - 1) && src[j] != '\0')
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		dst[i] = src[j];
+		i++;
+		j++;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
+	dst[i] = '\0';
+	return (len);
 }

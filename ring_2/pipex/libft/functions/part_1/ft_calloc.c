@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:08:57 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:08:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../../libft.h"
+#include <limits.h>
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	void	*ptr;
+	size_t	total_size;
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+	if (nmemb == 0 || size == 0)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		nmemb = 1;
+		size = 1;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
+	if (size > (INT_MAX / nmemb))
+		return (NULL);
+	total_size = nmemb * size;
+	ptr = malloc(total_size);
+	if (ptr == NULL)
+		return (NULL);
+	else
+		ft_bzero(ptr, total_size);
+	return (ptr);
 }

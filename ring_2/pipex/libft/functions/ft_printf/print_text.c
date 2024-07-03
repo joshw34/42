@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_text.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/03 12:15:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/05/09 11:23:57 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/05/09 11:24:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "ft_printf.h"
 
-int	main(int argc, char **argv)
+void	ft_print_char(char c, size_t *char_count)
 {
-	t_node	*a;
-	t_node	*b;
-	int		start_pos;
+	write(1, &c, 1);
+	*char_count += 1;
+}
 
-	a = NULL;
-	b = NULL;
-	start_pos = 1;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	if (argc == 2)
+void	ft_print_str(char *str, size_t *char_count)
+{
+	size_t	len;
+	size_t	i;
+
+	if (str == NULL)
 	{
-		argv = ft_split(argv[1], ' ');
-		start_pos = 0;
+		ft_print_str("(null)", char_count);
+		return ;
 	}
-	create_stack_a(&a, argv, start_pos);
-	sort(&a, &b);
-	free_stack(&a);
-	return (0);
+	len = ft_strlen(str);
+	i = 0;
+	while (i < len)
+	{
+		ft_print_char(str[i], char_count);
+		i++;
+	}
 }
