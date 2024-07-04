@@ -62,15 +62,22 @@ all: $(NAME)
 libft:	all
 
 $(NAME): $(OBJ_FILES)
-		ar rcs $(NAME) $(OBJ_FILES)
+	@ar rcs $(NAME) $(OBJ_FILES)
+	@echo "Libft:	Library Created"
+
+.c.o:
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(REMOVE) $(OBJ_FILES)
+	@$(REMOVE) $(OBJ_FILES)
+	@echo "Libft:	Object Files Removed"
 
-fclean:	clean
-	$(REMOVE) $(NAME)
+fclean:	
+	@$(REMOVE) $(OBJ_FILES)
+	@echo "Libft:	Object Files Removed"
+	@$(REMOVE) $(NAME)
+	@echo "Libft:	Library Removed"
 
 re:	fclean all
 
 .PHONY: all clean fclean re
-
