@@ -8,6 +8,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/error_management/input_check.c \
+			$(SRC_DIR)/error_management/free.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
