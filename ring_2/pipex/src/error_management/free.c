@@ -15,25 +15,25 @@ void	free_array(char **array)
 
 void	free_data_struct(t_data *data)
 {
-	if (data->arg1 != NULL)
+	if (data->cmd1 != NULL)
 	{
-		free_array(data->arg1);
-		data->arg1 = NULL;
+		free_array(data->cmd1);
+		data->cmd1 = NULL;
 	}
-	if (data->arg2 != NULL)
+	if (data->cmd2 != NULL)
 	{
-		free_array(data->arg2);
-		data->arg2 = NULL;
+		free_array(data->cmd2);
+		data->cmd2 = NULL;
 	}
-	if (data->arg1_path != NULL)
+	if (data->cmd1_path != NULL)
 	{
-		free(data->arg1_path);
-		data->arg1_path = NULL;
+		free(data->cmd1_path);
+		data->cmd1_path = NULL;
 	}
-	if (data->arg2_path != NULL)
+	if (data->cmd2_path != NULL)
 	{
-		free(data->arg2_path);
-		data->arg2_path = NULL;
+		free(data->cmd2_path);
+		data->cmd2_path = NULL;
 	}
 	free(data);
 }
