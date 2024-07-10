@@ -11,7 +11,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/error_management/free.c \
 			$(SRC_DIR)/utils/utils.c \
 			$(SRC_DIR)/utils/error_print.c \
-			#$(SRC_DIR)/execute_commands/execute_commands.c \
+			$(SRC_DIR)/execute_commands/execute_commands.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

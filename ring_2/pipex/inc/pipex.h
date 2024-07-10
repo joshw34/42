@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/09 19:29:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:03:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ char	**get_paths(char **env);
 int		error_print(const char *str, ...);
 
 /* execute_commands.c */
-//void	execute_commands(t_data *data);
+void	execute_commands(t_data *data);
 
 #endif
