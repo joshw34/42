@@ -1,4 +1,4 @@
-#include "../../inc/pipex.h"
+#include "../inc/pipex.h"
 
 char	**get_paths(char **env)
 {

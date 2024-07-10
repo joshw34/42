@@ -6,11 +6,11 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:19:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/09 19:26:32 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:35:48 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/pipex.h"
+#include "../inc/pipex.h"
 
 static	void	ft_print_char(char c, size_t *char_count)
 {

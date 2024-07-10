@@ -1,4 +1,4 @@
-#include "../../inc/pipex.h"
+#include "../inc/pipex.h"
 
 void	free_array(char **array)
 {
@@ -38,11 +38,10 @@ void	free_data_struct(t_data *data)
 	free(data);
 }
 
-void	free_exit(char *message, t_data *data)
+void	free_exit(int status, t_data *data)
 {
-	error_print("%s", message);
 	if (errno != 0)
 		perror("");
 	free_data_struct(data);
-	exit(EXIT_FAILURE);
+	exit(status);
 }

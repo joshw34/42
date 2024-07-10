@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/10 13:03:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:06:50 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	populate_struct(int count, char **args, char **env, t_data *data);
 /* free.c */
 void	free_data_struct(t_data *data);
 void	free_array(char **array);
-void	free_exit(char *message, t_data *data);
+void	free_exit(int status, t_data *data);
 
 /* utils.c */
 char	**get_paths(char **env);
