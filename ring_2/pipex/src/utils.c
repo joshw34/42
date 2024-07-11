@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/11 15:46:10 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/07/11 15:46:42 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pipex.h"
 
 char	**get_paths(char **env)
 {
 	char	**result;
 	char	*paths;
-	char 	*temp;
+	char	*temp;
 	int		i;
 
 	i = 0;
@@ -25,4 +37,42 @@ char	**get_paths(char **env)
 	}
 	free(paths);
 	return (result);
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void	free_data_struct(t_data *data)
+{
+	if (data->cmd1 != NULL)
+	{
+		free_array(data->cmd1);
+		data->cmd1 = NULL;
+	}
+	if (data->cmd2 != NULL)
+	{
+		free_array(data->cmd2);
+		data->cmd2 = NULL;
+	}
+	if (data->cmd1_path != NULL)
+	{
+		free(data->cmd1_path);
+		data->cmd1_path = NULL;
+	}
+	if (data->cmd2_path != NULL)
+	{
+		free(data->cmd2_path);
+		data->cmd2_path = NULL;
+	}
+	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/10 18:06:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:44:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <string.h>
 # include <stdarg.h>
 
-typedef	struct s_pipe
+typedef struct s_pipe
 {
 	char	*infile;
 	char	*outfile;
@@ -37,16 +37,10 @@ typedef	struct s_pipe
 /* parse_check_input.c */
 void	populate_struct(int count, char **args, char **env, t_data *data);
 
-/* free.c */
-void	free_data_struct(t_data *data);
-void	free_array(char **array);
-void	free_exit(int status, t_data *data);
-
 /* utils.c */
 char	**get_paths(char **env);
-
-/* error_print.c */
-int		error_print(const char *str, ...);
+void	free_data_struct(t_data *data);
+void	free_array(char **array);
 
 /* execute_commands.c */
 void	execute_commands(t_data *data);

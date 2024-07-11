@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_check_input.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/11 15:45:14 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/07/11 15:45:34 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pipex.h"
 
 static	char	*set_cmd_path(char *cmd, char **paths)
@@ -10,7 +22,7 @@ static	char	*set_cmd_path(char *cmd, char **paths)
 	{
 		result = ft_strjoin(paths[i], cmd);
 		if (access(result, X_OK) == 0)
-			return(result);
+			return (result);
 		else
 			free(result);
 		i++;
@@ -41,10 +53,11 @@ static	void	arg_count(int count, t_data *data)
 	if (count != 4)
 	{
 		if (count < 4)
-			error_print("Error: Not Enough Arguments");
+			ft_putstr_fd("Error: Not Enough Arguments", 2);
 		if (count > 4)
-			error_print("Error: Too Many Arguments");
-		free_exit(EXIT_FAILURE, data);
+			ft_putstr_fd("Error: Too Many Arguments", 2);
+		free_data_struct(data);
+		exit(EXIT_FAILURE);
 	}
 }
 

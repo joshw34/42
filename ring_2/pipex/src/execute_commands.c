@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_commands.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/11 15:45:44 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/07/11 15:46:01 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pipex.h"
 
 static	void	execute_cmd2(t_data *data, int p_fd[])
 {
 	int	out_fd;
-	
+
 	close(p_fd[1]);
 	out_fd = open(data->outfile, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (out_fd == -1)
