@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:45:44 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/11 15:46:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:23:16 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,18 @@ static	void	execute_cmd2(t_data *data, int p_fd[])
 	{
 		perror("");
 		close(p_fd[0]);
+		free_data_struct(data);
 		_exit(EXIT_FAILURE);
 	}
 	dup2(out_fd, STDOUT_FILENO);
 	close(out_fd);
 	dup2(p_fd[0], STDIN_FILENO);
 	close(p_fd[0]);
-	if (data->cmd1[0] == NULL)
+	if (data->cmd2_path == NULL)
+	{
+		free_data_struct(data);
 		_exit(EXIT_FAILURE);
+	}
 	execve(data->cmd2_path, data->cmd2, data->env);
 	_exit(EXIT_FAILURE);
 }
@@ -44,14 +48,18 @@ static	void	execute_cmd1(t_data *data, int p_fd[])
 	{
 		perror("");
 		close(p_fd[1]);
+		free_data_struct(data);
 		_exit(EXIT_FAILURE);
 	}
 	dup2(in_fd, STDIN_FILENO);
 	close(in_fd);
 	dup2(p_fd[1], STDOUT_FILENO);
 	close(p_fd[1]);
-	if (data->cmd2[0] == NULL)
+	if (data->cmd1_path == NULL || data->cmd1_path[0] == '\0')
+	{
+		free_data_struct(data);
 		_exit(EXIT_FAILURE);
+	}
 	execve(data->cmd1_path, data->cmd1, data->env);
 	_exit(EXIT_FAILURE);
 }

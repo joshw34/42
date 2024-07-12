@@ -1,6 +1,7 @@
 NAME = pipex
 
 SRC_DIR = ./src
+BONUS_DIR = ./bonus
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
 
@@ -11,11 +12,17 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/execute_commands.c \
 
+BONUS_SRC_FILES = $(BONUS_DIR)/main_bonus.c \
+				  $(BONUS_DIR)/parse_check_input_bonus.c \
+				  $(BONUS_DIR)/utils_bonus.c \
+				  $(BONUS_DIR)/execute_commands_bonus.c \
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
+BONUS_OBJ_FILES = $(BONUS_SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(BONUS_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)
 
@@ -28,17 +35,22 @@ $(LIBFT):
 	@echo "Libft:	Compiling"
 	@make -s all -C $(LIBFT_DIR)
 
+bonus: $(LIBFT) $(BONUS_OBJ_FILES)
+	@echo "Pipex Bonus:	Compiling"
+	@$(CC) $(CFLAGS) $(BONUS_OBJ_FILES) $(LIBFT) -o $(NAME)
+	@echo "Pipex Bonus:	Compiled"
+
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make -s clean -C $(LIBFT_DIR)
-	@$(REMOVE) $(OBJ_FILES)
+	@$(REMOVE) $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	@echo "Pipex:	Object Files Removed"
 
 fclean:
 	@make -s fclean -C $(LIBFT_DIR)
-	@$(REMOVE) $(OBJ_FILES)
+	@$(REMOVE) $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	@echo "Pipex:	Object Files Removed"
 	@$(REMOVE) $(NAME)
 	@echo "Pipex:	Executable Removed"

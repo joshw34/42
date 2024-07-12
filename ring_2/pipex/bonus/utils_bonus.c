@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:46:10 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/12 01:26:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:29:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../inc/pipex_bonus.h"
 
-char	**get_paths(char **env)
+char	**b_get_paths(char **env)
 {
 	char	**result;
 	char	*paths;
@@ -39,7 +39,7 @@ char	**get_paths(char **env)
 	return (result);
 }
 
-void	free_array(char **array)
+static	void	b_free_int_array(int **array)
 {
 	int	i;
 
@@ -52,27 +52,43 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	free_data_struct(t_data *data)
+void	b_free_array(char **array)
 {
-	if (data->cmd1 != NULL)
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
 	{
-		free_array(data->cmd1);
-		data->cmd1 = NULL;
+		free(array[i]);
+		i++;
 	}
-	if (data->cmd2 != NULL)
+	free(array);
+}
+
+static	void	b_free_cmd_array(char ***cmds)
+{
+	int	i;
+
+	i = 0;
+	while (cmds[i])
 	{
-		free_array(data->cmd2);
-		data->cmd2 = NULL;
+		b_free_array(cmds[i]);
+		i++;
 	}
-	if (data->cmd1_path != NULL)
-	{
-		free(data->cmd1_path);
-		data->cmd1_path = NULL;
-	}
-	if (data->cmd2_path != NULL)
-	{
-		free(data->cmd2_path);
-		data->cmd2_path = NULL;
-	}
+	free(cmds);
+}
+
+void	b_free_data_struct(t_data *data)
+{
+	if (data->cmds != NULL)
+		b_free_cmd_array(data->cmds);
+	if (data->cmd_paths != NULL)
+		b_free_array(data->cmd_paths);
+	if (data->p_fd != NULL)
+		b_free_int_array(data->p_fd);
+	if (data->pid != NULL)
+		free(data->pid);
 	free(data);
 }
