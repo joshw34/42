@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:46:10 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/12 01:29:21 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:23:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,56 +39,42 @@ char	**b_get_paths(char **env)
 	return (result);
 }
 
-static	void	b_free_int_array(int **array)
+char	*b_get_next_line(int fd, char **buffer)
 {
-	int	i;
+	char	*line;
 
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	if (fd < 0)
+		return (0);
+	*buffer = read_file(fd, *buffer);
+	if (!*buffer)
+		return (NULL);
+	line = next_line(*buffer);
+	*buffer = leftover(*buffer);
+	return (line);
 }
 
-void	b_free_array(char **array)
+void	read_here_doc(t_data *data, char *delimiter)
 {
-	int	i;
+	char	*buffer;
+	char	*line;
+	size_t	delimiter_len;
 
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
+	delimiter_len = ft_strlen(delimiter);
+	line = NULL;
+	buffer = NULL;
+	while (1)
 	{
-		free(array[i]);
-		i++;
+		line = b_get_next_line(STDIN_FILENO, &buffer);
+		if (ft_strlen(line) == delimiter_len + 1
+			&& ft_strncmp(line, delimiter, delimiter_len) == 0)
+			break ;
+		else
+			write(data->infile, line, ft_strlen(line));
+		free(line);
 	}
-	free(array);
-}
-
-static	void	b_free_cmd_array(char ***cmds)
-{
-	int	i;
-
-	i = 0;
-	while (cmds[i])
-	{
-		b_free_array(cmds[i]);
-		i++;
-	}
-	free(cmds);
-}
-
-void	b_free_data_struct(t_data *data)
-{
-	if (data->cmds != NULL)
-		b_free_cmd_array(data->cmds);
-	if (data->cmd_paths != NULL)
-		b_free_array(data->cmd_paths);
-	if (data->p_fd != NULL)
-		b_free_int_array(data->p_fd);
-	if (data->pid != NULL)
-		free(data->pid);
-	free(data);
+	if (line != NULL)
+		free(line);
+	free(buffer);
+	close(data->infile);
+	data->infile = open("temp.txt", O_RDONLY);
 }

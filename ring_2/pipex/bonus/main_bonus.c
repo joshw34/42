@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:16:57 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/11 19:24:33 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:56:47 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	*data;
 
+	if (argc == 1)
+		exit(EXIT_FAILURE);
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 	{

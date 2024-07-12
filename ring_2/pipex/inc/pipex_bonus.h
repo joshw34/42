@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/11 19:35:17 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:27:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ void	b_populate_struct(int count, char **args, char **env, t_data *data);
 
 /* utils_bonus.c */
 char	**b_get_paths(char **env);
+char	*b_get_next_line(int fd, char **buffer);
+void	read_here_doc(t_data *data, char *delimiter);
+
+/* free_bonus.c */
 void	b_free_array(char **array);
 void	b_free_data_struct(t_data *data);
 
-/* execute_commands.c */
+/** execute_commands_bonus.c */
 void	b_execute_commands(t_data *data);
 
 #endif

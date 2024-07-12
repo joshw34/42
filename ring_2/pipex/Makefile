@@ -15,6 +15,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 BONUS_SRC_FILES = $(BONUS_DIR)/main_bonus.c \
 				  $(BONUS_DIR)/parse_check_input_bonus.c \
 				  $(BONUS_DIR)/utils_bonus.c \
+				  $(BONUS_DIR)/free_bonus.c \
 				  $(BONUS_DIR)/execute_commands_bonus.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

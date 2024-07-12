@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:45:14 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/12 01:53:42 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:19:28 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,27 @@ static	void	b_arg_count(int count, t_data *data)
 	}
 }
 
-void	b_populate_struct(int count, char **args, char **env, t_data *data)
+void	b_populate_struct(int ac, char **args, char **env, t_data *data)
 {
-	b_arg_count(count - 1, data);
-	data->infile = open(args[1], O_RDONLY);
-	data->outfile = open(args[count - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
-	data->env = env;
-	data->cmd_count = count - 3;
-	b_cmd_and_path(args + 2, data);
-	p_fd_and_pid(data);
+	if (ft_strncmp(args[1], "here_doc", 7) == 0)
+	{
+		b_arg_count(ac - 2, data);
+		data->infile = open("temp.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
+		data->outfile = open(args[ac - 1], O_RDWR | O_CREAT | O_APPEND, 0666);
+		data->env = env;
+		data->cmd_count = ac - 4;
+		read_here_doc(data, args[2]);
+		b_cmd_and_path(args + 3, data);
+		p_fd_and_pid(data);
+	}
+	else
+	{
+		b_arg_count(ac - 1, data);
+		data->infile = open(args[1], O_RDONLY);
+		data->outfile = open(args[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
+		data->env = env;
+		data->cmd_count = ac - 3;
+		b_cmd_and_path(args + 2, data);
+		p_fd_and_pid(data);
+	}
 }
