@@ -20,9 +20,9 @@ CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(BONUS_DIR) -I$(LIBFT_DIR)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
-	@echo "Pipex:	Compiling"
+	@echo "so_long:	Compiling"
 	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) -o $(NAME)
-	@echo "Pipex:	Compiled"
+	@echo "so_long:	Compiled"
 
 $(LIBFT):
 	@echo "Libft:	Compiling"
