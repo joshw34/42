@@ -1,7 +1,6 @@
-NAME = pipex
+NAME = so_long
 
 SRC_DIR = ./src
-BONUS_DIR = ./bonus
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
 
@@ -12,14 +11,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/execute_commands.c \
 
-BONUS_SRC_FILES = $(BONUS_DIR)/main_bonus.c \
-				  $(BONUS_DIR)/parse_check_input_bonus.c \
-				  $(BONUS_DIR)/utils_bonus.c \
-				  $(BONUS_DIR)/free_bonus.c \
-				  $(BONUS_DIR)/execute_commands_bonus.c \
-
 OBJ_FILES = $(SRC_FILES:.c=.o)
-BONUS_OBJ_FILES = $(BONUS_SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
@@ -35,11 +27,6 @@ $(NAME): $(LIBFT) $(OBJ_FILES)
 $(LIBFT):
 	@echo "Libft:	Compiling"
 	@make -s all -C $(LIBFT_DIR)
-
-bonus: $(LIBFT) $(BONUS_OBJ_FILES)
-	@echo "Pipex Bonus:	Compiling"
-	@$(CC) $(CFLAGS) $(BONUS_OBJ_FILES) $(LIBFT) -o $(NAME)
-	@echo "Pipex Bonus:	Compiled"
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -58,4 +45,4 @@ fclean:
 
 re:	fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
