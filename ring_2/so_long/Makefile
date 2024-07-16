@@ -3,26 +3,25 @@ NAME = so_long
 SRC_DIR = ./src
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
+MLX_FLAGS = -L/usr/lib -lmlx -lXext -lX11
+
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC_FILES =	$(SRC_DIR)/main.c \
-			$(SRC_DIR)/parse_check_input.c \
-			$(SRC_DIR)/utils.c \
-			$(SRC_DIR)/execute_commands.c \
+SRC_FILES =	$(SRC_DIR)/so_long.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(BONUS_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
-	@echo "so_long:	Compiling"
-	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) -o $(NAME)
-	@echo "so_long:	Compiled"
+	@echo "so_long: Compiling"
+	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@echo "so_long: Compiled"
 
 $(LIBFT):
 	@echo "Libft:	Compiling"
