@@ -3,7 +3,7 @@ NAME = so_long
 SRC_DIR = ./src
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
-MLX_FLAGS = -L/usr/lib -lmlx -lXext -lX11
+MLX_FLAGS = -L../inc/minilibx -lmlx -lXext -lX11
 
 
 LIBFT = $(LIBFT_DIR)/libft.a
