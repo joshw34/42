@@ -9,6 +9,9 @@ MLX_FLAGS = -L../inc/minilibx -lmlx -lXext -lX11
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_FILES =	$(SRC_DIR)/so_long.c \
+			$(SRC_DIR)/parse_map.c \
+			$(SRC_DIR)/free_data.c \
+			$(SRC_DIR)/utils.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
