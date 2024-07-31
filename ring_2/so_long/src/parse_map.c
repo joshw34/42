@@ -1,6 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 12:34:31 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/07/31 12:43:58 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/so_long.h"
 
-void	copy_map(int fd, t_data *data)
+static	void	copy_map(int fd, t_data *data)
+{
+	char	*buffer;
+	int		i;
+
+	buffer = NULL;
+	i = 0;
+	data->map = malloc((data->rows + 1) * sizeof(char *));
+	while (i < data->rows)
+	{
+		data->map[i] = sl_gnl(fd, &buffer);
+		i++;
+	}
+	data->map[i] = NULL;
+	i = 0;
+	while (data->map[i])
+	{
+		ft_printf("%s", data->map[i]);
+		i++;
+	}
+	free(buffer);
+}
+
+static	void	count_lines(int fd, t_data *data)
 {
 	char	*buffer;
 	char	*line;
@@ -14,8 +49,6 @@ void	copy_map(int fd, t_data *data)
 		line = sl_gnl(fd, &buffer);
 		if (line == NULL)
 			break ;
-		ft_printf("TEST 2");
-		ft_printf("%s", line);
 		data->rows++;
 		len = ft_strlen(line);
 		if (data->cols != -1 && data->cols != len)
@@ -30,39 +63,10 @@ void	copy_map(int fd, t_data *data)
 	free(buffer);
 }
 
-void	count_lines(int fd, t_data *data)
-{
-	char	*buffer;
-	char	*line;
-	int		len;
-
-	data->rows = 0;
-	data->cols = -1;
-	buffer = NULL;
-	ft_printf("TEST 1\n");
-	while (1)
-	{
-		line = sl_gnl(fd, &buffer);
-		if (line == NULL)
-			break ;
-		ft_printf("%s", line);
-		data->rows++;
-		len = ft_strlen(line);
-		if (data->cols != -1 && data->cols != len)
-		{
-			ft_putstr_fd("Error\nMap is Not Rectangular\n", 2);
-			close(fd);
-			error_exit(data);
-		}
-		data->cols = len;
-		free(line);
-	}
-	free(buffer);
-}
-
-void	check_argc_ext(int argc, char *map, t_data *data)
+static	void	check_argc_ext(int argc, char *map, t_data *data)
 {
 	int	ext;
+
 	if (argc != 2)
 	{
 		if (argc == 1)
@@ -82,6 +86,7 @@ void	check_argc_ext(int argc, char *map, t_data *data)
 void	parse_map(int argc, char *map, t_data *data)
 {
 	int	fd;
+
 	check_argc_ext(argc, map, data);
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
@@ -90,6 +95,13 @@ void	parse_map(int argc, char *map, t_data *data)
 		error_exit(data);
 	}
 	count_lines(fd, data);
+	close(fd);
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error\nMap file");
+		error_exit(data);
+	}
 	copy_map(fd, data);
 	close(fd);
 }

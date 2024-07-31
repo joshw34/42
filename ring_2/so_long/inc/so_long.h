@@ -6,12 +6,12 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/30 18:05:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:41:05 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "../libft/libft.h"
 # include "../libft/functions/get_next_line/get_next_line.h"
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef	struct s_data
+typedef struct s_data
 {
 	void	*init;
 	void	*win;
@@ -28,9 +28,7 @@ typedef	struct s_data
 	int		cols;
 }	t_data;
 
-
 /* parse_map.c */
-void	check_argc_ext(int argc, char *map, t_data *data);
 void	parse_map(int argc, char *map, t_data *data);
 
 /* free_data.c */

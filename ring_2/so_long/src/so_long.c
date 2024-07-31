@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 12:34:48 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/07/31 12:35:09 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/so_long.h"
 
 int	main(int argc, char **argv)
@@ -8,7 +20,6 @@ int	main(int argc, char **argv)
 	parse_map(argc, argv[1], data);
 	return (0);
 }
-
 
 /*void	*init = mlx_init();
 	void	*window = mlx_new_window(init, 500, 500, "Test Window");
