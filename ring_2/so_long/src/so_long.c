@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:34:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 12:35:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:58:15 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	data = ft_calloc(1, sizeof(t_data));
+	data = init_data_struct();
 	parse_map(argc, argv[1], data);
+	check_map(data);
 	return (0);
 }
 

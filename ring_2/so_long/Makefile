@@ -10,6 +10,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_FILES =	$(SRC_DIR)/so_long.c \
 			$(SRC_DIR)/parse_map.c \
+			$(SRC_DIR)/check_map.c \
 			$(SRC_DIR)/free_data.c \
 			$(SRC_DIR)/utils.c \
 

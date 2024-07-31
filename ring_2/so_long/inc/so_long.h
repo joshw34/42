@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 12:41:05 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:57:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ typedef struct s_data
 	char	**map;
 	int		rows;
 	int		cols;
+	int		p_x;
+	int		p_y;
+	int		c;
+	int		e;
+	int		p;
 }	t_data;
 
 /* parse_map.c */
@@ -34,9 +39,13 @@ void	parse_map(int argc, char *map, t_data *data);
 /* free_data.c */
 void	free_data(t_data *data);
 void	free_array(char **array);
-void	error_exit(t_data *data);
+void	error_exit(t_data *data, char *message);
+
+/* check_map.c */
+void	check_map(t_data *data);
 
 /* utils.c */
 char	*sl_gnl(int fd, char **buffer);
+t_data	*init_data_struct(void);
 
 #endif
