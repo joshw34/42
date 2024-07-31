@@ -2,18 +2,6 @@
 
 void	copy_map(int fd, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	data->map = malloc(sizeof(char **));
-	while (1)
-	{
-		
-	}
-}
-
-void	count_lines(int fd, t_data *data)
-{
 	char	*buffer;
 	char	*line;
 	int		len;
@@ -26,6 +14,38 @@ void	count_lines(int fd, t_data *data)
 		line = sl_gnl(fd, &buffer);
 		if (line == NULL)
 			break ;
+		ft_printf("TEST 2");
+		ft_printf("%s", line);
+		data->rows++;
+		len = ft_strlen(line);
+		if (data->cols != -1 && data->cols != len)
+		{
+			ft_putstr_fd("Error\nMap is Not Rectangular\n", 2);
+			close(fd);
+			error_exit(data);
+		}
+		data->cols = len;
+		free(line);
+	}
+	free(buffer);
+}
+
+void	count_lines(int fd, t_data *data)
+{
+	char	*buffer;
+	char	*line;
+	int		len;
+
+	data->rows = 0;
+	data->cols = -1;
+	buffer = NULL;
+	ft_printf("TEST 1\n");
+	while (1)
+	{
+		line = sl_gnl(fd, &buffer);
+		if (line == NULL)
+			break ;
+		ft_printf("%s", line);
 		data->rows++;
 		len = ft_strlen(line);
 		if (data->cols != -1 && data->cols != len)

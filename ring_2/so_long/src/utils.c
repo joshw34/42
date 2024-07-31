@@ -11,5 +11,6 @@ char	*sl_gnl(int fd, char **buffer)
 		return (NULL);
 	line = next_line(*buffer);
 	*buffer = leftover(*buffer);
+	//ft_printf("%s\n", line);
 	return (line);
 }
