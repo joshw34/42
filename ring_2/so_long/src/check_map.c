@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:27:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 18:45:44 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:21:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static	void	check_game_elements(t_data *data)
 	if (data->c < 1)
 		error_exit(data, "Error\nAt least 1 collectible required\n");
 	if (data->e != 1)
-		error_exit(data, "Error\n1 exit must be specified\n");
+		error_exit(data, "Error\nOne exit must be specified\n");
 	if (data->p != 1)
-		error_exit(data, "Error\n1 player start position must be specified\n");
+		error_exit(data, "Error\nOne player start position must be specified\n");
 }
 
 static	void	check_content(t_data *data)
@@ -56,12 +56,12 @@ static	void	check_content(t_data *data)
 			c = data->map[i][j];
 			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
 			{
-				error_exit(data, "Error\nInvalid Character in Map File");
+				error_exit(data, "Error\nInvalid Character in Map File\n");
 			}
 			if (c == 'P')
 			{
-				data->p_x = j + 1;
-				data->p_y = i + 1;
+				data->p_row = i;
+				data->p_col = j;
 			}
 			j++;
 		}
@@ -117,12 +117,10 @@ static	void	check_shape(t_data *data)
 	data->cols = len;
 }
 
-void	check_map(t_data *data)
+void	check_map_data(t_data *data)
 {
 	check_shape(data);
 	check_walls(data);
 	check_content(data);
 	check_game_elements(data);
-	ft_printf("x = %d\ny = %d", data->p_x, data->p_y);
-	free_data(data);
 }

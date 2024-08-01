@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 18:57:29 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:02:15 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_data	*init_data_struct(void)
 	data->map = NULL;
 	data->rows = 0;
 	data->cols = 0;
-	data->p_x = 0;
-	data->p_y = 0;
+	data->p_row = 0;
+	data->p_col = 0;
 	data->c = 0;
 	data->e = 0;
 	data->p = 0;
