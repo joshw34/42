@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:34:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 12:11:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:52:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	parse_map(argc, argv[1], data);
 	check_map_data(data);
 	validate_map(data);
+	run_game(data);
+	free_data(data);
 	return (0);
 }
 

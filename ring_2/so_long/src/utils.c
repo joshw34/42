@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 12:02:15 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:07:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_data	*init_data_struct(void)
 	}
 	data->init = NULL;
 	data->win = NULL;
+	data->background = NULL;
 	data->map = NULL;
 	data->rows = 0;
 	data->cols = 0;

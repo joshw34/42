@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 12:11:02 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:08:15 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_data
 {
 	void	*init;
 	void	*win;
+	void	*background;
 	char	**map;
 	int		rows;
 	int		cols;
@@ -46,6 +47,9 @@ void	check_map_data(t_data *data);
 
 /* validate_map.c */
 void	validate_map(t_data *data);
+
+/* game.c */
+void	run_game(t_data *data);
 
 /* utils.c */
 char	*sl_gnl(int fd, char **buffer);

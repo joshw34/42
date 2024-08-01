@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 15:44:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:07:18 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	free_array(char **array)
 
 void	free_data(t_data *data)
 {
-	if (data->init != NULL)
+	/*if (data->init != NULL)
 		free(data->init);
 	if (data->win != NULL)
-		free(data->win);
+		free(data->win);*/
 	if (data->map != NULL)
 		free_array(data->map);
 	free(data);
