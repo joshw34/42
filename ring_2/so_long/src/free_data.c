@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 17:07:18 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:07:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,25 @@ void	free_array(char **array)
 
 void	free_data(t_data *data)
 {
-	/*if (data->init != NULL)
-		free(data->init);
+	if (data->floor != NULL)
+		mlx_destroy_image(data->init, (data->floor));
+	if (data->wall != NULL)
+		mlx_destroy_image(data->init, data->wall);
+	if (data->player != NULL)
+		mlx_destroy_image(data->init, data->player);
+	if (data->exit1 != NULL)
+		mlx_destroy_image(data->init, data->exit1);
+	if (data->exit2 != NULL)
+		mlx_destroy_image(data->init, data->exit2);
+	if (data->collect != NULL)
+		mlx_destroy_image(data->init, data->collect);
 	if (data->win != NULL)
-		free(data->win);*/
+		mlx_destroy_window(data->init, data->win);
+	if (data->init != NULL)
+	{
+		mlx_destroy_display(data->init);
+		free(data->init);
+	}
 	if (data->map != NULL)
 		free_array(data->map);
 	free(data);

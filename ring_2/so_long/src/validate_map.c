@@ -1,5 +1,25 @@
 #include "../inc/so_long.h"
 
+static	void	reset_game_elements(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j] != '\0')
+		{
+			if (data->map[i][j] == 'C')
+				data->c++;
+			j++;
+		}
+		i++;
+	}
+	data->e = 1;
+}
+
 static	void	check_possible(t_data *data, char **temp, int r, int c)
 {
 	if (r < 0 || r >= data->rows || c < 0 || c >= data->cols)
@@ -54,4 +74,5 @@ void	validate_map(t_data *data)
 		error_exit(data, "Error\nCollectible not reachable\n");
 	if (data->e > 0)
 		error_exit(data, "Error\nExit not reachable\n");
+	reset_game_elements(data);
 }

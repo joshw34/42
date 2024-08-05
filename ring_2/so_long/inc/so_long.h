@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 17:08:15 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:50:37 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,23 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define FLOOR "./assets/floor.xpm"
+# define WALL "./assets/wall.xpm"
+# define PLAYER "./assets/player.xpm"
+# define EXIT1 "./assets/exit1.xpm"
+# define EXIT2 "./assets/exit2.xpm"
+# define COLLECT "./assets/collect.xpm"
+
 typedef struct s_data
 {
 	void	*init;
 	void	*win;
-	void	*background;
+	void	*floor;
+	void	*wall;
+	void	*player;
+	void	*exit1;
+	void	*exit2;
+	void	*collect;
 	char	**map;
 	int		rows;
 	int		cols;

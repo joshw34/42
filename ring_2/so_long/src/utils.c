@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/01 17:07:55 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:07:09 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ t_data	*init_data_struct(void)
 	}
 	data->init = NULL;
 	data->win = NULL;
-	data->background = NULL;
+	data->floor = NULL;
+	data->wall = NULL;
+	data->player = NULL;
+	data->exit1 = NULL;
+	data->exit2 = NULL;
+	data->collect = NULL;
 	data->map = NULL;
 	data->rows = 0;
 	data->cols = 0;
