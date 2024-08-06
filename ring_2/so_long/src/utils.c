@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 15:57:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:01:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,23 @@ char	*sl_gnl(int fd, char **buffer)
 	return (line);
 }
 
+static	t_m_data	*init_m_data_struct(void)
+{
+	t_m_data	*m_data;
+
+	m_data = malloc(sizeof(t_m_data));
+	m_data->rows = 0;
+	m_data->cols = 0;
+	m_data->p_row = 0;
+	m_data->p_col = 0;
+	m_data->e_row = 0;
+	m_data->e_col = 0;
+	m_data->c = 0;
+	m_data->e = 0;
+	m_data->p = 0;
+	return (m_data);
+}
+
 t_data	*init_data_struct(void)
 {
 	t_data	*data;
@@ -59,12 +76,6 @@ t_data	*init_data_struct(void)
 	data->exit2 = NULL;
 	data->collect = NULL;
 	data->map = NULL;
-	data->rows = 0;
-	data->cols = 0;
-	data->p_row = 0;
-	data->p_col = 0;
-	data->c = 0;
-	data->e = 0;
-	data->p = 0;
+	data->m_data = init_m_data_struct();
 	return (data);
 }

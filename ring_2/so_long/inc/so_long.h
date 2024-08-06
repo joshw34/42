@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 16:33:45 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:52:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,31 @@
 
 # define ESC 65307
 
+typedef	struct s_m_data
+{
+	int	rows;
+	int	cols;
+	int	p_row;
+	int	p_col;
+	int	e_row;
+	int	e_col;
+	int	c;
+	int	e;
+	int	p;
+} t_m_data;
+
 typedef struct s_data
 {
-	void	*init;
-	void	*win;
-	void	*floor;
-	void	*wall;
-	void	*player;
-	void	*exit1;
-	void	*exit2;
-	void	*collect;
-	char	**map;
-	int		rows;
-	int		cols;
-	int		p_row;
-	int		p_col;
-	int		c;
-	int		e;
-	int		p;
+	void		*init;
+	void		*win;
+	void		*floor;
+	void		*wall;
+	void		*player;
+	void		*exit1;
+	void		*exit2;
+	void		*collect;
+	char		**map;
+	t_m_data	*m_data;
 }	t_data;
 
 /* parse_map.c */

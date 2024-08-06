@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:53:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 16:35:55 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:24:48 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static	bool	check_rules(t_data *data, int row, int col)
 	next = data->map[row][col];
 	if (next == '1')
 		return (false);
-	if (next == 'E' && data->c != 0)
+	if (next == 'E' && data->m_data->c != 0)
 		return (false);
 	if (next == 'C')
 	{
-		if (data->c == 1)
+		if (data->m_data->c == 1)
 		{
-			data->c--;
-			put_image(data, row, col);
+			data->m_data->c--;
+			put_image(data, data->m_data->e_row, data->m_data->e_col);
 		}
 		else
-			data->c--;
+			data->m_data->c--;
 	}
 	return (true);
 }
@@ -44,7 +44,7 @@ void	left_right(t_data *data, int row, int col, int keysym)
 		data->map[row][col - 1] = 'P';
 		put_image(data, row, col);
 		put_image(data, row, col - 1);
-		data->p_col--;
+		data->m_data->p_col--;
 	}
 	if (keysym == D || keysym == RT)
 	{
@@ -54,7 +54,7 @@ void	left_right(t_data *data, int row, int col, int keysym)
 		data->map[row][col + 1] = 'P';
 		put_image(data, row, col);
 		put_image(data, row, col + 1);
-		data->p_col++;
+		data->m_data->p_col++;
 	}
 }
 
@@ -68,7 +68,7 @@ void	up_down(t_data *data, int row, int col, int keysym)
 		data->map[row - 1][col] = 'P';
 		put_image(data, row, col);
 		put_image(data, row - 1, col);
-		data->p_row--;
+		data->m_data->p_row--;
 	}
 	if (keysym == S || keysym == DN)
 	{
@@ -78,6 +78,6 @@ void	up_down(t_data *data, int row, int col, int keysym)
 		data->map[row + 1][col] = 'P';
 		put_image(data, row, col);
 		put_image(data, row + 1, col);
-		data->p_row++;
+		data->m_data->p_row++;
 	}
 }

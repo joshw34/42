@@ -6,11 +6,25 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:27:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 15:54:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:40:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+static	void	player_exit_loc(t_data *data, char c, int row, int col)
+{
+	if (c == 'P')
+	{
+		data->m_data->p_row = row;
+		data->m_data->p_col = col;
+	}
+	if (c == 'E')
+	{
+		data->m_data->e_row = row;
+		data->m_data->e_col = col;
+	}
+}
 
 static	void	check_game_elements(t_data *data)
 {
@@ -24,20 +38,20 @@ static	void	check_game_elements(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == 'C')
-				data->c++;
+				data->m_data->c++;
 			if (data->map[i][j] == 'E')
-				data->e++;
+				data->m_data->e++;
 			if (data->map[i][j] == 'P')
-				data->p++;
+				data->m_data->p++;
 			j++;
 		}
 		i++;
 	}
-	if (data->c < 1)
+	if (data->m_data->c < 1)
 		error_exit(data, "Error\nAt least 1 collectible required\n");
-	if (data->e != 1)
+	if (data->m_data->e != 1)
 		error_exit(data, "Error\nOne exit must be specified\n");
-	if (data->p != 1)
+	if (data->m_data->p != 1)
 		error_exit(data, "Error\nOne player start position required\n");
 }
 
@@ -55,14 +69,9 @@ static	void	check_content(t_data *data)
 		{
 			c = data->map[i][j];
 			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
-			{
 				error_exit(data, "Error\nInvalid Character in Map File\n");
-			}
-			if (c == 'P')
-			{
-				data->p_row = i;
-				data->p_col = j;
-			}
+			if (c == 'P' || c == 'E')
+				player_exit_loc(data, c, i, j);
 			j++;
 		}
 		j = 0;
@@ -78,7 +87,7 @@ static	void	check_walls(t_data *data)
 	int	last_col;
 
 	i = 0;
-	last_row = data->rows - 1;
+	last_row = data->m_data->rows - 1;
 	last_col = ft_strlen(data->map[0]) - 1;
 	while (data->map[i])
 	{
@@ -99,7 +108,7 @@ static	void	check_walls(t_data *data)
 	}
 }
 
-static	void	check_shape(t_data *data)
+void	check_map_data(t_data *data)
 {
 	int	i;
 	int	len;
@@ -114,12 +123,7 @@ static	void	check_shape(t_data *data)
 			error_exit(data, "Error\nMap is not Rectangular\n");
 		i++;
 	}
-	data->cols = len;
-}
-
-void	check_map_data(t_data *data)
-{
-	check_shape(data);
+	data->m_data->cols = len;
 	check_walls(data);
 	check_content(data);
 	check_game_elements(data);

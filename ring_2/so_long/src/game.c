@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:19:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 15:55:18 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:41:13 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static	void	init_mlx(t_data *data)
 
 	x = 48;
 	y = 48;
-	width = data->cols * x;
-	height = data->rows * y;
+	width = data->m_data->cols * x;
+	height = data->m_data->rows * y;
 	data->init = mlx_init();
 	data->win = mlx_new_window(data->init, width, height, "so_long");
 	data->floor = mlx_xpm_file_to_image(data->init, FLOOR, &x, &y);

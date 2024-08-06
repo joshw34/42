@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:34:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/07/31 18:10:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:05:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static	void	copy_map(int fd, t_data *data)
 
 	buffer = NULL;
 	i = 0;
-	data->map = malloc((data->rows + 1) * sizeof(char *));
-	while (i < data->rows)
+	data->map = malloc((data->m_data->rows + 1) * sizeof(char *));
+	while (i < data->m_data->rows)
 	{
 		data->map[i] = sl_gnl(fd, &buffer);
 		i++;
@@ -35,13 +35,13 @@ static	void	count_lines(int fd, t_data *data)
 	char	*line;
 
 	buffer = NULL;
-	data->rows = 0;
+	data->m_data->rows = 0;
 	while (1)
 	{
 		line = sl_gnl(fd, &buffer);
 		if (line == NULL)
 			break ;
-		data->rows++;
+		data->m_data->rows++;
 		free(line);
 	}
 	free(buffer);
