@@ -63,5 +63,5 @@ void	run_game(t_data *data)
 {
 	init_mlx(data);
 	draw_map(data);
-	sleep(5);
+	sleep(60);
 }
