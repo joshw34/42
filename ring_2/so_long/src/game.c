@@ -59,9 +59,16 @@ static	void	init_mlx(t_data *data)
 	data->collect = mlx_xpm_file_to_image(data->init, COLLECT, &x, &y);
 }
 
+int	key(t_data *data)
+{
+	(void)data;
+	printf("%d\n", KeySym);
+	return (0);
+}
+
 void	run_game(t_data *data)
 {
 	init_mlx(data);
 	draw_map(data);
-	sleep(60);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, &key, &data);
 }

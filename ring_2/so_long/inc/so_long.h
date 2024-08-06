@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/05 17:50:37 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 12:51:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "./minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define FLOOR "./assets/floor.xpm"
 # define WALL "./assets/wall.xpm"
