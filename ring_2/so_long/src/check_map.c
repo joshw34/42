@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:27:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/05 16:14:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:54:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	check_game_elements(t_data *data)
 	if (data->e != 1)
 		error_exit(data, "Error\nOne exit must be specified\n");
 	if (data->p != 1)
-		error_exit(data, "Error\nOne player start position must be specified\n");
+		error_exit(data, "Error\nOne player start position required\n");
 }
 
 static	void	check_content(t_data *data)

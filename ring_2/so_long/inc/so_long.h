@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 12:51:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:33:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "./minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 
@@ -27,6 +28,18 @@
 # define EXIT1 "./assets/exit1.xpm"
 # define EXIT2 "./assets/exit2.xpm"
 # define COLLECT "./assets/collect.xpm"
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+
+# define UP 65362
+# define LT 65361
+# define DN 65364
+# define RT 65363
+
+# define ESC 65307
 
 typedef struct s_data
 {
@@ -51,11 +64,6 @@ typedef struct s_data
 /* parse_map.c */
 void	parse_map(int argc, char *map, t_data *data);
 
-/* free_data.c */
-void	free_data(t_data *data);
-void	free_array(char **array);
-void	error_exit(t_data *data, char *message);
-
 /* check_map.c */
 void	check_map_data(t_data *data);
 
@@ -65,8 +73,24 @@ void	validate_map(t_data *data);
 /* game.c */
 void	run_game(t_data *data);
 
+/* game_draw.c */
+void	put_image(t_data *data, int a, int b);
+void	init_map(t_data *data);
+
+/* game_hooks.c */
+int	key(int keysym, t_data *data);
+
+/* game_move.c */
+void	left_right(t_data *data, int row, int col, int keysym);
+void	up_down(t_data *data, int row, int col, int keysym);
+
 /* utils.c */
 char	*sl_gnl(int fd, char **buffer);
 t_data	*init_data_struct(void);
+
+/* free_data.c */
+void	free_data(t_data *data);
+void	free_array(char **array);
+void	error_exit(t_data *data, char *message);
 
 #endif

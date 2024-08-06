@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/05 17:07:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:57:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	void	null_terminate(char *line)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	if (!line)
 		return ;
 	while (line[i] && line[i] != '\n')
@@ -36,13 +36,14 @@ char	*sl_gnl(int fd, char **buffer)
 		return (NULL);
 	line = next_line(*buffer);
 	*buffer = leftover(*buffer);
-	null_terminate(line);		
+	null_terminate(line);
 	return (line);
 }
 
 t_data	*init_data_struct(void)
 {
 	t_data	*data;
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{

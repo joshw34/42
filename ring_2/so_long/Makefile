@@ -13,6 +13,9 @@ SRC_FILES =	$(SRC_DIR)/so_long.c \
 			$(SRC_DIR)/check_map.c \
 			$(SRC_DIR)/validate_map.c \
 			$(SRC_DIR)/game.c \
+			$(SRC_DIR)/game_draw.c \
+			$(SRC_DIR)/game_hooks.c \
+			$(SRC_DIR)/game_move.c \
 			$(SRC_DIR)/free_data.c \
 			$(SRC_DIR)/utils.c \
 
