@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:19:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/07 14:04:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:21:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	run_game(t_data *data)
 {
 	init_mlx(data);
 	init_map(data);
+	mlx_hook(data->win, DestroyNotify, 0, &win_close, data);
+	mlx_expose_hook(data->win, &expose_win, data);
 	mlx_key_hook(data->win, &key, data);
-	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, &win_close, &data);
 	mlx_loop(data->init);
 }

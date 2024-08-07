@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:20:23 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/07 14:14:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:17:52 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 int	win_close(t_data *data)
 {
-	mlx_destroy_window(data->init, data->win);
-	mlx_destroy_display(data->init);
 	success_exit(data, "Game Over: User Closed Window\n");
+	return (0);
+}
+
+int	expose_win(t_data *data)
+{
+	init_map(data);
 	return (0);
 }
 

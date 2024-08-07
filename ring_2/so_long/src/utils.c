@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 17:01:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:25:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static	t_m_data	*init_m_data_struct(void)
 	m_data->c = 0;
 	m_data->e = 0;
 	m_data->p = 0;
+	m_data->moves = 0;
 	return (m_data);
 }
 

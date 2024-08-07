@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/07 14:03:58 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:25:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef	struct s_m_data
 	int	c;
 	int	e;
 	int	p;
+	int	moves;
 } t_m_data;
 
 typedef struct s_data
@@ -86,6 +87,7 @@ void	init_map(t_data *data);
 
 /* game_hooks.c */
 int	win_close(t_data *data);
+int	expose_win(t_data *data);
 int	key(int keysym, t_data *data);
 
 /* game_move.c */

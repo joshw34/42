@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:53:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 17:24:48 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:26:56 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static	bool	check_rules(t_data *data, int row, int col)
 		else
 			data->m_data->c--;
 	}
+	data->m_data->moves++;
+	ft_printf("Moves: %d\n", data->m_data->moves);
 	return (true);
 }
 
