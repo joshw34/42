@@ -6,11 +6,19 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:20:23 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/07 12:13:58 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:06:02 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+int	win_close(t_data *data)
+{
+	mlx_destroy_window(data->init, data->win);
+	mlx_destroy_display(data->init);
+	success_exit(data, "Game Over: User Closed Window\n");
+	return (0);
+}
 
 int	key(int keysym, t_data *data)
 {

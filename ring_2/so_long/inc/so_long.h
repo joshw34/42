@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/07 12:10:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:03:58 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	put_image(t_data *data, int a, int b);
 void	init_map(t_data *data);
 
 /* game_hooks.c */
+int	win_close(t_data *data);
 int	key(int keysym, t_data *data);
 
 /* game_move.c */
