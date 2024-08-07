@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 16:52:08 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:10:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_data	*init_data_struct(void);
 /* free_data.c */
 void	free_data(t_data *data);
 void	free_array(char **array);
+void	success_exit(t_data *data, char *message);
 void	error_exit(t_data *data, char *message);
 
 #endif

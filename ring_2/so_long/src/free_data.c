@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 17:02:22 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:10:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ void	free_data(t_data *data)
 	if (data->m_data != NULL)
 		free(data->m_data);
 	free(data);
+}
+
+void	success_exit(t_data *data, char *message)
+{
+	if (message != NULL)
+		ft_putstr_fd(message, 1);
+	free_data(data);
+	exit(EXIT_SUCCESS);
 }
 
 void	error_exit(t_data *data, char *message)

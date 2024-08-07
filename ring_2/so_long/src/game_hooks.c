@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:20:23 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 17:27:33 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:13:58 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	key(int keysym, t_data *data)
 	if (keysym == A || keysym == LT || keysym == D || keysym == RT)
 		left_right(data, row, col, keysym);
 	if (keysym == ESC)
-		error_exit(data, "Game Over: User pressed ESC");
-	ft_printf("Collects Left: %d\n", data->m_data->c);
+		success_exit(data, "Game Over: User pressed ESC\n");
+	if (data->map[data->m_data->e_row][data->m_data->e_col] == 'P')
+		success_exit(data, "Game Over: You Win\n");
 	return (0);
 }
