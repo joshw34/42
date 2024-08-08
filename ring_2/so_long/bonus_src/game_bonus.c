@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:19:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 17:04:15 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:38:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 static	void	init_mlx(t_data *data)
 {
@@ -27,8 +27,12 @@ static	void	init_mlx(t_data *data)
 	data->win = mlx_new_window(data->init, width, height, "so_long");
 	data->floor = mlx_xpm_file_to_image(data->init, FLOOR, &x, &y);
 	data->wall = mlx_xpm_file_to_image(data->init, WALL, &x, &y);
+	data->player_u = mlx_xpm_file_to_image(data->init, PLAYER_U, &x, &y);
 	data->player_d = mlx_xpm_file_to_image(data->init, PLAYER_D, &x, &y);
+	data->player_r = mlx_xpm_file_to_image(data->init, PLAYER_R, &x, &y);
+	data->player_l = mlx_xpm_file_to_image(data->init, PLAYER_L, &x, &y);
 	data->exit_c = mlx_xpm_file_to_image(data->init, EXIT_C, &x, &y);
+	data->exit_o = mlx_xpm_file_to_image(data->init, EXIT_O, &x, &y);
 	data->collect = mlx_xpm_file_to_image(data->init, COLLECT, &x, &y);
 }
 

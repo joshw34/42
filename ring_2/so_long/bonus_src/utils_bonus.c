@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 17:03:40 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:38:31 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 static	void	null_terminate(char *line)
 {
@@ -45,6 +45,11 @@ static	t_m_data	*init_m_data_struct(void)
 	t_m_data	*m_data;
 
 	m_data = malloc(sizeof(t_m_data));
+	if (!m_data)
+	{
+		perror("Struct malloc");
+		exit(EXIT_FAILURE);
+	}
 	m_data->rows = 0;
 	m_data->cols = 0;
 	m_data->p_row = 0;
@@ -72,8 +77,12 @@ t_data	*init_data_struct(void)
 	data->win = NULL;
 	data->floor = NULL;
 	data->wall = NULL;
+	data->player_u = NULL;
 	data->player_d = NULL;
+	data->player_r = NULL;
+	data->player_l = NULL;
 	data->exit_c = NULL;
+	data->exit_o = NULL;
 	data->collect = NULL;
 	data->map = NULL;
 	data->m_data = init_m_data_struct();

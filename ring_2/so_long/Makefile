@@ -1,6 +1,7 @@
 NAME = so_long
 
 SRC_DIR = ./src
+BONUS_SRC_DIR = ./bonus_src
 INC_DIR = ./inc
 LIBFT_DIR = ./libft
 MLX_DIR = $(INC_DIR)/minilibx
@@ -20,7 +21,19 @@ SRC_FILES = $(SRC_DIR)/so_long.c \
             $(SRC_DIR)/free_data.c \
             $(SRC_DIR)/utils.c
 
+BONUS_SRC_FILES = $(BONUS_SRC_DIR)/so_long_bonus.c \
+				  $(BONUS_SRC_DIR)/parse_map_bonus.c \
+				  $(BONUS_SRC_DIR)/check_map_bonus.c \
+				  $(BONUS_SRC_DIR)/validate_map_bonus.c \
+				  $(BONUS_SRC_DIR)/game_bonus.c \
+				  $(BONUS_SRC_DIR)/game_draw_bonus.c \
+				  $(BONUS_SRC_DIR)/game_hooks_bonus.c \
+				  $(BONUS_SRC_DIR)/game_move_bonus.c \
+				  $(BONUS_SRC_DIR)/free_data_bonus.c \
+				  $(BONUS_SRC_DIR)/utils_bonus.c
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
+BONUS_OBJ_FILES = $(BONUS_SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
@@ -37,21 +50,26 @@ $(LIBFT):
 	@echo "Libft: Compiling"
 	@make -s all -C $(LIBFT_DIR)
 
+bonus: $(LIBFT) $(BONUS_OBJ_FILES)
+	@echo "so_long: Linking"
+	@$(CC) $(BONUS_OBJ_FILES) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	@echo "so_long: Ready"
+
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make -s clean -C $(LIBFT_DIR)
-	@$(REMOVE) $(OBJ_FILES)
+	@$(REMOVE) $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	@echo "so_long: Object Files Removed"
 
 fclean:
 	@make -s fclean -C $(LIBFT_DIR)
-	@$(REMOVE) $(OBJ_FILES)
+	@$(REMOVE) $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	@echo "so_long: Object Files Removed"
 	@$(REMOVE) $(NAME)
 	@echo "so_long: Executable Removed"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

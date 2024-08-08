@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   free_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 17:03:49 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:39:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 void	free_array(char **array)
 {
@@ -31,10 +31,18 @@ void	free_data(t_data *data)
 		mlx_destroy_image(data->init, (data->floor));
 	if (data->wall != NULL)
 		mlx_destroy_image(data->init, data->wall);
+	if (data->player_u != NULL)
+		mlx_destroy_image(data->init, data->player_u);
 	if (data->player_d != NULL)
 		mlx_destroy_image(data->init, data->player_d);
+	if (data->player_r != NULL)
+		mlx_destroy_image(data->init, data->player_r);
+	if (data->player_l != NULL)
+		mlx_destroy_image(data->init, data->player_l);
 	if (data->exit_c != NULL)
 		mlx_destroy_image(data->init, data->exit_c);
+	if (data->exit_o != NULL)
+		mlx_destroy_image(data->init, data->exit_o);
 	if (data->collect != NULL)
 		mlx_destroy_image(data->init, data->collect);
 	if (data->win != NULL)

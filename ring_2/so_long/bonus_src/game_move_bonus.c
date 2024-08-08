@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_move.c                                        :+:      :+:    :+:   */
+/*   game_move_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:53:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 15:48:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:44:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../inc/so_long_bonus.h"
 
 static	bool	check_rules(t_data *data, int row, int col)
 {
@@ -22,9 +22,16 @@ static	bool	check_rules(t_data *data, int row, int col)
 	if (next == 'E' && data->m_data->c != 0)
 		return (false);
 	if (next == 'C')
-		data->m_data->c--;
+	{
+		if (data->m_data->c == 1)
+		{
+			data->m_data->c--;
+			put_image(data, data->m_data->e_row, data->m_data->e_col);
+		}
+		else
+			data->m_data->c--;
+	}
 	data->m_data->moves++;
-	ft_printf("Moves: %d\n", data->m_data->moves);
 	return (true);
 }
 
@@ -50,6 +57,7 @@ void	left_right(t_data *data, int row, int col, int keysym)
 		put_image(data, row, col + 1);
 		data->m_data->p_col++;
 	}
+	print_moves(data);
 }
 
 void	up_down(t_data *data, int row, int col, int keysym)
@@ -74,4 +82,5 @@ void	up_down(t_data *data, int row, int col, int keysym)
 		put_image(data, row + 1, col);
 		data->m_data->p_row++;
 	}
+	print_moves(data);
 }

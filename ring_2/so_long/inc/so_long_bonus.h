@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 17:03:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:45:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 
 # define FLOOR "./assets/floor.xpm"
 # define WALL "./assets/wall.xpm"
+# define PLAYER_U "./assets/player_u.xpm"
 # define PLAYER_D "./assets/player_d.xpm"
+# define PLAYER_R "./assets/player_r.xpm"
+# define PLAYER_L "./assets/player_l.xpm"
 # define EXIT_C "./assets/exit_c.xpm"
+# define EXIT_O "./assets/exit_o.xpm"
 # define COLLECT "./assets/collect.xpm"
 
 # define W 119
@@ -60,8 +64,12 @@ typedef struct s_data
 	void		*win;
 	void		*floor;
 	void		*wall;
+	void		*player_u;
 	void		*player_d;
+	void		*player_r;
+	void		*player_l;
 	void		*exit_c;
+	void		*exit_o;
 	void		*collect;
 	char		**map;
 	t_m_data	*m_data;
@@ -80,16 +88,16 @@ void	validate_map(t_data *data);
 void	run_game(t_data *data);
 
 /* game_draw.c */
+void	print_moves(t_data *data);
 void	put_image(t_data *data, int a, int b);
 void	init_map(t_data *data);
 
 /* game_hooks.c */
-int	win_close(t_data *data);
-int	expose_win(t_data *data);
-int	key(int keysym, t_data *data);
+int		win_close(t_data *data);
+int		expose_win(t_data *data);
+int		key(int keysym, t_data *data);
 
 /* game_move.c */
-void	display_moves(t_data *data);
 void	left_right(t_data *data, int row, int col, int keysym);
 void	up_down(t_data *data, int row, int col, int keysym);
 
