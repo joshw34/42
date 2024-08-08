@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:20:02 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/06 17:21:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:59:26 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	put_image(t_data *data, int a, int b)
 		mlx_put_image_to_window(data->init, data->win, data->exit2, x, y);
 	if (data->map[a][b] == 'C')
 		mlx_put_image_to_window(data->init, data->win, data->collect, x, y);
+	mlx_string_put(data->init, data->win, 0, 16, 0xFFFFFF, "HELLO");
 }
 
 void	init_map(t_data *data)
