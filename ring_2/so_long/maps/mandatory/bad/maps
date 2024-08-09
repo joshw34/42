@@ -1,0 +1,9 @@
+map1 - collectible blocked by closed exit
+map 2 - player blocked by wall
+map 3 - exit blocked by wall
+map 4 - empty line
+map 5 - line too long
+map 6 - invalid character
+map 7 - no player start position
+map 8 - no exit
+map 9 - no collectibles
