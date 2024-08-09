@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:27:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 15:43:42 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:08:16 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ static	void	check_content(t_data *data)
 		while (data->map[i][j])
 		{
 			c = data->map[i][j];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
-				error_exit(data, "Error\nInvalid Character in Map File\n");
+			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P' 
+				&& c != 'F')
+				error_exit(data, "Error\nInvalid character in map\n");
 			if (c == 'P' || c == 'E')
 				player_exit_loc(data, c, i, j);
 			j++;
@@ -120,7 +121,7 @@ void	check_map_data(t_data *data)
 	{
 		tmp = ft_strlen(data->map[i]);
 		if (len != tmp)
-			error_exit(data, "Error\nMap is not Rectangular\n");
+			error_exit(data, "Error\nLine empty or map not rectangular\n");
 		i++;
 	}
 	data->m_data->cols = len;

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:19:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 18:38:46 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:47:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static	void	init_mlx(t_data *data)
 	data->exit_c = mlx_xpm_file_to_image(data->init, EXIT_C, &x, &y);
 	data->exit_o = mlx_xpm_file_to_image(data->init, EXIT_O, &x, &y);
 	data->collect = mlx_xpm_file_to_image(data->init, COLLECT, &x, &y);
+	data->fire = mlx_xpm_file_to_image(data->init, FIRE, &x, &y);
 }
 
 void	run_game(t_data *data)

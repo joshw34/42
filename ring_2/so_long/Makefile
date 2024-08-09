@@ -1,4 +1,5 @@
 NAME = so_long
+BONUS_NAME = so_long_bonus
 
 SRC_DIR = ./src
 BONUS_SRC_DIR = ./bonus_src
@@ -42,18 +43,21 @@ CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
-	@echo "so_long: Linking"
+	@echo "$(NAME): Linking"
 	@$(CC) $(OBJ_FILES) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
-	@echo "so_long: Ready"
+	@echo "$(NAME): Ready"
 
 $(LIBFT):
 	@echo "Libft: Compiling"
 	@make -s all -C $(LIBFT_DIR)
 
-bonus: $(LIBFT) $(BONUS_OBJ_FILES)
-	@echo "so_long: Linking"
-	@$(CC) $(BONUS_OBJ_FILES) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
-	@echo "so_long: Ready"
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(LIBFT) $(BONUS_OBJ_FILES)
+	@echo "so_long bonus: Linking"
+	@$(CC) $(BONUS_OBJ_FILES) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(BONUS_NAME)
+	@mv so_long_bonus so_long
+	@echo "so_long bonus: Ready"
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@

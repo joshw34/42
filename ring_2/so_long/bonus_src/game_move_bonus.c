@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:53:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 18:44:04 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:53:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static	bool	check_rules(t_data *data, int row, int col)
 		return (false);
 	if (next == 'E' && data->m_data->c != 0)
 		return (false);
+	if (next == 'F')
+		success_exit(data, "Game Over: You Lose!\n");
 	if (next == 'C')
 	{
 		if (data->m_data->c == 1)

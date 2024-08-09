@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 18:39:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:43:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	free_data(t_data *data)
 		mlx_destroy_image(data->init, data->exit_o);
 	if (data->collect != NULL)
 		mlx_destroy_image(data->init, data->collect);
+	if (data->fire != NULL)
+		mlx_destroy_image(data->init, data->fire);
 	if (data->win != NULL)
 		mlx_destroy_window(data->init, data->win);
 	if (data->init != NULL)

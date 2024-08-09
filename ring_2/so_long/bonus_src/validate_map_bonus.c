@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:57:51 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 15:44:55 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:46:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void	check_possible(t_data *data, char **temp, int r, int c)
 {
 	if (r < 0 || r >= data->m_data->rows || c < 0 || c >= data->m_data->cols)
 		return ;
-	if (temp[r][c] == '1' || temp[r][c] == 'X')
+	if (temp[r][c] == '1' || temp[r][c] == 'X' || temp[r][c] == 'F')
 		return ;
 	else if (temp[r][c] == 'C')
 		data->m_data->c--;

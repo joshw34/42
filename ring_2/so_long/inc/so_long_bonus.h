@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 18:45:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:41:56 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define EXIT_C "./assets/exit_c.xpm"
 # define EXIT_O "./assets/exit_o.xpm"
 # define COLLECT "./assets/collect.xpm"
+# define FIRE "./assets/fire.xpm"
 
 # define W 119
 # define A 97
@@ -71,6 +72,7 @@ typedef struct s_data
 	void		*exit_c;
 	void		*exit_o;
 	void		*collect;
+	void		*fire;
 	char		**map;
 	t_m_data	*m_data;
 }	t_data;

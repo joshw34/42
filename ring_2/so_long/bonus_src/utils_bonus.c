@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 18:38:31 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:42:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_data	*init_data_struct(void)
 	data->exit_c = NULL;
 	data->exit_o = NULL;
 	data->collect = NULL;
+	data->fire = NULL;
 	data->map = NULL;
 	data->m_data = init_m_data_struct();
 	return (data);
