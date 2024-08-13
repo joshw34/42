@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 14:09:22 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/13 14:20:17 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/08/13 14:22:11 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/08/13 14:34:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+//#include <stdio.h>
 
-void	ft_putstr(char *str)
+char	*ft_strcpy(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return ;
-	while (str[i] != '\0')
+	if (!s1 || !s2)
+		return (0);
+	while (s2[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		s1[i] = s2[i];
 		i++;
 	}
+	s1[i] = '\0';
+	return (s1);
 }
 
 /*int	main(int argc, char **argv)
 {
+	char	dest[50];
+
 	(void)argc;
-	ft_putstr(argv[1]);
-	return (0);
+	ft_strcpy(dest, argv[1]);
+	printf("%s", dest);
 }*/
