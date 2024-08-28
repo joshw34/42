@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/09 12:43:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:47:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+}
+
+static	void	free_data_2(t_data *data)
+{
+	if (data->win != NULL)
+		mlx_destroy_window(data->init, data->win);
+	if (data->init != NULL)
+	{
+		mlx_destroy_display(data->init);
+		free(data->init);
+	}
+	if (data->map != NULL)
+		free_array(data->map);
+	if (data->m_data != NULL)
+		free(data->m_data);
+	free(data);
 }
 
 void	free_data(t_data *data)
@@ -47,18 +63,6 @@ void	free_data(t_data *data)
 		mlx_destroy_image(data->init, data->collect);
 	if (data->fire != NULL)
 		mlx_destroy_image(data->init, data->fire);
-	if (data->win != NULL)
-		mlx_destroy_window(data->init, data->win);
-	if (data->init != NULL)
-	{
-		mlx_destroy_display(data->init);
-		free(data->init);
-	}
-	if (data->map != NULL)
-		free_array(data->map);
-	if (data->m_data != NULL)
-		free(data->m_data);
-	free(data);
 }
 
 void	success_exit(t_data *data, char *message)

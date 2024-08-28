@@ -6,12 +6,12 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/09 12:41:56 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:54:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/libft.h"
 # include "../libft/functions/get_next_line/get_next_line.h"
@@ -45,7 +45,7 @@
 
 # define ESC 65307
 
-typedef	struct s_m_data
+typedef struct s_m_data
 {
 	int	rows;
 	int	cols;
@@ -57,7 +57,7 @@ typedef	struct s_m_data
 	int	e;
 	int	p;
 	int	moves;
-} t_m_data;
+}	t_m_data;
 
 typedef struct s_data
 {

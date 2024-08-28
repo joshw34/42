@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:27:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/08 17:03:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:53:09 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 # define ESC 65307
 
-typedef	struct s_m_data
+typedef struct s_m_data
 {
 	int	rows;
 	int	cols;
@@ -52,7 +52,7 @@ typedef	struct s_m_data
 	int	e;
 	int	p;
 	int	moves;
-} t_m_data;
+}	t_m_data;
 
 typedef struct s_data
 {
@@ -84,9 +84,9 @@ void	put_image(t_data *data, int a, int b);
 void	init_map(t_data *data);
 
 /* game_hooks.c */
-int	win_close(t_data *data);
-int	expose_win(t_data *data);
-int	key(int keysym, t_data *data);
+int		win_close(t_data *data);
+int		expose_win(t_data *data);
+int		key(int keysym, t_data *data);
 
 /* game_move.c */
 void	display_moves(t_data *data);

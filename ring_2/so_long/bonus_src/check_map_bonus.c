@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:27:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/09 14:08:16 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:45:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	check_content(t_data *data)
 		while (data->map[i][j])
 		{
 			c = data->map[i][j];
-			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P' 
+			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P'
 				&& c != 'F')
 				error_exit(data, "Error\nInvalid character in map\n");
 			if (c == 'P' || c == 'E')
