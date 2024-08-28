@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:33:13 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/28 16:47:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:32:37 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	free_data(t_data *data)
 		mlx_destroy_image(data->init, data->collect);
 	if (data->fire != NULL)
 		mlx_destroy_image(data->init, data->fire);
+	free_data_2(data);
 }
 
 void	success_exit(t_data *data, char *message)
