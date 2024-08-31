@@ -1,35 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_bits.c                                       :+:      :+:    :+:   */
+/*   wdmatch.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 18:01:44 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/31 11:36:58 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/08/31 14:20:44 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/08/31 14:32:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
 
-void	print_bits(unsigned char octet)
+static	void	write_str(char *str)
 {
-	int				i;
-	unsigned char	bit;
+	int	i;
 
-	i = 7;
-	while (i >= 0)
+	i = 0;
+	while (str[i])
 	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
-		i--;
+		write(1, &str[i], 1);
+		i++;
 	}
+}
+
+static	void	wdmatch(char *s1, char *s2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s2[i])
+	{
+		if (s2[i] == s1[j])
+			j++;
+		i++;
+	}
+	if (s1[j] == '\0')
+		write_str(s1);
 }
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	print_bits(atoi(argv[1]));
+	if (argc == 3)
+		wdmatch(argv[1], argv[2]);
+	write(1, "\n", 1);
 	return (0);
 }

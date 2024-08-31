@@ -1,35 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_bits.c                                       :+:      :+:    :+:   */
+/*   snake_to_camel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 18:01:44 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/31 11:36:58 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/08/31 12:11:51 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/08/31 12:45:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "stdio.h"
 #include <unistd.h>
 
-void	print_bits(unsigned char octet)
+static	int	find_first_letter(char *str)
 {
-	int				i;
-	unsigned char	bit;
+	int	i;
 
-	i = 7;
-	while (i >= 0)
+	i = 0;
+	while (str[i] == '_')
+		i++;
+	return (i);
+}
+
+static	void	snake_to_camel(char *str)
+{
+	int	i;
+
+	i = find_first_letter(str);
+	while (str[i])
 	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
-		i--;
+		while (str[i] == '_')
+		{
+			i++;
+			if (str[i] >= 'a' && str[i] <= 'z')
+				str[i] = str[i] - 32;
+		}
+		write(1, &str[i], 1);
+		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	print_bits(atoi(argv[1]));
+	if (argc == 2)
+		snake_to_camel(argv[1]);
+	write(1, "\n", 1);
 	return (0);
 }
