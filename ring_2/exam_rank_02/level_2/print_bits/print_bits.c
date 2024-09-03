@@ -5,24 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 18:01:44 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/08/31 11:36:58 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/09/03 12:49:03 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/09/03 12:53:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void	print_bits(unsigned char octet)
 {
-	int				i;
-	unsigned char	bit;
-
-	i = 7;
+	int i = 7;
+	unsigned char result = 0;
+	
 	while (i >= 0)
 	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
+		result = (octet >> i & 1) + '0';
+		write(1, &result, 1);
 		i--;
 	}
 }
@@ -31,5 +30,5 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	print_bits(atoi(argv[1]));
-	return (0);
+	write(1, "\n", 1);
 }

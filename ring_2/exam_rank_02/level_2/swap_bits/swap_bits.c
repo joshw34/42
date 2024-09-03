@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 16:45:17 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/03 17:16:39 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/09/03 12:34:37 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/09/03 12:59:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-static void	expand_str(char *str)
+unsigned char	swap_bits(unsigned char octet)
 {
-	int	i;
+	unsigned char result;
 
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i])
-	{
-		while (str[i] != ' ' && str[i] != '\t' && str[i])
-		{
-			write(1, &str[i], 1);
-			i++;
-		}
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		if (str[i] && str[i] != ' ' && str[i] != '\t')
-			write(1, "   ", 3);
-	}
+	result = ((octet >> 4) | (octet << 4));
+	return (result);
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc == 2)
-		expand_str(argv[1]);
-	write(1, "\n", 1);	
-	return (0);
+	(void)argc;
+	int	number = atoi(argv[1]);
+	unsigned char result = swap_bits(number);
+	printf("%d\n", result);
 }
