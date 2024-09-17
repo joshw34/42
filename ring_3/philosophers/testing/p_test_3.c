@@ -1,6 +1,4 @@
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "test_header.h"
 
 void	*thread_10(void *arg)
 {

@@ -1,5 +1,4 @@
-#include <sys/time.h>
-#include <stdio.h>
+#include "test_header.h"
 
 int	main(void)
 {

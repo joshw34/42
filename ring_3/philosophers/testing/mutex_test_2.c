@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <pthread.h>
+#include "test_header.h"
 
 typedef	struct s_mutex_test
 {
