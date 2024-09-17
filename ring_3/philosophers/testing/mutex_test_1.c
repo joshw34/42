@@ -1,12 +1,5 @@
 #include "test_header.h"
 
-typedef	struct s_mutex_test
-{
-	int				counter;
-	pthread_mutex_t	mutex;
-} t_mutex_data;
-
-
 void	*increment_counter(void *arg)
 {
 	t_mutex_data	*data = arg;
