@@ -4,6 +4,7 @@ SRC_DIR = ./src
 INC_DIR = ./inc
 
 SRC_FILES =	$(SRC_DIR)/main.c \
+			$(SRC_DIR)/free.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
