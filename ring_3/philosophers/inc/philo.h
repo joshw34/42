@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joshw <joshw@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/18 12:42:31 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:30:52 by joshw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,33 @@
 # include <stdbool.h>
 # include <pthread.h>
 
-typedef struct s_input
+typedef struct s_philo
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_eat;
-}	t_input;
+	pthread_t		t_id;
+	unsigned int	philo_id;
+	unsigned int	t_ate;
+	time_t			t_last_meal;
+	pthread_mutex_t	forks[2];
+	t_data			*data;
+}	t_philo;
+
+typedef struct s_data
+{
+	time_t			sim_start;
+	unsigned int	n_philos;
+	unsigned int	t_die;
+	unsigned int	t_eat;
+	unsigned int	t_sleep;
+	int				n_eat;
+	pthread_mutex_t	*forks;
+	pthread_t		print_lock;
+	t_philo			**philos;
+}	t_data;
 
 /* parse_check_input.c */
-t_input	*parse_input(char **argv);
+t_data	*parse_input(char **argv);
 
 /* free.c */
-void	input_error_exit(t_input *input, char *message);
+void	input_error_exit(t_data *input, char *message);
 
 #endif

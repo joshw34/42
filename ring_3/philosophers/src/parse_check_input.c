@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_check_input.c                                :+:      :+:    :+:   */
+/*   parse_check_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joshw <joshw@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:05:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/19 11:05:43 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:34:41 by joshw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
-t_input	*parse_input(char **argv)
+t_data	*parse_data(char **argv)
 {
-	t_input	*input;
+	t_data	*data;
 
-	input = malloc(sizeof(t_input));
-	if(!input)
+	data = malloc(sizeof(t_data));
+	if(!data)
 		return (NULL);
-	input->n_philo = ft_atoi(argv[0]);
-	input->t_die = ft_atoi(argv[1]);
-	input->t_eat = ft_atoi(argv[2]);
-	input->t_sleep = ft_atoi(argv[3]);
+	data->n_philos = ft_atoi(argv[0]);
+	data->t_die = ft_atoi(argv[1]);
+	data->t_eat = ft_atoi(argv[2]);
+	data->t_sleep = ft_atoi(argv[3]);
 	if (argv[4])
-		input->n_eat = ft_atoi(argv[4]);
+		data->n_eat = ft_atoi(argv[4]);
 	else
-		input->n_eat = -1;
-	if (input->n_philo == 0 || input->t_die == 0 || input->t_eat == 0
-		|| input->t_sleep == 0 || input->n_eat == 0)
+		data->n_eat = -1;
+	if (data->n_philos == 0 || data->t_die == 0 || data->t_eat == 0
+		|| data->t_sleep == 0 || data->n_eat == 0)
 	{
-		input_error_exit(input, "Error: Invalid Arguments\n");
+		data_error_exit(data, "Error: Invalid Arguments\n");
 		return (NULL);
 	}
-	return (input);
+	return (data);
 }
