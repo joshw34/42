@@ -6,6 +6,7 @@ INC_DIR = ./inc
 SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/parse_check_input.c \
 			$(SRC_DIR)/free.c \
+			$(SRC_DIR)/utils.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

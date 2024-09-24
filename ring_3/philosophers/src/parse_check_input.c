@@ -30,26 +30,21 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
-t_data	*parse_data(char **argv)
+t_data	*init_structs(char **av)
 {
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if(!data)
 		return (NULL);
-	data->n_philos = ft_atoi(argv[0]);
-	data->t_die = ft_atoi(argv[1]);
-	data->t_eat = ft_atoi(argv[2]);
-	data->t_sleep = ft_atoi(argv[3]);
-	if (argv[4])
-		data->n_eat = ft_atoi(argv[4]);
+	data->sim_start = get_time();
+	data->n_philos = ft_atoi(av[0]);
+	data->t_die = ft_atoi(av[1]);
+	data->t_eat = ft_atoi(av[2]);
+	data->t_sleep = ft_atoi(av[3]);
+	if (av[4])
+		data->n_eat = ft_atoi(av[4]);
 	else
 		data->n_eat = -1;
-	if (data->n_philos == 0 || data->t_die == 0 || data->t_eat == 0
-		|| data->t_sleep == 0 || data->n_eat == 0)
-	{
-		data_error_exit(data, "Error: Invalid Arguments\n");
-		return (NULL);
-	}
 	return (data);
 }

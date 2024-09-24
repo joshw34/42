@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joshw <joshw@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/24 13:30:52 by joshw            ###   ########.fr       */
+/*   Updated: 2024/09/24 15:28:49 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <sys/time.h>
+
+typedef struct s_data t_data;
 
 typedef struct s_philo
 {
@@ -43,9 +46,13 @@ typedef struct s_data
 }	t_data;
 
 /* parse_check_input.c */
-t_data	*parse_input(char **argv);
+t_data	*init_structs(char **av);
 
 /* free.c */
-void	input_error_exit(t_data *input, char *message);
+void	free_philos(t_philo **philos);
+void	data_error_exit(t_data *input, char *message);
+
+/* utils.c */
+time_t	get_time(void);
 
 #endif

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 10:51:37 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/24 15:25:46 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/09/24 15:28:40 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	main(int ac, char **av)
+time_t	get_time(void)
 {
-	t_data	*data;
-
-	if (ac != 5 && ac != 6)
-		return (EXIT_FAILURE);
-	data = init_structs(av + 1);
-	if (!data)
-		return (EXIT_FAILURE);
-	else
-		printf("%ld\n", data->sim_start);
+	struct timeval	current_time;
+	gettimeofday(&current_time, NULL);
+	return((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
