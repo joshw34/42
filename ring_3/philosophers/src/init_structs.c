@@ -12,22 +12,52 @@
 
 #include "../inc/philo.h"
 
-int	ft_atoi(char *str)
+static	t_philo	**init_philos(t_data *data)
 {
-	int	i;
-	int	result;
-	
+	unsigned int	i;
+	t_philo 		**philos;
+
 	i = 0;
-	result = 0;
-	while (str[i])
+	philos = malloc(data->n_philos * sizeof(t_philo));
+	if (!philos)
+		return (NULL);
+	while (i < data->n_philos)
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			result = (result * 10) + (str[i] - 48);
+		philos[i] = malloc(sizeof(t_philo));
+		philos[i]->philo_id = i + 1;
+		philos[i]->t_ate = 0;
+		if (i == 0)
+			philos[i]->forks[0] = data->n_philos - 1;
 		else
-			return (0);
+			philos[i]->forks[0] = i - 1;
+		philos[i]->forks[1] = i;
+		philos[i]->t_last_meal = data->sim_start;
+		pthread_mutex_init(&philos[i]->last_meal_lock, NULL);
+		philos[i]->data = data;
 		i++;
 	}
-	return (result);
+	return (philos);
+}
+
+static	pthread_mutex_t	*init_forks(unsigned int n)
+{
+	unsigned int	i;
+	pthread_mutex_t	*forks;
+	
+	i = 0;
+	forks = malloc(n * sizeof(pthread_mutex_t));
+	if (!forks)
+		return (NULL);
+	while (i < n)
+	{
+		if (pthread_mutex_init(&forks[i], NULL) != 0)
+		{
+			free(forks);
+			return (NULL);
+		}
+		i++;
+	}
+	return (forks);
 }
 
 t_data	*init_structs(char **av)
@@ -46,5 +76,8 @@ t_data	*init_structs(char **av)
 		data->n_eat = ft_atoi(av[4]);
 	else
 		data->n_eat = -1;
+	data->fork_lock = init_forks(data->n_philos);
+	pthread_mutex_init(&data->print_lock, NULL);
+	data->philos = init_philos(data);
 	return (data);
 }

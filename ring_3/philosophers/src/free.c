@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/24 14:26:25 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:47:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_philos(t_philo **philos)
 	free(philos);
 }
 
-void	data_error_exit(t_data *data, char *message)
+void	error_exit(t_data *data, char *message)
 {
 	if (data)
 	{
