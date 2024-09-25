@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 11:49:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:33:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_atoi(char *str)
 {
 	int	i;
 	int	result;
-	
+
 	i = 0;
 	result = 0;
 	while (str[i])
@@ -33,6 +33,7 @@ int	ft_atoi(char *str)
 time_t	get_time(void)
 {
 	struct timeval	current_time;
+
 	gettimeofday(&current_time, NULL);
-	return((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }

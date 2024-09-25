@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_check_data.c                                :+:      :+:    :+:   */
+/*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joshw <joshw@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 12:05:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/24 13:34:41 by joshw            ###   ########.fr       */
+/*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/09/25 13:33:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	t_philo	**init_philos(t_data *data)
 {
 	unsigned int	i;
-	t_philo 		**philos;
+	t_philo			**philos;
 
 	i = 0;
 	philos = malloc(data->n_philos * sizeof(t_philo));
@@ -43,7 +43,7 @@ static	pthread_mutex_t	*init_forks(unsigned int n)
 {
 	unsigned int	i;
 	pthread_mutex_t	*forks;
-	
+
 	i = 0;
 	forks = malloc(n * sizeof(pthread_mutex_t));
 	if (!forks)
@@ -65,7 +65,7 @@ t_data	*init_structs(char **av)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-	if(!data)
+	if (!data)
 		return (NULL);
 	data->sim_start = get_time();
 	data->n_philos = ft_atoi(av[0]);

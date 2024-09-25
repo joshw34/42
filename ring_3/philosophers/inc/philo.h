@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 11:51:08 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:30:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
