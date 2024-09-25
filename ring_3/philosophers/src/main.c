@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:51:37 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 13:32:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:51:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	main(int ac, char **av)
 		printf("Left Fork: %d\tRight Fork: %d\n\n", data->philos[i]->forks[0], data->philos[i]->forks[1]);
 		i++;
 	}
+	write_error(ERROR_3);
 	return (0);
 }

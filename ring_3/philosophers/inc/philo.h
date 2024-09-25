@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 13:30:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:52:28 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+/* ERROR MESSAGES */
+# define ERROR_1 "ERROR: Malloc Failure: Data Struct\n"
+# define ERROR_2 "ERROR: Malloc Failure: Forks\n"
+# define ERROR_3 "ERROR\nMalloc Failure: Philo Struct\n"
+
+/* STRUCTS */
 typedef struct s_data	t_data;
 
 typedef struct s_philo
@@ -46,6 +52,7 @@ typedef struct s_data
 	t_philo			**philos;
 }	t_data;
 
+/* FUNCTION PROTOTYPES */
 /* init_structs.c */
 t_data	*init_structs(char **av);
 
@@ -54,6 +61,7 @@ void	free_philos(t_philo **philos);
 void	data_error_exit(t_data *input, char *message);
 
 /* utils.c */
+void	write_error(char *str);
 int		ft_atoi(char *str);
 time_t	get_time(void);
 

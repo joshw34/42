@@ -6,11 +6,23 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 12:47:25 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:50:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	write_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(2, &str[i], 1);
+		i++;
+	}
+}
 
 void	free_philos(t_philo **philos)
 {
