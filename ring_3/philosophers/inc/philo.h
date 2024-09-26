@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/26 11:13:32 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:45:59 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	int				n_eat;
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
+	bool			print_lock_init;
 	t_philo			**philos;
 }	t_data;
 
@@ -59,11 +60,10 @@ typedef struct s_data
 t_data	*init_structs(char **av);
 
 /* free.c */
-void	free_philos(t_philo **philos);
-void	error_exit(t_data *data, char *message);
+void	print_error(char *str);
+void	free_all(t_data *data, char *error_message);
 
 /* utils.c */
-void	write_error(char *str);
 int		ft_atoi(char *str);
 time_t	get_time(void);
 

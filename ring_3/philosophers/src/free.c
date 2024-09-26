@@ -6,13 +6,13 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/26 11:00:23 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:26:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	write_error(char *str)
+void	print_error(char *str)
 {
 	int	i;
 
@@ -24,27 +24,45 @@ void	write_error(char *str)
 	}
 }
 
-void	free_philos(t_philo **philos)
+static	void	free_forks(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	while (philos[i])
+	while (i < data->n_philos)
 	{
-		free(philos[i]);
+		pthread_mutex_destroy(&data->fork_lock[i]);
 		i++;
 	}
-	free(philos);
+	free(data->fork_lock);
 }
 
-void	error_exit(t_data *data, char *message)
+static	void	free_philos(t_data *data)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < data->n_philos)
+	{
+		pthread_mutex_destroy(&data->philos[i]->last_meal_lock);
+		free(data->philos[i]);
+		i++;
+	}
+	free(data->philos);
+}
+
+void	free_all(t_data *data, char *error_message)
 {
 	if (data)
 	{
 		if (data->philos)
-			free_philos(data->philos);
+			free_philos(data);
+		if (data->fork_lock)
+			free_forks(data);
+		if (data->print_lock_init == true)
+			pthread_mutex_destroy(&data->print_lock);
 		free(data);
 	}
-	if (message)
-		printf("%s\n", message);
+	if (error_message)
+		print_error(error_message);
 }
