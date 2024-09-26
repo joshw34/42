@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 13:52:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:13:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # include <sys/time.h>
 
 /* ERROR MESSAGES */
-# define ERROR_1 "ERROR: Malloc Failure: Data Struct\n"
-# define ERROR_2 "ERROR: Malloc Failure: Forks\n"
-# define ERROR_3 "ERROR\nMalloc Failure: Philo Struct\n"
+# define ERROR_0 "ERROR:\nMalloc Failure: Data Struct\n"
+# define ERROR_1 "ERROR:\nInvalid Input\n"
+# define ERROR_2 "ERROR:\nFailed to initialise Forks\n"
+# define ERROR_3 "ERROR:\nMalloc Failure: Philo Struct\n"
+# define ERROR_4 "ERROR:\nFailed to initialise mutex\n"
 
 /* STRUCTS */
 typedef struct s_data	t_data;
@@ -58,7 +60,7 @@ t_data	*init_structs(char **av);
 
 /* free.c */
 void	free_philos(t_philo **philos);
-void	data_error_exit(t_data *input, char *message);
+void	error_exit(t_data *data, char *message);
 
 /* utils.c */
 void	write_error(char *str);

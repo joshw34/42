@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:51:37 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 13:51:25 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:17:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ int	main(int ac, char **av)
 	data = init_structs(av + 1);
 	if (!data)
 		return (EXIT_FAILURE);
-	unsigned int i = 0;
+	/*unsigned int i = 0;
 	while (i < data->n_philos)
 	{
 		printf("Philo ID: %d\n", data->philos[i]->philo_id);
 		printf("Left Fork: %d\tRight Fork: %d\n\n", data->philos[i]->forks[0], data->philos[i]->forks[1]);
 		i++;
-	}
-	write_error(ERROR_3);
+	}*/
 	return (0);
 }

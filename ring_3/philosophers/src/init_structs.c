@@ -6,20 +6,19 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/25 13:33:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:16:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static	t_philo	**init_philos(t_data *data)
+bool	t_philo	init_philos(t_data *data)
 {
 	unsigned int	i;
-	t_philo			**philos;
 
 	i = 0;
-	philos = malloc(data->n_philos * sizeof(t_philo));
-	if (!philos)
+	data->philos = malloc(data->n_philos * sizeof(t_philo));
+	if (!data->philos)
 		return (NULL);
 	while (i < data->n_philos)
 	{
@@ -39,34 +38,25 @@ static	t_philo	**init_philos(t_data *data)
 	return (philos);
 }
 
-static	pthread_mutex_t	*init_forks(unsigned int n)
+static	bool	init_forks(t_data *data)
 {
 	unsigned int	i;
-	pthread_mutex_t	*forks;
 
 	i = 0;
-	forks = malloc(n * sizeof(pthread_mutex_t));
-	if (!forks)
-		return (NULL);
-	while (i < n)
+	data->fork_lock = malloc(data->n_philos * sizeof(pthread_mutex_t));
+	if (!data->fork_lock)
+		return (false);
+	while (i < data->n_philos)
 	{
-		if (pthread_mutex_init(&forks[i], NULL) != 0)
-		{
-			free(forks);
-			return (NULL);
-		}
+		if (pthread_mutex_init(&data->fork_lock[i], NULL) != 0)
+			return (false);
 		i++;
 	}
-	return (forks);
+	return (true);
 }
 
-t_data	*init_structs(char **av)
+static	bool	init_data_struct(t_data *data, char **av)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
 	data->sim_start = get_time();
 	data->n_philos = ft_atoi(av[0]);
 	data->t_die = ft_atoi(av[1]);
@@ -76,8 +66,29 @@ t_data	*init_structs(char **av)
 		data->n_eat = ft_atoi(av[4]);
 	else
 		data->n_eat = -1;
-	data->fork_lock = init_forks(data->n_philos);
-	pthread_mutex_init(&data->print_lock, NULL);
+	if (data->sim_start == 0 || data->n_philos == 0 || data->t_die == 0
+		|| data->t_eat == 0 || data -> t_sleep == 0 || data->n_eat == 0)
+		return (false);
+	return (true);
+}
+
+t_data	*init_structs(char **av)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (error_exit(data, ERROR_1), NULL);
+		
+	if (init_data_struct(data, av) == false)
+		return (error_exit(data, ERROR_0), NULL);
+		
+	if (init_forks(data) == false)
+		return (error_exit(data, ERROR_2), NULL);
+
+	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+		return (error_exit(data, ERROR_4), NULL);
+	
 	data->philos = init_philos(data);
 	return (data);
 }
