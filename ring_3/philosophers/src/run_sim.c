@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   run_sim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/07 13:19:23 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/10/07 13:58:17 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	print_status(t_philo *philo, char *status)
+void	eat(t_philo *philo)
 {
-	printf("[%ld] %d %s\n", get_time(), philo->philo_id, status);
+	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
+	print_status(philo, FORK);
+	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
+	print_status(philo, FORK);
 }
 
-int	ft_atoi(char *str)
+void	run_sim(t_data *data)
 {
-	int	i;
-	int	result;
+	unsigned int	i;
 
 	i = 0;
-	result = 0;
-	while (str[i])
+	while (i < data->n_philos)
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			result = (result * 10) + (str[i] - 48);
+		if (i % 2 == 0)
+			eat(data->philos[i]);
 		else
-			return (0);
+			print_status(data->philos[i], "chilling");
+		usleep(50000);
 		i++;
 	}
-	return (result);
-}
-
-time_t	get_time(void)
-{
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }

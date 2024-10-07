@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/26 13:45:59 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:58:28 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 # define ERROR_2 "ERROR:\nFailed to initialise Forks\n"
 # define ERROR_3 "ERROR:\nMalloc Failure: Philo Struct\n"
 # define ERROR_4 "ERROR:\nFailed to initialise mutex\n"
+
+/* STATUS MESSAGES */
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
 
 /* STRUCTS */
 typedef struct s_data	t_data;
@@ -64,7 +71,12 @@ void	print_error(char *str);
 void	free_all(t_data *data, char *error_message);
 
 /* utils.c */
+void	print_status(t_philo *philo, char *status);
 int		ft_atoi(char *str);
 time_t	get_time(void);
+
+/* run_sim.c */
+void	eat(t_philo *philo);
+void	run_sim(t_data *data);
 
 #endif
