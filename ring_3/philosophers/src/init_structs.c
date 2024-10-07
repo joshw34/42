@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/26 14:25:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:57:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,13 @@ t_data	*init_structs(char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
-		
 	if (init_data_struct(data, av) == false)
 		return (free_all(data, ERROR_1), NULL);
-		
 	if (init_forks(data) == false)
 		return (free_all(data, ERROR_2), NULL);
-
 	if (init_mutexes(data) == false)
 		return (free_all(data, ERROR_4), NULL);
-	
 	if (init_philos(data) == false)
 		return (NULL);
-	
 	return (data);
 }
