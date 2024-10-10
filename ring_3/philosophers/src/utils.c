@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/07 13:19:23 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:53:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_atoi(char *str)
 	return (result);
 }
 
-time_t	get_time(void)
+long	get_time(void)
 {
 	struct timeval	current_time;
 

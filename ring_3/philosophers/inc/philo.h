@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/07 13:58:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:53:49 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	free_all(t_data *data, char *error_message);
 /* utils.c */
 void	print_status(t_philo *philo, char *status);
 int		ft_atoi(char *str);
-time_t	get_time(void);
+long	get_time(void);
 
 /* run_sim.c */
-void	eat(t_philo *philo);
+void	*eat(void *arg);
 void	run_sim(t_data *data);
 
 #endif
