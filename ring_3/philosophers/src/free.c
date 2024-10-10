@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/26 14:26:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:53:16 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static	void	free_philos(t_data *data)
 	i = 0;
 	while (i < data->n_philos)
 	{
-		pthread_mutex_destroy(&data->philos[i]->last_meal_lock);
 		free(data->philos[i]);
 		i++;
 	}

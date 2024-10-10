@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/10 11:53:49 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:45:29 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_philo
 	unsigned int	t_ate;
 	unsigned int	forks[2];
 	time_t			t_last_meal;
-	pthread_mutex_t	last_meal_lock;
 	t_data			*data;
 }	t_philo;
 
@@ -56,6 +55,7 @@ typedef struct s_data
 	unsigned int	t_eat;
 	unsigned int	t_sleep;
 	int				n_eat;
+	pthread_t		monitor;
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
 	bool			print_lock_init;
@@ -76,7 +76,5 @@ int		ft_atoi(char *str);
 long	get_time(void);
 
 /* run_sim.c */
-void	*eat(void *arg);
 void	run_sim(t_data *data);
-
 #endif

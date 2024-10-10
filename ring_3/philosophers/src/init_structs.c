@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/09/30 12:57:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:00:31 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static	bool	init_philos(t_data *data)
 			data->philos[i]->forks[0] = i - 1;
 		data->philos[i]->forks[1] = i;
 		data->philos[i]->t_last_meal = data->sim_start;
-		if (pthread_mutex_init(&data->philos[i]->last_meal_lock, NULL) != 0)
-			return (free_all(data, ERROR_4), false);
 		data->philos[i]->data = data;
 		i++;
 	}
@@ -82,7 +80,7 @@ static	bool	init_data_struct(t_data *data, char **av)
 	else
 		data->n_eat = -1;
 	if (data->sim_start == 0 || data->n_philos == 0 || data->t_die == 0
-		|| data->t_eat == 0 || data -> t_sleep == 0 || data->n_eat == 0)
+		|| data->t_eat == 0 || data->t_sleep == 0 || data->n_eat == 0)
 		return (false);
 	return (true);
 }
