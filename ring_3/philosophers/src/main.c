@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:51:37 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/10 15:06:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:33:31 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	main(int ac, char **av)
 		printf("philo %d has eaten %d times\n", data->philos[i]->philo_id, data->philos[i]->t_ate);
 		i++;
 	}
-	free_all(data, "Success\n");
+	free_all(data, NULL);
 	return (EXIT_SUCCESS);
 }

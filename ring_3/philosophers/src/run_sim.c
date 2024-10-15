@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_sim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/10 15:01:10 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:09:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static	void	think_sleep(t_philo *philo)
 {
 	unsigned int	think_time;
 	
-	think_time = (philo->data->t_die - philo->data->t_sleep) / 2;
+	if ((int)philo->t_ate == philo->data->n_eat)
+		return ;
+	think_time = (philo->data->t_die - philo->data->t_sleep) / 10;
 	print_status(philo, SLEEP);
 	usleep(philo->data->t_sleep * 1000);
 	print_status(philo, THINK);
@@ -48,6 +50,14 @@ static	void	think_sleep(t_philo *philo)
 
 static	void	eat(t_philo *philo)
 {
+	if ((get_time() - philo->t_last_meal) > philo->data->t_die)
+	{
+		philo->data->stop_sim = true;
+		print_status(philo, DIED);
+		return ;
+	} 
+	if ((int)philo->t_ate == philo->data->n_eat)
+		return ;
 	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
 	print_status(philo, FORK);
 	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
@@ -57,8 +67,6 @@ static	void	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
 	philo->t_ate++;
-	if ((int)philo->t_ate == philo->data->n_eat)
-		return ;
 	think_sleep(philo);
 }
 
@@ -67,7 +75,7 @@ static	void	*start(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
-	if (philo->philo_id % 2 == 0)
+	if (philo->philo_id % 2 != 0)
 		eat(philo);
 	else
 		think_sleep(philo);

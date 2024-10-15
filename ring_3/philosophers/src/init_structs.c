@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/10 15:00:31 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:03:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static	bool	init_forks(t_data *data)
 
 static	bool	init_data_struct(t_data *data, char **av)
 {
+	data->stop_sim = false;
 	data->print_lock_init = false;
 	data->sim_start = get_time();
 	data->n_philos = ft_atoi(av[0]);

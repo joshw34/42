@@ -1,0 +1,31 @@
+[1728990565403] 2 is sleeping
+[1728990565403] 1 has taken a fork
+[1728990565403] 1 has taken a fork
+[1728990565403] 3 has taken a fork
+[1728990565403] 3 has taken a fork
+[1728990565403] 4 is sleeping
+[1728990565603] 2 is thinking
+[1728990565604] 1 is sleeping
+[1728990565604] 4 is thinking
+[1728990565604] 3 is sleeping
+[1728990565625] 2 has taken a fork
+[1728990565625] 2 has taken a fork
+[1728990565625] 4 has taken a fork
+[1728990565625] 4 has taken a fork
+[1728990565804] 1 is thinking
+[1728990565804] 3 is thinking
+[1728990565825] 2 is sleeping
+[1728990565825] 1 died
+[1728990565825] 4 is sleeping
+[1728990565825] 3 died
+[1728990566025] 2 is thinking
+[1728990566025] 4 is thinking
+[1728990566046] 2 died
+[1728990566046] 4 died
+
+Each philo must eat -1 times
+
+philo 1 has eaten 1 times
+philo 2 has eaten 1 times
+philo 3 has eaten 1 times
+philo 4 has eaten 1 times
