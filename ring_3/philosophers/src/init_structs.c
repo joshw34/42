@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/15 13:03:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:32:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	bool	init_philos(t_data *data)
 		else
 			data->philos[i]->forks[0] = i - 1;
 		data->philos[i]->forks[1] = i;
-		data->philos[i]->t_last_meal = data->sim_start;
+		data->philos[i]->t_last_meal = 0;
 		data->philos[i]->data = data;
 		i++;
 	}
@@ -47,6 +47,12 @@ static	bool	init_mutexes(t_data *data)
 		return (false);
 	}
 	data->print_lock_init = true;
+	if (pthread_mutex_init(&data->time_lock, NULL) != 0)
+	{
+		data->time_lock_init = false;
+		return (false);
+	}
+	data->time_lock_init = true;
 	return (true);
 }
 

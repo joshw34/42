@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/15 13:09:04 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:35:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,62 @@
 
 static	void	eat(t_philo *philo);
 
-/*static	void	*monitor(void *arg)
+static	void	*monitor(void *arg)
 {
 	unsigned int	i;
 	t_data	*data;
 
 	data = (t_data *)arg;
 	i = 0;
-	while (0)
+	while (data->stop_sim == false)
 	{
-		while (data->philos[i])
+		while (i < data->n_philos && data->stop_sim == false)
 		{
-			if (data->philos[i]->t_ate == data->n_eat)
-				pthread_kill()
+			if (data->philos[i]->t_last_meal < get_timestamp(data->philos[i]) - data->t_die)
+			{
+				print_status(data->philos[i], DIED);
+				data->stop_sim = true;
+			}
+			else if (data->philos[i]->t_ate == (unsigned int)data->n_eat)
+				data->stop_sim = true;
 			i++;
 		}
+		usleep(10000);
 		i = 0;
 	}
 	return (NULL);
-}*/
+}
 
 static	void	think_sleep(t_philo *philo)
 {
-	unsigned int	think_time;
+	//unsigned int	think_time;
 	
-	if ((int)philo->t_ate == philo->data->n_eat)
-		return ;
-	think_time = (philo->data->t_die - philo->data->t_sleep) / 10;
-	print_status(philo, SLEEP);
-	usleep(philo->data->t_sleep * 1000);
+	//if (philo->data->stop_sim == true)
+	//	return ;
+	//think_time = (philo->data->t_die - philo->data->t_sleep - philo->data->t_eat) / 2;
+	//print_status(philo, SLEEP);
+	//usleep(philo->data->t_sleep * 1000);
 	print_status(philo, THINK);
-	usleep(think_time * 1000);
+	usleep(10000);
 	eat(philo);	
 }
 
 static	void	eat(t_philo *philo)
 {
-	if ((get_time() - philo->t_last_meal) > philo->data->t_die)
-	{
-		philo->data->stop_sim = true;
-		print_status(philo, DIED);
-		return ;
-	} 
-	if ((int)philo->t_ate == philo->data->n_eat)
+	if (philo->data->stop_sim == true)
 		return ;
 	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
 	print_status(philo, FORK);
 	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
 	print_status(philo, FORK);
-	philo->t_last_meal = get_time();
+	philo->t_last_meal = get_timestamp(philo);
 	usleep(philo->data->t_eat * 1000);
 	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
+	print_status(philo, SLEEP);
+	usleep(philo->data->t_sleep * 1000);
+	//pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
+	//pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
 	philo->t_ate++;
 	think_sleep(philo);
 }
@@ -87,16 +91,18 @@ void	run_sim(t_data *data)
 	unsigned int	i;
 
 	i = 0;
+	pthread_create(&data->monitor, NULL, monitor, data);
+	data->sim_start = get_time();
 	while (i < data->n_philos)
 	{
 		pthread_create(&data->philos[i]->t_id, NULL, start, data->philos[i]);
 		i++;
 	}
-	//pthread_create(&data->monitor, NULL, monitor, data);
 	i = 0;
 	while (i < data->n_philos)
 	{
 		pthread_join(data->philos[i]->t_id, NULL);
 		i++;
 	}
+	pthread_join(data->monitor, NULL);
 }

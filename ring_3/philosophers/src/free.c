@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/10 13:53:16 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:42:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	free_all(t_data *data, char *error_message)
 			free_forks(data);
 		if (data->print_lock_init == true)
 			pthread_mutex_destroy(&data->print_lock);
+		if (data->time_lock_init == true)
+			pthread_mutex_destroy(&data->time_lock);
 		free(data);
 	}
 	if (error_message)

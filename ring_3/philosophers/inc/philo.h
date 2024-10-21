@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/15 12:32:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:40:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ typedef struct s_data
 	pthread_t		monitor;
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
+	pthread_mutex_t	time_lock;
 	bool			print_lock_init;
+	bool			time_lock_init;
 	bool			stop_sim;
 	t_philo			**philos;
 }	t_data;
@@ -75,6 +77,7 @@ void	free_all(t_data *data, char *error_message);
 void	print_status(t_philo *philo, char *status);
 int		ft_atoi(char *str);
 long	get_time(void);
+long	get_timestamp(t_philo *philo);
 
 /* run_sim.c */
 void	run_sim(t_data *data);
