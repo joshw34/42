@@ -13,7 +13,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -pthread
 
 all: $(NAME)
 

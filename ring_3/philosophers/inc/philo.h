@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/21 12:40:11 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:34:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 	unsigned int	t_ate;
 	unsigned int	forks[2];
 	time_t			t_last_meal;
+	bool			finished;
 	t_data			*data;
 }	t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/21 14:32:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:34:26 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,25 @@ static	bool	init_philos(t_data *data)
 			return (free_all(data, ERROR_3), false);
 		data->philos[i]->philo_id = i + 1;
 		data->philos[i]->t_ate = 0;
-		if (i == 0)
+		if (i % 2 == 0)
+		{
+			if (i == 0)
+				data->philos[i]->forks[0] = data->n_philos - 1;
+			else
+				data->philos[i]->forks[0] = i - 1;
+			data->philos[i]->forks[1] = i;
+		}
+		else
+		{
+			data->philos[i]->forks[0] = i;
+			data->philos[i]->forks[1] = i - 1;
+		}
+		/*if (i == 0)
 			data->philos[i]->forks[0] = data->n_philos - 1;
 		else
 			data->philos[i]->forks[0] = i - 1;
-		data->philos[i]->forks[1] = i;
+		data->philos[i]->forks[1] = i;*/
+		data->philos[i]->finished = false;
 		data->philos[i]->t_last_meal = 0;
 		data->philos[i]->data = data;
 		i++;
