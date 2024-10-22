@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/21 14:18:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:50:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ long	get_timestamp(t_philo *philo)
 	now = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	pthread_mutex_unlock(&philo->data->time_lock);
 	return (now - philo->data->sim_start);
+}
+
+void	stop_thread(int	time_ms)
+{
+	long	now;
+
+	now = get_time();
+	while ((get_time() - now) < time_ms)
+		usleep(100);
 }

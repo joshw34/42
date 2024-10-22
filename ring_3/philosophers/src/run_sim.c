@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/22 13:32:45 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:07:29 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 static	void	eat(t_philo *philo);
 
-/*static	void	*monitor(void *arg)
-{
+static	void	*monitor(void *arg)
+{	
 	unsigned int	i;
 	t_data	*data;
 
 	data = (t_data *)arg;
 	i = 0;
+	while (data->philos[i]->data->sim_start == 0)
+		usleep(100);
 	while (data->stop_sim == false)
 	{
 		while (i < data->n_philos && data->stop_sim == false)
 		{
-			if (data->philos[i]->t_last_meal < get_timestamp(data->philos[i]) - data->t_die && data->philos[i]->finished == false)
+			if (data->philos[i]->t_last_meal < get_timestamp(data->philos[i]) - data->t_die)
 			{
 				print_status(data->philos[i], DIED);
 				data->stop_sim = true;
 				return (NULL);
 			}
-			else if (data->philos[i]->t_ate == (unsigned int)data->n_eat && data->philos[i]->finished == false)
+			else if (data->philos[i]->t_ate == (unsigned int)data->n_eat)
 			{
 				data->philos[i]->finished = true;
 				printf("%d\t finished = %d\n", data->philos[i]->philo_id, data->philos[i]->finished);
@@ -42,7 +44,7 @@ static	void	eat(t_philo *philo);
 		i = 0;
 	}
 	return (NULL);
-}*/
+}
 
 /*static	void	think_sleep(t_philo *philo)
 {
@@ -63,23 +65,24 @@ static	void	eat(t_philo *philo);
 
 static	void	eat(t_philo *philo)
 {
-	if (philo->data->stop_sim == true || philo->finished == true)
-		return ;
-	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
-	print_status(philo, FORK);
-	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
-	print_status(philo, FORK);
-	philo->t_last_meal = get_timestamp(philo);
-	usleep(philo->data->t_eat * 1000);
-	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
-	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
-	philo->t_ate++;
-	print_status(philo, SLEEP);
-	usleep(philo->data->t_sleep * 1000);
-	print_status(philo, THINK);
-	usleep(10000);
-	eat(philo);
-	//think_sleep(philo);
+	while (philo->data->stop_sim == false && philo->finished == false)
+	{
+		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
+		print_status(philo, FORK);
+		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
+		print_status(philo, FORK);
+		philo->t_last_meal = get_timestamp(philo);
+		print_status(philo, EAT);
+		stop_thread(philo->data->t_eat);
+		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
+		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
+		philo->t_ate++;
+		print_status(philo, SLEEP);
+		stop_thread(philo->data->t_sleep);
+		print_status(philo, THINK);
+		//eat(philo);
+		//think_sleep(philo);
+	}
 }
 
 static	void	*start(void *arg)
@@ -88,14 +91,12 @@ static	void	*start(void *arg)
 
 	philo = (t_philo *)arg;
 	while (philo->data->sim_start == 0)
-	{
-		
-	}
+		usleep(100);
 	if (philo->philo_id % 2 != 0)
 		eat(philo);
 	else
 	{
-		usleep(philo->data->t_eat);
+		usleep(100);
 		eat(philo);
 		//think_sleep(philo);
 	}
@@ -107,20 +108,20 @@ void	run_sim(t_data *data)
 	unsigned int	i;
 
 	i = 0;
-	//pthread_create(&data->monitor, NULL, monitor, data);
 	data->sim_start = 0;
+	pthread_create(&data->monitor, NULL, monitor, data);
 	while (i < data->n_philos)
 	{
 		pthread_create(&data->philos[i]->t_id, NULL, start, data->philos[i]);
-		//pthread_detach(data->philos[i]->t_id);
+		pthread_detach(data->philos[i]->t_id);
 		i++;
 	}
 	data->sim_start = get_time();
 	i = 0;
-	while (i < data->n_philos)
+	/*while (i < data->n_philos)
 	{
 		pthread_join(data->philos[i]->t_id, NULL);
 		i++;
-	}
-	//pthread_join(data->monitor, NULL);
+	}*/
+	pthread_join(data->monitor, NULL);
 }
