@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/23 20:11:04 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/23 21:26:02 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ static	void	think_sleep(t_philo *philo)
 	//print_status(philo, SLEEP);
 	//usleep(philo->data->t_sleep * 1000);
 	print_status(philo, THINK);
-	usleep(think_time * 1000);
+	if (philo->data->n_philos % 2 != 0)
+		stop_thread(think_time);
+	else
+		usleep(200);
 	//usleep(5000);
 	//eat(philo);	
 }
@@ -119,7 +122,8 @@ static	void	*start(void *arg)
 		eat(philo);
 	else
 	{
-		usleep(100);
+		//usleep(philo->data->t_eat);
+		stop_thread(philo->data->t_eat);
 		eat(philo);
 		//think_sleep(philo);
 	}
