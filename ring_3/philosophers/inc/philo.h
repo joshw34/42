@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/22 15:09:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:02:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ typedef struct s_data
 	pthread_t		monitor;
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
-	pthread_mutex_t	time_lock;
 	bool			print_lock_init;
-	bool			time_lock_init;
 	bool			stop_sim;
 	t_philo			**philos;
 }	t_data;

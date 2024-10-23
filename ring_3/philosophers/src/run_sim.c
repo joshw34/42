@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/23 15:06:49 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:11:04 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ static	void	*monitor(void *arg)
 		usleep(100);
 	while (data->stop_sim == false)
 	{
-		while (i < data->n_philos && data->stop_sim == false)
+		while (i < data->n_philos /*&& data->stop_sim == false*/)
 		{
-			if (data->philos[i]->t_last_meal < get_timestamp(data->philos[i]) - data->t_die && data->philos[i]->finished == false)
+			if (data->philos[i]->t_last_meal <= get_timestamp(data->philos[i]) - data->t_die)
 			{
-				print_status(data->philos[i], DIED);
 				data->stop_sim = true;
+				printf("[%ld] %d %s\n", get_timestamp(data->philos[i])
+					, data->philos[i]->philo_id, DIED);
 				return (NULL);
 			}
 			else if (data->philos[i]->t_ate == (unsigned int)data->n_eat && data->philos[i]->finished == false)
@@ -54,17 +55,18 @@ static	void	*monitor(void *arg)
 
 static	void	think_sleep(t_philo *philo)
 {
-	//unsigned int	think_time;
+	unsigned int	think_time;
 	
 	//if (philo->data->stop_sim == true)
 	//	return ;
-	//think_time = (philo->data->t_die - philo->data->t_sleep - philo->data->t_eat) / 2;
+	think_time = (philo->data->t_die - philo->data->t_sleep - philo->data->t_eat) / 2;
 	//print_status(philo, SLEEP);philo 1 has eaten 201 times
 
 	//usleep(philo->data->t_sleep * 1000);
 	//print_status(philo, SLEEP);
 	//usleep(philo->data->t_sleep * 1000);
 	print_status(philo, THINK);
+	usleep(think_time * 1000);
 	//usleep(5000);
 	//eat(philo);	
 }
@@ -80,9 +82,9 @@ static	void	single_philo(t_philo *philo)
 
 static	void	eat(t_philo *philo)
 {
-	while (philo->data->stop_sim == false && philo->finished == false)
+	while (philo->data->stop_sim == false /*&& philo->finished == false*/)
 	{
-		if (philo->data->stop_sim == true || philo->finished == true)
+		if (philo->data->stop_sim == true)
 			return ;
 		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
 		print_status(philo, FORK);
@@ -94,11 +96,11 @@ static	void	eat(t_philo *philo)
 		stop_thread(philo->data->t_eat);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
-		if (philo->data->stop_sim == true || philo->finished == true)
+		if (philo->data->stop_sim == true)
 			return ;
 		print_status(philo, SLEEP);
 		stop_thread(philo->data->t_sleep);
-		if (philo->data->stop_sim == true || philo->finished == true)
+		if (philo->data->stop_sim == true)
 			return ;
 		think_sleep(philo);
 	}
@@ -144,7 +146,6 @@ void	run_sim(t_data *data)
 		pthread_join(data->philos[i]->t_id, NULL);
 		i++;
 	}
-	printf("all thread done, waiting for monitor\n");
 	if (data->n_philos > 1)
 		pthread_join(data->monitor, NULL);
 }

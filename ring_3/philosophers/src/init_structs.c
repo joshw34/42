@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/22 12:34:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:06:11 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,6 @@ static	bool	init_mutexes(t_data *data)
 		return (false);
 	}
 	data->print_lock_init = true;
-	if (pthread_mutex_init(&data->time_lock, NULL) != 0)
-	{
-		data->time_lock_init = false;
-		return (false);
-	}
-	data->time_lock_init = true;
 	return (true);
 }
 
