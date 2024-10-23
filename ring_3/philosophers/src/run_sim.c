@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/23 21:26:02 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:31:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,13 @@ static	void	think_sleep(t_philo *philo)
 	//print_status(philo, SLEEP);
 	//usleep(philo->data->t_sleep * 1000);
 	print_status(philo, THINK);
-	if (philo->data->n_philos % 2 != 0)
-		stop_thread(think_time);
-	else
-		usleep(200);
+	if (think_time < 2)
+		return ;
+	//if (philo->data->n_philos % 2 != 0)
+	stop_thread(think_time);
+	//else
+	//	usleep(10);
+	//	stop_thread(1);
 	//usleep(5000);
 	//eat(philo);	
 }
