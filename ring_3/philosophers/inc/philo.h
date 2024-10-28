@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/23 19:02:46 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:44:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERROR_2 "ERROR:\nFailed to initialise Forks\n"
 # define ERROR_3 "ERROR:\nMalloc Failure: Philo Struct\n"
 # define ERROR_4 "ERROR:\nFailed to initialise mutex\n"
+# define ERROR_5 "ERROR:\nMalloc Failure: Waiter Struct\n"
 
 /* STATUS MESSAGES */
 # define FORK "has taken a fork"
@@ -37,6 +38,14 @@
 /* STRUCTS */
 typedef struct s_data	t_data;
 
+typedef struct s_waiter
+{
+	bool			fork_available[200];
+	pthread_mutex_t	fork_check_lock;
+	bool			fork_check_lock_init;
+	t_data			*data;
+}	t_wait;
+
 typedef struct s_philo
 {
 	pthread_t		t_id;
@@ -45,6 +54,8 @@ typedef struct s_philo
 	unsigned int	forks[2];
 	time_t			t_last_meal;
 	bool			finished;
+	pthread_mutex_t	last_meal_lock;
+	bool			last_meal_lock_init;
 	t_data			*data;
 }	t_philo;
 
@@ -62,6 +73,7 @@ typedef struct s_data
 	bool			print_lock_init;
 	bool			stop_sim;
 	t_philo			**philos;
+	t_wait			*waiter;
 }	t_data;
 
 /* FUNCTION PROTOTYPES */
@@ -81,4 +93,8 @@ void	stop_thread(int	time_ms);
 
 /* run_sim.c */
 void	run_sim(t_data *data);
+
+/* waiter.c */
+bool	ask_waiter(t_data *data, int fork_1, int fork_2);
+bool	tell_waiter(t_data *data, int fork_1, int fork_2);
 #endif

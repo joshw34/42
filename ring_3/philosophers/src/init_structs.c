@@ -6,11 +6,39 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/23 21:21:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:56:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static	bool	init_waiter(t_data *data)
+{
+	t_wait			*waiter;
+	unsigned int	i;
+
+	i = 0;
+	waiter = malloc(sizeof(t_wait));
+	if (!waiter)
+		return (free_all(data, ERROR_5), false);
+	data->waiter = waiter;
+	if (pthread_mutex_init(&waiter->fork_check_lock, NULL) != 0)
+	{
+		data->waiter->fork_check_lock_init = false;
+		return (free_all(data, ERROR_4), false);
+	}
+	data->waiter->fork_check_lock_init = true;
+	while (i < 200)
+	{
+		if (i < data->n_philos)
+			data->waiter->fork_available[i] = true;
+		else
+			data->waiter->fork_available[i] = false;
+		i++;
+	}
+	data->waiter->data = data;
+	return (true);
+}
 
 static	bool	init_philos(t_data *data)
 {
@@ -29,22 +57,20 @@ static	bool	init_philos(t_data *data)
 		data->philos[i]->t_ate = 0;
 		if (i % 2 == 0)
 		{
-			if (i == 0)
-				data->philos[i]->forks[0] = data->n_philos - 1;
-			else
-				data->philos[i]->forks[0] = i - 1;
-			data->philos[i]->forks[1] = i;
+			data->philos[i]->forks[0] = i;                     // Own fork
+			data->philos[i]->forks[1] = (i + 1) % data->n_philos; // Left fork
 		}
 		else
 		{
-			data->philos[i]->forks[0] = i;
-			data->philos[i]->forks[1] = i - 1;
+			data->philos[i]->forks[0] = (i + 1) % data->n_philos; // Left fork
+			data->philos[i]->forks[1] = i;                     // Own fork
 		}
-		/*if (i == 0)
-			data->philos[i]->forks[0] = data->n_philos - 1;
-		else
-			data->philos[i]->forks[0] = i - 1;
-		data->philos[i]->forks[1] = i;*/
+		if (pthread_mutex_init(&data->philos[i]->last_meal_lock, NULL) != 0)
+		{
+			data->philos[i]->last_meal_lock_init = false;
+			return (free_all(data, ERROR_4), false);
+		}
+		data->philos[i]->last_meal_lock_init = true;
 		data->philos[i]->finished = false;
 		data->philos[i]->t_last_meal = 0;
 		data->philos[i]->data = data;
@@ -114,6 +140,8 @@ t_data	*init_structs(char **av)
 	if (init_mutexes(data) == false)
 		return (free_all(data, ERROR_4), NULL);
 	if (init_philos(data) == false)
+		return (NULL);
+	if (init_waiter(data) == false)
 		return (NULL);
 	return (data);
 }

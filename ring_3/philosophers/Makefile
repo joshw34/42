@@ -8,6 +8,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/free.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/run_sim.c \
+			$(SRC_DIR)/waiter.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
