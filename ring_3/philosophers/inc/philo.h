@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/24 15:44:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:13:53 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ typedef struct s_data
 /* init_structs.c */
 t_data	*init_structs(char **av);
 
+/* init_structs_utils.c */
+void    set_philo_data(t_philo *philo, unsigned int i);
+bool	init_forks(t_data *data);
+
 /* free.c */
 void	print_error(char *str);
 void	free_all(t_data *data, char *error_message);
@@ -97,4 +101,7 @@ void	run_sim(t_data *data);
 /* waiter.c */
 bool	ask_waiter(t_data *data, int fork_1, int fork_2);
 bool	tell_waiter(t_data *data, int fork_1, int fork_2);
+
+/* monitor.c */
+void	*monitor(void *arg);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/24 12:56:46 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:50:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,14 @@ static	bool	init_philos(t_data *data)
 		data->philos[i] = malloc(sizeof(t_philo));
 		if (!data->philos[i])
 			return (free_all(data, ERROR_3), false);
-		data->philos[i]->philo_id = i + 1;
-		data->philos[i]->t_ate = 0;
-		if (i % 2 == 0)
-		{
-			data->philos[i]->forks[0] = i;                     // Own fork
-			data->philos[i]->forks[1] = (i + 1) % data->n_philos; // Left fork
-		}
-		else
-		{
-			data->philos[i]->forks[0] = (i + 1) % data->n_philos; // Left fork
-			data->philos[i]->forks[1] = i;                     // Own fork
-		}
+		data->philos[i]->data = data;
+		set_philo_data(data->philos[i], i);
 		if (pthread_mutex_init(&data->philos[i]->last_meal_lock, NULL) != 0)
 		{
 			data->philos[i]->last_meal_lock_init = false;
 			return (free_all(data, ERROR_4), false);
 		}
 		data->philos[i]->last_meal_lock_init = true;
-		data->philos[i]->finished = false;
-		data->philos[i]->t_last_meal = 0;
-		data->philos[i]->data = data;
 		i++;
 	}
 	return (true);
@@ -87,23 +74,6 @@ static	bool	init_mutexes(t_data *data)
 		return (false);
 	}
 	data->print_lock_init = true;
-	return (true);
-}
-
-static	bool	init_forks(t_data *data)
-{
-	unsigned int	i;
-
-	i = 0;
-	data->fork_lock = malloc(data->n_philos * sizeof(pthread_mutex_t));
-	if (!data->fork_lock)
-		return (false);
-	while (i < data->n_philos)
-	{
-		if (pthread_mutex_init(&data->fork_lock[i], NULL) != 0)
-			return (false);
-		i++;
-	}
 	return (true);
 }
 
