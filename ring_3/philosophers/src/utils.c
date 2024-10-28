@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/24 16:27:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:32:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_status(t_philo *philo, char *status)
 	//if (philo->data->stop_sim == true)
 	//	return ;
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("[%ld] %d %s\n", get_timestamp(philo), philo->philo_id, status);
+	printf("[%ld] %d %s\n", get_time() - philo->data->sim_start, philo->philo_id, status);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
