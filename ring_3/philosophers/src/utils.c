@@ -6,16 +6,33 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:02:45 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:35:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+bool	check_stop(t_data *data)
+{
+	pthread_mutex_lock(&data->stop_sim_lock);
+	if (data->stop_sim == true)
+	{
+		pthread_mutex_unlock(&data->stop_sim_lock);
+		return (true);
+	}
+	pthread_mutex_unlock(&data->stop_sim_lock);
+	return (false);
+}
+
 void	print_status(t_philo *philo, char *status)
 {
+	pthread_mutex_lock(&philo->data->stop_sim_lock);
 	if (philo->data->stop_sim == true)
+	{
+		pthread_mutex_unlock(&philo->data->stop_sim_lock);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->data->stop_sim_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
 	printf("[%ld] %d %s\n", get_time() - philo->data->sim_start,
 		philo->philo_id, status);

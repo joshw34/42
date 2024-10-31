@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:37:18 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:14:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	free_all(t_data *data, char *error_message)
 			free_forks(data);
 		if (data->print_lock_init == true)
 			pthread_mutex_destroy(&data->print_lock);
+		if (data->stop_sim_lock_init == true)
+			pthread_mutex_destroy(&data->stop_sim_lock);
 		if (data->waiter)
 			free_waiter(data);
 		free(data);

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:12:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:40:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:25:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static	bool	check_if_dead(t_philo *philo)
 		- philo->data->t_die)
 	{
 		pthread_mutex_unlock(&philo->last_meal_lock);
+		pthread_mutex_lock(&philo->data->stop_sim_lock);
 		philo->data->stop_sim = true;
+		pthread_mutex_unlock(&philo->data->stop_sim_lock);
 		printf("[%ld] %d %s\n", get_time() - philo->data->sim_start,
 			philo->philo_id, DIED);
 		return (true);
@@ -64,7 +66,11 @@ void	*monitor(void *arg)
 			i++;
 		}
 		if (done == data->n_philos)
+		{
+			pthread_mutex_lock(&data->stop_sim_lock);
 			data->stop_sim = true;
+			pthread_mutex_unlock(&data->stop_sim_lock);
+		}
 		stop_thread(10);
 		i = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:41:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:10:56 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,21 @@ static	bool	init_philos(t_data *data)
 	return (true);
 }
 
-static	bool	init_mutexes(t_data *data)
+static	bool	init_data_mutexes(t_data *data)
 {
 	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
 	{
 		data->print_lock_init = false;
+		data->stop_sim_lock_init = false;
 		return (false);
 	}
 	data->print_lock_init = true;
+	if (pthread_mutex_init(&data->stop_sim_lock, NULL) != 0)
+	{
+		data->stop_sim_lock_init = false;
+		return (false);
+	}
+	data->stop_sim_lock_init = true;
 	return (true);
 }
 
@@ -103,7 +110,7 @@ t_data	*init_structs(char **av)
 		return (free_all(data, ERROR_1), NULL);
 	if (init_forks(data) == false)
 		return (free_all(data, ERROR_2), NULL);
-	if (init_mutexes(data) == false)
+	if (init_data_mutexes(data) == false)
 		return (free_all(data, ERROR_4), NULL);
 	if (init_philos(data) == false)
 		return (NULL);

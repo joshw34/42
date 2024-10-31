@@ -6,13 +6,13 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:38:44 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:45:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static	void	eat_sleep(t_philo *philo);
+//static	void	eat_sleep(t_philo *philo);
 
 static	void	single_philo(t_philo *philo)
 {
@@ -37,7 +37,7 @@ static	void	think(t_philo *philo)
 
 static	void	eat_sleep(t_philo *philo)
 {
-	while (philo->data->stop_sim == false)
+	while (check_stop(philo->data) == false)
 	{
 		ask_waiter(philo->data, philo->forks[0], philo->forks[1]);
 		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
