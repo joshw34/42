@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 14:52:56 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:02:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,6 @@ long	get_time(void)
 
 	gettimeofday(&current_time, NULL);
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
-}
-
-long	get_timestamp(t_philo *philo)
-{
-	long			now;
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	now = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
-	return (now - philo->data->sim_start);
 }
 
 void	stop_thread(int time_ms)

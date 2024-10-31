@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:42:08 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:02:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	free_all(t_data *data, char *error_message);
 void	print_status(t_philo *philo, char *status);
 int		ft_atoi(char *str);
 long	get_time(void);
-long	get_timestamp(t_philo *philo);
 void	stop_thread(int time_ms);
 
 /* run_sim.c */
