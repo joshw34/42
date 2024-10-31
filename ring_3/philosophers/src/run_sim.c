@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_sim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 15:17:59 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:38:44 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ static	void	eat_sleep(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
 		tell_waiter(philo->data, philo->forks[0], philo->forks[1]);
+		pthread_mutex_lock(&philo->t_ate_lock);
 		philo->t_ate++;
+		pthread_mutex_unlock(&philo->t_ate_lock);
 		print_status(philo, SLEEP);
 		stop_thread(philo->data->t_sleep);
 		think(philo);
@@ -64,7 +66,7 @@ static	void	*start(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (philo->data->sim_start == 0)
+	while (get_time() < philo->data->sim_start)
 		usleep(10);
 	if (philo->data->n_philos == 1)
 		single_philo(philo);
@@ -83,7 +85,7 @@ void	run_sim(t_data *data)
 	unsigned int	i;
 
 	i = 0;
-	data->sim_start = 0;
+	data->sim_start = get_time() + data->n_philos;
 	if (data->n_philos > 1)
 		pthread_create(&data->monitor, NULL, monitor, data);
 	while (i < data->n_philos)
@@ -91,7 +93,7 @@ void	run_sim(t_data *data)
 		pthread_create(&data->philos[i]->t_id, NULL, start, data->philos[i]);
 		i++;
 	}
-	data->sim_start = get_time();
+	//data->sim_start = get_time();
 	i = 0;
 	while (i < data->n_philos)
 	{

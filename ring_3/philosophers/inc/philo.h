@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 15:13:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:42:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_philo
 	bool			finished;
 	pthread_mutex_t	last_meal_lock;
 	bool			last_meal_lock_init;
+	pthread_mutex_t	t_ate_lock;
+	bool			t_ate_lock_init;
 	t_data			*data;
 }	t_philo;
 
@@ -81,7 +83,8 @@ typedef struct s_data
 t_data	*init_structs(char **av);
 
 /* init_structs_utils.c */
-void    set_philo_data(t_philo *philo, unsigned int i);
+bool	init_philo_mutexes(t_philo *philo);
+void	set_philo_data(t_philo *philo, unsigned int i);
 bool	init_forks(t_data *data);
 
 /* free.c */
@@ -93,7 +96,7 @@ void	print_status(t_philo *philo, char *status);
 int		ft_atoi(char *str);
 long	get_time(void);
 long	get_timestamp(t_philo *philo);
-void	stop_thread(int	time_ms);
+void	stop_thread(int time_ms);
 
 /* run_sim.c */
 void	run_sim(t_data *data);

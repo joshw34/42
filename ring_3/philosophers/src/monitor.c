@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:12:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 15:55:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:40:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static	bool	check_eaten_enough(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->t_ate_lock);
 	if (philo->t_ate == (unsigned int)philo->data->n_eat && philo->finished
 		== false)
 	{
+		pthread_mutex_unlock(&philo->t_ate_lock);
 		philo->finished = true;
 		return (true);
 	}
+	pthread_mutex_unlock(&philo->t_ate_lock);
 	return (false);
 }
 
@@ -48,7 +51,7 @@ void	*monitor(void *arg)
 	data = (t_data *)arg;
 	done = 0;
 	i = 0;
-	while (data->philos[i]->data->sim_start == 0)
+	while (get_time() < data->philos[i]->data->sim_start)
 		usleep(10);
 	while (data->stop_sim == false)
 	{
@@ -62,7 +65,7 @@ void	*monitor(void *arg)
 		}
 		if (done == data->n_philos)
 			data->stop_sim = true;
-		usleep(10000);
+		stop_thread(10);
 		i = 0;
 	}
 	return (NULL);

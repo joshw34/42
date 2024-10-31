@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/24 11:16:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:37:18 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static	void	free_philos(t_data *data)
 	{
 		if (data->philos[i]->last_meal_lock_init == true)
 			pthread_mutex_destroy(&data->philos[i]->last_meal_lock);
+		if (data->philos[i]->t_ate_lock_init == true)
+			pthread_mutex_destroy(&data->philos[i]->t_ate_lock);
 		free(data->philos[i]);
 		i++;
 	}

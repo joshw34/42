@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 14:50:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:41:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,8 @@ static	bool	init_philos(t_data *data)
 			return (free_all(data, ERROR_3), false);
 		data->philos[i]->data = data;
 		set_philo_data(data->philos[i], i);
-		if (pthread_mutex_init(&data->philos[i]->last_meal_lock, NULL) != 0)
-		{
-			data->philos[i]->last_meal_lock_init = false;
+		if (init_philo_mutexes(data->philos[i]) == false)
 			return (free_all(data, ERROR_4), false);
-		}
-		data->philos[i]->last_meal_lock_init = true;
 		i++;
 	}
 	return (true);
