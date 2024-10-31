@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:10:56 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:57:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static	bool	init_data_struct(t_data *data, char **av)
 {
 	data->stop_sim = false;
 	data->print_lock_init = false;
-	data->sim_start = get_time();
+	data->sim_start = 0;
 	data->n_philos = ft_atoi(av[0]);
 	data->t_die = ft_atoi(av[1]);
 	data->t_eat = ft_atoi(av[2]);
@@ -93,7 +93,7 @@ static	bool	init_data_struct(t_data *data, char **av)
 		data->n_eat = ft_atoi(av[4]);
 	else
 		data->n_eat = -1;
-	if (data->sim_start == 0 || data->n_philos == 0 || data->t_die == 0
+	if (data->n_philos == 0 || data->t_die == 0
 		|| data->t_eat == 0 || data->t_sleep == 0 || data->n_eat == 0)
 		return (false);
 	return (true);
