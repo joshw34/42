@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:12:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 14:28:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:46:29 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*monitor(void *arg)
 			i++;
 		}
 		check_if_sim_done(data, done);
-		stop_thread(10);
+		stop_thread(5);
 		i = 0;
 	}
 	return (NULL);
