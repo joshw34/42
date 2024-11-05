@@ -6,13 +6,11 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:45:46 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:21:40 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-//static	void	eat_sleep(t_philo *philo);
 
 static	void	single_philo(t_philo *philo)
 {
@@ -93,7 +91,6 @@ void	run_sim(t_data *data)
 		pthread_create(&data->philos[i]->t_id, NULL, start, data->philos[i]);
 		i++;
 	}
-	//data->sim_start = get_time();
 	i = 0;
 	while (i < data->n_philos)
 	{

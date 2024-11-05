@@ -6,11 +6,21 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:12:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:25:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:22:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static	void	check_if_sim_done(t_data *data, unsigned int done)
+{
+	if (done == data->n_philos)
+	{
+		pthread_mutex_lock(&data->stop_sim_lock);
+		data->stop_sim = true;
+		pthread_mutex_unlock(&data->stop_sim_lock);
+	}
+}
 
 static	bool	check_eaten_enough(t_philo *philo)
 {
@@ -55,7 +65,7 @@ void	*monitor(void *arg)
 	i = 0;
 	while (get_time() < data->philos[i]->data->sim_start)
 		usleep(10);
-	while (data->stop_sim == false)
+	while (check_stop(data) == false)
 	{
 		while (i < data->n_philos)
 		{
@@ -65,12 +75,7 @@ void	*monitor(void *arg)
 				done++;
 			i++;
 		}
-		if (done == data->n_philos)
-		{
-			pthread_mutex_lock(&data->stop_sim_lock);
-			data->stop_sim = true;
-			pthread_mutex_unlock(&data->stop_sim_lock);
-		}
+		check_if_sim_done(data, done);
 		stop_thread(10);
 		i = 0;
 	}

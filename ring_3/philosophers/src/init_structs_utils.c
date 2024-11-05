@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:14:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 13:41:42 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:08:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 bool	init_philo_mutexes(t_philo *philo)
 {
-		if (pthread_mutex_init(&philo->last_meal_lock, NULL) != 0)
-		{
-			philo->last_meal_lock_init = false;
-			philo->t_ate_lock_init = false;
-			return (false);
-		}
-		philo->last_meal_lock_init = true;
-		if (pthread_mutex_init(&philo->t_ate_lock, NULL) != 0)
-		{
-			philo->t_ate_lock_init = false;
-			return (false);
-		}
-		philo->t_ate_lock_init = true;
-		return (true);
+	if (pthread_mutex_init(&philo->last_meal_lock, NULL) != 0)
+	{
+		philo->last_meal_lock_init = false;
+		philo->t_ate_lock_init = false;
+		return (false);
+	}
+	philo->last_meal_lock_init = true;
+	if (pthread_mutex_init(&philo->t_ate_lock, NULL) != 0)
+	{
+		philo->t_ate_lock_init = false;
+		return (false);
+	}
+	philo->t_ate_lock_init = true;
+	return (true);
 }
 
 void	set_philo_data(t_philo *philo, unsigned int i)
