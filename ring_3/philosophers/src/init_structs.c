@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 11:44:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:14:19 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static	bool	init_data_struct(t_data *data, char **av)
 	else
 		data->n_eat = -1;
 	if (data->n_philos < 1 || data->t_die < 1
-		|| data->t_eat < 1 || data->t_sleep < 1 || data->n_eat < 1)
+		|| data->t_eat < 1 || data->t_sleep < 1 || data->n_eat == 0)
 		return (false);
 	return (true);
 }
