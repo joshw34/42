@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:12:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 21:46:29 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:03:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void	*monitor(void *arg)
 		{
 			if (check_if_dead(data->philos[i]) == true)
 				return (NULL);
-			if (check_eaten_enough(data->philos[i]) == true)
-				done++;
+			if (data->n_eat > 0)
+				if (check_eaten_enough(data->philos[i]) == true)
+					done++;
 			i++;
 		}
 		check_if_sim_done(data, done);

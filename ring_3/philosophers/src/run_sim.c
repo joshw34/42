@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 12:21:40 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:59:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,40 @@ static	void	think(t_philo *philo)
 
 	think_time = (philo->data->t_die - (get_time() - philo->data->sim_start
 				- philo->t_last_meal)) / 2;
-	if (think_time <= 3)
+	if (think_time < 1)
+	{
+		print_status(philo, THINK);
 		return ;
+	}
 	print_status(philo, THINK);
 	stop_thread(think_time);
 }
+
+/*static	bool	take_forks(t_philo *philo)
+{
+	if (pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]) != 0)
+		return (false);
+	print_status(philo, FORK);
+	if (pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]) != 0)
+	{
+		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
+		print_status(philo, ERROR_0);
+		return (false);
+	}
+	print_status(philo, FORK);
+	return (true);
+}*/
 
 static	void	eat_sleep(t_philo *philo)
 {
 	while (check_stop(philo->data) == false)
 	{
-		ask_waiter(philo->data, philo->forks[0], philo->forks[1]);
 		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]);
 		print_status(philo, FORK);
 		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
 		print_status(philo, FORK);
+		//while (take_forks(philo) == false)
+		//	stop_thread(1);
 		pthread_mutex_lock(&philo->last_meal_lock);
 		philo->t_last_meal = get_time() - philo->data->sim_start;
 		pthread_mutex_unlock(&philo->last_meal_lock);
@@ -49,7 +68,6 @@ static	void	eat_sleep(t_philo *philo)
 		stop_thread(philo->data->t_eat);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
-		tell_waiter(philo->data, philo->forks[0], philo->forks[1]);
 		pthread_mutex_lock(&philo->t_ate_lock);
 		philo->t_ate++;
 		pthread_mutex_unlock(&philo->t_ate_lock);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:38:33 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/28 13:43:59 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:57:22 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ bool	ask_waiter(t_data *data, int fork_1, int fork_2)
 	return (answer);
 }
 
-bool	tell_waiter(t_data *data, int fork_1, int fork_2)
+void	tell_waiter(t_data *data, int fork_1, int fork_2)
 {
 	pthread_mutex_lock(&data->waiter->fork_check_lock);
 	data->waiter->fork_available[fork_1] = true;
 	data->waiter->fork_available[fork_2] = true;
 	pthread_mutex_unlock(&data->waiter->fork_check_lock);
-	return (true);
 }

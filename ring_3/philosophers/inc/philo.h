@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:52:09 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:35:37 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:03:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	stop_thread(int time_ms);
 void	run_sim(t_data *data);
 
 /* waiter.c */
-bool	ask_waiter(t_data *data, int fork_1, int fork_2);
-bool	tell_waiter(t_data *data, int fork_1, int fork_2);
+//bool	ask_waiter(t_data *data, int fork_1, int fork_2);
+//void	tell_waiter(t_data *data, int fork_1, int fork_2);
 
 /* monitor.c */
 void	*monitor(void *arg);
