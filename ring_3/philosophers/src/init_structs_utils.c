@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:14:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 12:08:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:51:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,23 @@ bool	init_forks(t_data *data)
 			return (false);
 		i++;
 	}
+	return (true);
+}
+
+bool	init_data_mutexes(t_data *data)
+{
+	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+	{
+		data->print_lock_init = false;
+		data->stop_sim_lock_init = false;
+		return (false);
+	}
+	data->print_lock_init = true;
+	if (pthread_mutex_init(&data->stop_sim_lock, NULL) != 0)
+	{
+		data->stop_sim_lock_init = false;
+		return (false);
+	}
+	data->stop_sim_lock_init = true;
 	return (true);
 }

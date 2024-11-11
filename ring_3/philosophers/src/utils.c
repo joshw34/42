@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:28:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/06 13:07:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:53:05 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ long	get_time(void)
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }
 
-void	stop_thread(int time_ms)
+void	stop_thread(t_data *data, int time_ms)
 {
 	long	now;
 
@@ -73,5 +73,7 @@ void	stop_thread(int time_ms)
 	while ((get_time() - now) < time_ms)
 	{
 		usleep(10);
+		if (check_stop(data) == true)
+			break ;
 	}
 }

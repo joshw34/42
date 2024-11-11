@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:46:06 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/10/31 14:14:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:21:06 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ void	print_error(char *str)
 		write(2, &str[i], 1);
 		i++;
 	}
-}
-
-static	void	free_waiter(t_data *data)
-{
-	if (data->waiter->fork_check_lock_init == true)
-		pthread_mutex_destroy(&data->waiter->fork_check_lock);
-	free(data->waiter);
 }
 
 static	void	free_forks(t_data *data)
@@ -73,8 +66,6 @@ void	free_all(t_data *data, char *error_message)
 			pthread_mutex_destroy(&data->print_lock);
 		if (data->stop_sim_lock_init == true)
 			pthread_mutex_destroy(&data->stop_sim_lock);
-		if (data->waiter)
-			free_waiter(data);
 		free(data);
 	}
 	if (error_message)

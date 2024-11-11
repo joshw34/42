@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:38:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/06 14:59:43 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:53:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	void	single_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
 	print_status(philo, FORK);
-	stop_thread(philo->data->t_die);
+	stop_thread(philo->data, philo->data->t_die);
 	pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
 	print_status(philo, DIED);
 }
@@ -33,23 +33,8 @@ static	void	think(t_philo *philo)
 		return ;
 	}
 	print_status(philo, THINK);
-	stop_thread(think_time);
+	stop_thread(philo->data, think_time);
 }
-
-/*static	bool	take_forks(t_philo *philo)
-{
-	if (pthread_mutex_lock(&philo->data->fork_lock[philo->forks[0]]) != 0)
-		return (false);
-	print_status(philo, FORK);
-	if (pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]) != 0)
-	{
-		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
-		print_status(philo, ERROR_0);
-		return (false);
-	}
-	print_status(philo, FORK);
-	return (true);
-}*/
 
 static	void	eat_sleep(t_philo *philo)
 {
@@ -59,20 +44,18 @@ static	void	eat_sleep(t_philo *philo)
 		print_status(philo, FORK);
 		pthread_mutex_lock(&philo->data->fork_lock[philo->forks[1]]);
 		print_status(philo, FORK);
-		//while (take_forks(philo) == false)
-		//	stop_thread(1);
 		pthread_mutex_lock(&philo->last_meal_lock);
 		philo->t_last_meal = get_time() - philo->data->sim_start;
 		pthread_mutex_unlock(&philo->last_meal_lock);
 		print_status(philo, EAT);
-		stop_thread(philo->data->t_eat);
+		stop_thread(philo->data, philo->data->t_eat);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[0]]);
 		pthread_mutex_unlock(&philo->data->fork_lock[philo->forks[1]]);
 		pthread_mutex_lock(&philo->t_ate_lock);
 		philo->t_ate++;
 		pthread_mutex_unlock(&philo->t_ate_lock);
 		print_status(philo, SLEEP);
-		stop_thread(philo->data->t_sleep);
+		stop_thread(philo->data, philo->data->t_sleep);
 		think(philo);
 	}
 }
@@ -90,7 +73,7 @@ static	void	*start(void *arg)
 		eat_sleep(philo);
 	else
 	{
-		stop_thread(philo->data->t_eat);
+		stop_thread(philo->data, philo->data->t_eat);
 		eat_sleep(philo);
 	}
 	return (NULL);

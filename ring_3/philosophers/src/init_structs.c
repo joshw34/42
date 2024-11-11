@@ -6,39 +6,11 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:29:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/05 14:14:19 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:50:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-static	bool	init_waiter(t_data *data)
-{
-	t_wait			*waiter;
-	unsigned int	i;
-
-	i = 0;
-	waiter = malloc(sizeof(t_wait));
-	if (!waiter)
-		return (free_all(data, ERROR_5), false);
-	data->waiter = waiter;
-	if (pthread_mutex_init(&waiter->fork_check_lock, NULL) != 0)
-	{
-		data->waiter->fork_check_lock_init = false;
-		return (free_all(data, ERROR_4), false);
-	}
-	data->waiter->fork_check_lock_init = true;
-	while (i < 200)
-	{
-		if (i < data->n_philos)
-			data->waiter->fork_available[i] = true;
-		else
-			data->waiter->fork_available[i] = false;
-		i++;
-	}
-	data->waiter->data = data;
-	return (true);
-}
 
 static	bool	init_philos(t_data *data)
 {
@@ -59,24 +31,6 @@ static	bool	init_philos(t_data *data)
 			return (free_all(data, ERROR_4), false);
 		i++;
 	}
-	return (true);
-}
-
-static	bool	init_data_mutexes(t_data *data)
-{
-	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
-	{
-		data->print_lock_init = false;
-		data->stop_sim_lock_init = false;
-		return (false);
-	}
-	data->print_lock_init = true;
-	if (pthread_mutex_init(&data->stop_sim_lock, NULL) != 0)
-	{
-		data->stop_sim_lock_init = false;
-		return (false);
-	}
-	data->stop_sim_lock_init = true;
 	return (true);
 }
 
@@ -113,8 +67,6 @@ t_data	*init_structs(char **av)
 	if (init_data_mutexes(data) == false)
 		return (free_all(data, ERROR_4), NULL);
 	if (init_philos(data) == false)
-		return (NULL);
-	if (init_waiter(data) == false)
 		return (NULL);
 	return (data);
 }
