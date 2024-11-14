@@ -25,7 +25,7 @@ void	run_command(char *str, char **env, int out_fd)
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
-	
+
 	(void)ac;
 	(void)av;
 	while (1)
