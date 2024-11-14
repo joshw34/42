@@ -13,12 +13,13 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 REMOVE = rm -f
 CC = clang
 CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+LDFLAGS = -lreadline -lhistory
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
 	@echo "Compiling/Linking"
-	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_FILES) $(LDFLAGS) $(LIBFT) -o $(NAME)
 	@echo "Ready"
 
 $(LIBFT):
