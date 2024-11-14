@@ -1,6 +1,8 @@
 #include "../inc/minishell.h"
 #include <fcntl.h>
+#include <sys/types.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 void	print_result(int out_fd)
 {
@@ -10,17 +12,14 @@ void	print_result(int out_fd)
 	printf("%s\n", line);
 }
 
-void	run_command(char *str, char **env, int in_fd, int out_fd)
+void	run_command(char *str, char **env, int out_fd)
 {
 	char **args = ft_split(str, ' ');	
 	char *path = ft_strjoin("/usr/bin/", args[0]);
-	/*int in_fd = open("infile", O_RDONLY);
-	int out_fd = open("outfile", O_RDWR);
-	int in_backup = STDIN_FILENO;
-	int out_backup = STDOUT_FILENO;*/
-	dup2(in_fd, STDIN_FILENO);
+	pid_t pid = fork();
 	dup2(out_fd, STDOUT_FILENO);
 	execve(path, args, env);
+	waitpid(pid, NULL, 0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -40,13 +39,9 @@ int	main(int ac, char **av, char **env)
 		}
 		if (input != NULL)
 		{
-			//ft_printf("%s\n", input);
-			
-			int in_fd = open("infile", O_RDONLY);
+			//int in_fd = open("infile", O_RDONLY);
 			int out_fd = open("outfile", O_RDWR);
-		//	int in_backup = STDIN_FILENO;
-		//	int out_backup = STDOUT_FILENO;
-			run_command(input, env, in_fd, out_fd);
+			run_command(input, env, out_fd);
 			print_result(out_fd);
 			add_history(input);
 			free(input);
