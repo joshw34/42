@@ -7,6 +7,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_FILES =	$(SRC_DIR)/main.c \
+			$(SRC_DIR)/utils.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
