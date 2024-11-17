@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:23:29 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 23:02:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:04:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ static	t_single	*init_single_struct(char *input)
 		return (NULL);
 	data->args = get_args(input);
 	if (!data->args)
+	{
+		free_single_struct(data);
+		return (NULL);
+	}
+	if (check_args(data->args) == false)
 	{
 		free_single_struct(data);
 		return (NULL);

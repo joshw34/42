@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 22:52:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:04:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	read_input(char *input, char **env);
 
 /* run_sinlge_command.c */
 void	run_single_command(char *input, char **env);
+
+/* check_args.c */
+bool	check_args(char **args);
 
 /* free_exit.c */
 void	free_single_struct(t_single *data);

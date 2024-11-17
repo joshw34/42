@@ -10,6 +10,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/read_input.c \
 			$(SRC_DIR)/run_single_command.c \
+			$(SRC_DIR)/check_args.c \
 			$(SRC_DIR)/free_exit.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
