@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 16:24:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:52:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,29 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include <stdbool.h>
+
+typedef struct	s_single
+{
+	char	*path;
+	char	**args;
+	pid_t	pid;
+}	t_single;
 
 /* FUNCTION PROTOTYPES */
 /* utils.c */
+char	*get_path(char **args, char *paths);
 char	**get_args(char *input);
 char	*get_prompt(void);
 
 /* read_input.c */
 void	read_input(char *input, char **env);
 
-/* run_commands.c */
+/* run_sinlge_command.c */
 void	run_single_command(char *input, char **env);
 
 /* free_exit.c */
+void	free_single_struct(t_single *data);
 void	user_exit(char *input);
 void	free_array(char **array);
 #endif

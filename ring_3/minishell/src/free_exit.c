@@ -6,12 +6,20 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:22:08 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 16:22:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:52:44 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <readline/readline.h>
+
+void	free_single_struct(t_single *data)
+{
+	if (data->args)
+		free_array(data->args);
+	if (data->path)
+		free(data->path);
+	free(data);
+}
 
 void	user_exit(char *input)
 {

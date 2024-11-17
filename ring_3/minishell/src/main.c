@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:20:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 16:21:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:52:33 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **env)
 		input = readline(prompt);
 		free(prompt);
 		read_input(input, env);
+		add_history(input);
 		free(input);
 	}
 	return (0);

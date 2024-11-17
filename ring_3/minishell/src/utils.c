@@ -6,17 +6,58 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:21:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/17 16:21:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:52:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+char	*get_path(char **args, char *paths)
+{
+	char	*temp;
+	char	*result;
+	char	**split;
+	int		i;
+	
+	i = 0;
+	split = ft_split(paths, ':');
+	while (split[i])
+	{
+		temp = ft_strjoin(split[i], "/");
+		result = ft_strjoin(temp, args[0]);
+		free(temp);
+		if (access(result, X_OK) == 0)
+		{
+			free_array(split);
+			return(result);
+		}
+		else
+			free(result);
+		i++;
+	}
+	free_array(split);
+	return (NULL);
+}
+
+static	bool	check_spaces(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] != ' ')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 char	**get_args(char *input)
 {
 	char	**args;
 
-	if (!input)
+	if (!input || check_spaces(input) == false)
 		return (NULL);
 	args = ft_split(input, ' ');
 	return (args);
