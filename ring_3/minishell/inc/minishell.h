@@ -24,7 +24,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-typedef struct	s_single
+typedef struct s_single
 {
 	char	*path;
 	char	**args;

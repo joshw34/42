@@ -18,7 +18,7 @@ char	*get_path(char **args, char *paths)
 	char	*result;
 	char	**split;
 	int		i;
-	
+
 	i = 0;
 	split = ft_split(paths, ':');
 	while (split[i])
@@ -29,7 +29,7 @@ char	*get_path(char **args, char *paths)
 		if (access(result, X_OK) == 0)
 		{
 			free_array(split);
-			return(result);
+			return (result);
 		}
 		else
 			free(result);

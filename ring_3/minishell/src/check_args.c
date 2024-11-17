@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/18 00:14:31 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/11/18 00:15:27 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
-#include <stdlib.h>
 
 static	void	env_variables(char **args)
 {
@@ -24,9 +35,9 @@ static	void	env_variables(char **args)
 
 bool	check_args(char **args)
 {
-	env_variables(args);	
+	env_variables(args);
 	if (ft_strncmp(args[0], "cd", 3) == 0)
-	{	
+	{
 		chdir(args[1]);
 		return (false);
 	}
