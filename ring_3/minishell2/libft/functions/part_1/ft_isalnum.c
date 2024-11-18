@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:22:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:04:21 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:09:33 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/04/29 12:09:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-
-void	read_input(char *input, char **env)
+int	ft_isalnum(int c)
 {
-	if (*input == '\0')
-		return ;
-	else if (ft_strncmp(input, "exit", 5) == 0)
-		user_exit(input);
-	else if (input)
-	{
-		if (!ft_strchr(input, '|'))
-			run_single_command(input, env);
-		else
-			printf("PIPE\n");
-	}
-	add_history(input);
+	if ((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123))
+		return (1);
+	return (0);
 }

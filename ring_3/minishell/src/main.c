@@ -25,7 +25,6 @@ int	main(int ac, char **av, char **env)
 		input = readline(prompt);
 		free(prompt);
 		read_input(input, env);
-		add_history(input);
 		free(input);
 	}
 	return (0);

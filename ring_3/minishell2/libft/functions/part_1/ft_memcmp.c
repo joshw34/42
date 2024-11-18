@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:22:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:04:21 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:14:16 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:08:23 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../libft.h"
 
-void	read_input(char *input, char **env)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	if (*input == '\0')
-		return ;
-	else if (ft_strncmp(input, "exit", 5) == 0)
-		user_exit(input);
-	else if (input)
+	size_t				i;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
+
+	i = 0;
+	str1 = (const unsigned char *) s1;
+	str2 = (const unsigned char *) s2;
+	while (i < n)
 	{
-		if (!ft_strchr(input, '|'))
-			run_single_command(input, env);
-		else
-			printf("PIPE\n");
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
 	}
-	add_history(input);
+	return (0);
 }

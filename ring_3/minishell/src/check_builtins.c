@@ -1,29 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:22:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:04:21 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/11/18 00:14:31 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/11/18 14:39:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	read_input(char *input, char **env)
+static	void	env_variables(char **args)
 {
-	if (*input == '\0')
-		return ;
-	else if (ft_strncmp(input, "exit", 5) == 0)
-		user_exit(input);
-	else if (input)
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (args[i])
 	{
-		if (!ft_strchr(input, '|'))
-			run_single_command(input, env);
-		else
-			printf("PIPE\n");
+		if (args[i][0] == '$')
+		{
+			temp = getenv(args[i] + 1);
+			if (temp)
+			{
+				free(args[i]);
+				args[i] = ft_strdup(temp);
+			}
+		}
+		i++;
 	}
-	add_history(input);
+}
+
+bool	check_builtins(char **args)
+{
+	env_variables(args);
+	if (ft_strncmp(args[0], "cd", 3) == 0)
+	{
+		chdir(args[1]);
+		return (false);
+	}
+	return (true);
 }

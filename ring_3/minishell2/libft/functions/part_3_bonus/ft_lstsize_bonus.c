@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:22:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:04:21 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/30 14:06:26 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:13:05 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../libft.h"
 
-void	read_input(char *input, char **env)
+int	ft_lstsize(t_list *lst)
 {
-	if (*input == '\0')
-		return ;
-	else if (ft_strncmp(input, "exit", 5) == 0)
-		user_exit(input);
-	else if (input)
+	int		count;
+
+	count = 0;
+	while (lst != NULL)
 	{
-		if (!ft_strchr(input, '|'))
-			run_single_command(input, env);
-		else
-			printf("PIPE\n");
+		count++;
+		lst = lst->next;
 	}
-	add_history(input);
+	return (count);
 }

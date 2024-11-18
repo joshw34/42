@@ -13,7 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -23,31 +22,25 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 
-typedef struct s_single
+/* STRUCT TYPEDEFS */
+typedef enum s_tokens
 {
-	char	*path;
-	char	**args;
-	pid_t	pid;
-}	t_single;
+	PIPE = 1,
+	GREAT,
+	GREAT_GREAT,
+	LESS,
+	LESS_LESS,
+}	t_tokens;
 
-/* FUNCTION PROTOTYPES */
-/* utils.c */
-char	*get_path(char **args, char *paths);
-char	**get_args(char *input);
-char	*get_prompt(void);
+typedef struct s_reader
+{
+	char		*word;
+	t_tokens	token;
+	int			i;
+	struct s_reader	*next;
+	struct s_reader	*prev;
+}	t_reader;
 
-/* read_input.c */
-void	read_input(char *input, char **env);
-
-/* run_sinlge_command.c */
-void	run_single_command(char *input, char **env);
-
-/* check_args.c */
-bool	check_builtins(char **args);
-
-/* free_exit.c */
-void	free_single_struct(t_single *data);
-void	user_exit(char *input);
-void	free_array(char **array);
 #endif

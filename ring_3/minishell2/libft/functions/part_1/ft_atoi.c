@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:22:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:04:21 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:05:54 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/04/29 12:06:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-
-void	read_input(char *input, char **env)
+int	ft_atoi(const char *nptr)
 {
-	if (*input == '\0')
-		return ;
-	else if (ft_strncmp(input, "exit", 5) == 0)
-		user_exit(input);
-	else if (input)
+	int	i;
+	int	sign;
+	int	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((nptr[i] > 8 && nptr[i] < 14) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == 43 || nptr[i] == 45)
 	{
-		if (!ft_strchr(input, '|'))
-			run_single_command(input, env);
-		else
-			printf("PIPE\n");
+		if (nptr[i] == 45)
+			sign = -1;
+		i++;
 	}
-	add_history(input);
+	while (nptr[i] > 47 && nptr[i] < 58)
+	{
+		result = (result * 10) + (nptr[i] - 48);
+		i++;
+	}
+	return (sign * result);
 }

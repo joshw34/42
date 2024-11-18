@@ -25,7 +25,7 @@ static	t_single	*init_single_struct(char *input)
 		free_single_struct(data);
 		return (NULL);
 	}
-	if (check_args(data->args) == false)
+	if (check_builtins(data->args) == false)
 	{
 		free_single_struct(data);
 		return (NULL);

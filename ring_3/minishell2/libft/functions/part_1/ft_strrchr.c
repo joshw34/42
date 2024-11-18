@@ -1,45 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 00:14:31 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/18 00:15:27 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/04/29 12:19:39 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/06/10 12:09:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../libft.h"
 
-static	void	env_variables(char **args)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	char	*temp;
+	size_t			i;
+	size_t			s_len;
+	char			*str;
+	char			*result;
 
+	str = (char *) s;
 	i = 0;
-	while (args[i])
+	s_len = ft_strlen(str);
+	result = NULL;
+	if (c > 127)
+		return ((char *) s);
+	while (i <= s_len)
 	{
-		if (args[i][0] == '$')
+		if (str[i] == c)
 		{
-			temp = getenv(args[i] + 1);
-			if (temp)
-			{
-				free(args[i]);
-				args[i] = ft_strdup(temp);
-			}
+			result = &str[i];
 		}
 		i++;
 	}
-}
-
-bool	check_args(char **args)
-{
-	env_variables(args);
-	if (ft_strncmp(args[0], "cd", 3) == 0)
-	{
-		chdir(args[1]);
-		return (false);
-	}
-	return (true);
+	return (result);
 }
