@@ -13,34 +13,64 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <stdbool.h>
 # include "../libft/libft.h"
 
+# include <time.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+
 /* STRUCT TYPEDEFS */
-typedef enum s_tokens
+typedef enum e_tok_list
 {
-	PIPE = 1,
+	WORD = 1,
+	PIPE,
 	GREAT,
 	GREAT_GREAT,
 	LESS,
 	LESS_LESS,
-}	t_tokens;
+}	t_tok_list;
 
-typedef struct s_reader
+typedef struct s_tokens
 {
 	char		*word;
-	t_tokens	token;
+	char		*sep;
 	int			i;
 	struct s_reader	*next;
 	struct s_reader	*prev;
-}	t_reader;
+}	t_tokens;
+
+typedef struct s_data
+{
+	char			*user_input;
+	struct s_tokens	*tokens;
+	char			**env;
+}	t_data;
+
+/* FUNCTION PROTOTYPES*/
+/* init_data_struct.c */
+t_data	*init_data_struct(char **env);
+
+/* free.c */
+void	free_data_struct(t_data *data, bool keep_env);
+void	free_array(char **array);
+
+/* get_input.c */
+char	*get_input(t_data *data);
+
+/* var.c */
+char	*get_var(char **env, char *var);
+
+/* var_utils.c */
+char	*find_var(char **env, char *var);
+
+
 
 #endif
