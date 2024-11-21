@@ -10,7 +10,9 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/init_data_struct.c \
 			$(SRC_DIR)/free.c \
 			$(SRC_DIR)/get_input.c \
-			$(SRC_DIR)/var.c \
+			$(SRC_DIR)/var_get_print.c \
+			$(SRC_DIR)/var_export.c \
+			$(SRC_DIR)/var_export_utils.c \
 			$(SRC_DIR)/var_utils.c \
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)

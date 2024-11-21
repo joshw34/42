@@ -1,46 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data_struct.c                                 :+:      :+:    :+:   */
+/*   var_get_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:56:24 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/21 16:04:26 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/11/21 10:57:32 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/11/21 16:04:17 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static	char	**init_env(char **env)
+void	print_env(t_data *data)
 {
-	int		i;
-	char	**ret;
+	int	i;
 
 	i = 0;
-	while (env[i])
-		i++;
-	ret = ft_calloc(i + 1, sizeof(char *));
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (env[i])
+	if (!data->env)
+		return ;
+	while (data->env[i])
 	{
-		ret[i] = ft_strdup(env[i]);
-		if (!ret[i])
-			return (free_array(ret), NULL);
+		printf("%s\n", data->env[i]);
 		i++;
 	}
-	return (ret);
 }
 
-t_data	*init_data_struct(char **env)
+char	*get_var(char **env, char *var)
 {
-	t_data	*data;
+	char	*ret;
 
-	data = ft_calloc(1, sizeof(t_data));
-	if (!data)
+	ret = find_var(env, var);
+	if (!ret)
 		return (NULL);
-	data->env = init_env(env);
-	return (data);
+	return (strchr(ret, '=') + 1);
 }
