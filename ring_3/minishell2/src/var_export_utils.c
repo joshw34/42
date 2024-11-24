@@ -16,7 +16,8 @@ static bool	value_valid_unquoted(char *new_var, int i)
 {
 	while (new_var[i])
 	{
-		if (ft_isalnum(new_var[i]) == 0 && new_var[i] != '_' && new_var[i] != '/')
+		if (ft_isalnum(new_var[i]) == 0 && new_var[i] != '_'
+			&& new_var[i] != '/')
 			return (false);
 		i++;
 	}

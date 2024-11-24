@@ -42,5 +42,6 @@ t_data	*init_data_struct(char **env)
 	if (!data)
 		return (NULL);
 	data->env = init_env(env);
+	remove_var(data, "OLDPWD");
 	return (data);
 }

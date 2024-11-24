@@ -25,7 +25,6 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 	ret = ft_calloc(size, sizeof(char *));
 	if (!ret)
 		return (NULL);
-	printf("ARRAY ALLOCATED");
 	temp = ft_strjoin(var, "=");
 	len = ft_strlen(temp);
 	while (old_env[i])
@@ -48,10 +47,8 @@ bool	remove_var(t_data *data, char *var)
 	size = 0;
 	if (find_var(data->env, var) == NULL)
 		return (false);
-	printf("VAR FOUND\n");
 	while (data->env[size])
 		size++;
-	printf("SIZE CALCULATED\n");
 	new_env = remove_var_copy(data->env, var, size);
 	if (!new_env)
 		return (false);
@@ -120,7 +117,7 @@ bool	export_env(t_data *data, char *new_var)
 		return (false);
 	split = ft_split(new_var, '=');
 	if (!split[0])
-	 	return (free_array(split), false);
+		return (free_array(split), false);
 	old_var = find_var(data->env, split[0]);
 	if (old_var)
 	{

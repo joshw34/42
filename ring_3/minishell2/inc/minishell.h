@@ -79,4 +79,7 @@ bool	var_is_valid(char *new_var);
 /* var_utils.c */
 char	*find_var(char **env, char *var);
 
+/* cd.c */
+void	change_dir(t_data *data, char *new_dir);
+
 #endif
