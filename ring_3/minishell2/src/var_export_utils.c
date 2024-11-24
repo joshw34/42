@@ -23,7 +23,7 @@ static bool	value_valid_unquoted(char *new_var, int i)
 	return (true);
 }
 
-static bool	value_valid_quoted(char *new_var, int i)
+static bool	value_valid_quoted(char *new_var, size_t i)
 {
 	while (new_var[i])
 	{
@@ -31,6 +31,17 @@ static bool	value_valid_quoted(char *new_var, int i)
 			return (false);
 		i++;
 	}
+	i = 0;
+	while (new_var[i] != '"')
+		i++;
+	new_var[i] = new_var[i +1];
+	i++;
+	while ((i + 1) < ft_strlen(new_var) - 1)
+	{
+		new_var[i] = new_var[i + 1];
+		i++;
+	}
+	new_var[i] = '\0';
 	return (true);
 }
 

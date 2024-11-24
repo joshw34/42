@@ -70,6 +70,7 @@ void	print_env(t_data *data);
 char	*get_var(char **env, char *var);
 
 /* var_export.c */
+bool	remove_var(t_data *data, char *var);
 bool	export_env(t_data *data, char *new_var);
 
 /* var_export_utils.c */

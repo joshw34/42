@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <stdbool.h>
 
 char	*find_var(char **env, char *var)
 {

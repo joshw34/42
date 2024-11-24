@@ -23,10 +23,10 @@ void	minishell(char **env)
 		data = init_data_struct(env);
 		if (data)
 			data->user_input = get_input(data);
-		printf("%s\n", get_var(data->env, "HOME"));
-		if (export_env(data, data->user_input) == true)
-			printf("WORKS\n");
-		printf("%s\n", get_var(data->env, "HOME"));
+		print_env(data);
+		if (remove_var(data, data->user_input) == true)
+			printf("\n\n\nWORKS\n\n\n");
+		print_env(data);
 		free_data_struct(data, false);
 		i++;
 	}

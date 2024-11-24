@@ -12,6 +12,77 @@
 
 #include "../inc/minishell.h"
 
+static	char	**remove_var_copy(char **old_env, char *var, int size)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*temp;
+	char	**ret;
+
+	i = 0;
+	j = 0;
+	ret = ft_calloc(size, sizeof(char *));
+	if (!ret)
+		return (NULL);
+	printf("ARRAY ALLOCATED");
+	temp = ft_strjoin(var, "=");
+	len = ft_strlen(temp);
+	while (old_env[i])
+	{
+		if (ft_strncmp(old_env[i], temp, len) == 0)
+			i++;
+		ret[j] = ft_strdup(old_env[i]);
+		i++;
+		j++;
+	}
+	free(temp);
+	return (ret);
+}
+
+bool	remove_var(t_data *data, char *var)
+{
+	char	**new_env;
+	int		size;
+
+	size = 0;
+	if (find_var(data->env, var) == NULL)
+		return (false);
+	printf("VAR FOUND\n");
+	while (data->env[size])
+		size++;
+	printf("SIZE CALCULATED\n");
+	new_env = remove_var_copy(data->env, var, size);
+	if (!new_env)
+		return (false);
+	free_array(data->env);
+	data->env = new_env;
+	return (true);
+}
+
+static	bool	add_var(t_data *data, char *new_var)
+{
+	int		i;
+	char	**new_env;
+
+	i = 0;
+	while (data->env[i])
+		i++;
+	new_env = ft_calloc(i + 2, sizeof(char *));
+	if (!new_env)
+		return (false);
+	i = 0;
+	while (data->env[i])
+	{
+		new_env[i] = ft_strdup(data->env[i]);
+		i++;
+	}
+	new_env[i] = ft_strdup(new_var);
+	free_array(data->env);
+	data->env = new_env;
+	return (true);
+}
+
 static	bool	replace_var(t_data *data, char *new_var)
 {
 	int		i;
@@ -58,6 +129,10 @@ bool	export_env(t_data *data, char *new_var)
 		return (true);
 	}
 	else
-		return (free_array(split), false);
+	{
+		add_var(data, new_var);
+		free_array(split);
+		return (true);
+	}
 	free_array(split);
 }
