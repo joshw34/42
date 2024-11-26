@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 12:43:44 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/26 15:14:01 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/11/26 12:47:45 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/11/26 12:47:48 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "../inc/minishell.h"
 
-t_list	*ft_lstnew(void *content)
+void	print_pwd(t_data *data)
 {
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	printf("%s", get_var(data->env, "PWD"));
 }

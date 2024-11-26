@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/21 16:04:31 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:26:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_tokens
 	char			*word;
 	char			*sep;
 	int				i;
-	struct s_reader	*next;
-	struct s_reader	*prev;
+	struct s_tokens	*next;
+	struct s_tokens	*prev;
 }	t_tokens;
 
 typedef struct s_data
@@ -81,5 +81,11 @@ char	*find_var(char **env, char *var);
 
 /* cd.c */
 void	change_dir(t_data *data, char *new_dir);
+
+/* pwd.c */
+void	print_pwd(t_data *data);
+
+/* token_list_utils.c */
+t_tokens	*token_lstnew(char *word, char *sep);
 
 #endif

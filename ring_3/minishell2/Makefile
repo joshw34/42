@@ -15,6 +15,8 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/var_export_utils.c \
 			$(SRC_DIR)/var_utils.c \
 			$(SRC_DIR)/cd.c \
+			$(SRC_DIR)/pwd.c \
+			$(SRC_DIR)/token_list_utils.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
