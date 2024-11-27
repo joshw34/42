@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/24 22:45:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:28:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,17 @@ void	minishell(char **env)
 
 	i = 0;
 	data = init_data_struct(env);
-	while (i < 8)
+	while (i < 4)
 	{
 		if (data)
 			data->user_input = get_input(data);
-		change_dir(data, data->user_input);
+		data->tokens = get_tokens(data->user_input);
+		t_tokens *temp = data->tokens;
+		while (temp != NULL)
+		{
+			printf("%d\t%s\n", temp->i, temp->word);
+			temp = temp->next;
+		}
 		free_data_struct(data, true);
 		i++;
 	}
