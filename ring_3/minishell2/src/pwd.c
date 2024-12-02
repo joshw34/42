@@ -15,4 +15,5 @@
 void	print_pwd(t_data *data)
 {
 	printf("%s", get_var(data->env, "PWD"));
+	printf("\n");
 }

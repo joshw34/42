@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/27 13:59:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:55:48 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ typedef enum e_tok_list
 	LESS,
 	LESS_LESS,
 }	t_tok_list;
+
+typedef struct s_cmd
+{
+	char	*cmd;
+	char	*args;
+	int		cmd_n;
+	bool	pipe_in;
+	bool	pipe_out;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}	t_cmd;
 
 typedef struct s_tokens
 {
@@ -82,6 +93,9 @@ char		*find_var(char **env, char *var);
 /* cd.c */
 void		change_dir(t_data *data, char *new_dir);
 
+/* cd_utils.c */
+char		*get_realpwd(void);
+
 /* pwd.c */
 void		print_pwd(t_data *data);
 
@@ -93,7 +107,19 @@ void		token_lstclear(t_tokens *tokens);
 void		token_lstadd(t_tokens *tokens, char *word, char *sep);
 t_tokens	*token_lstnew(char *word, char *sep);
 
+/* cmd_list.c */
+t_cmd		*get_cmds(t_data *data);
+
 /* utils.c */
-bool	is_whitespace(char *str);
+bool		is_whitespace(char *str);
+
+/* check_builtins.c */
+bool		check_builtins(t_data *data);
+
+/* exit.c */
+void		exit_cmd(t_data *data);
+
+/* echo.c */
+void		echo_cmd(t_data *data);
 
 #endif

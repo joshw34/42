@@ -37,11 +37,14 @@ static	char	**init_env(char **env)
 t_data	*init_data_struct(char **env)
 {
 	t_data	*data;
+	char	*temp;
 
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		return (NULL);
 	data->env = init_env(env);
-	remove_var(data, "OLDPWD");
+	temp = ft_strjoin("OLDPWD=", get_var(data->env, "PWD"));
+	export_env(data, temp);
+	free(temp);
 	return (data);
 }

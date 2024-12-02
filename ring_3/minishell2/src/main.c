@@ -15,23 +15,14 @@
 void	minishell(char **env)
 {
 	t_data	*data;
-	int		i;
-
-	i = 0;
 	data = init_data_struct(env);
-	while (i < 4)
+	while (1)
 	{
 		if (data)
 			data->user_input = get_input(data);
 		data->tokens = get_tokens(data->user_input);
-		t_tokens *temp = data->tokens;
-		while (temp != NULL)
-		{
-			printf("%d\t%s\n", temp->i, temp->word);
-			temp = temp->next;
-		}
+		check_builtins(data); 
 		free_data_struct(data, true);
-		i++;
 	}
 	free_data_struct(data, false);
 }
