@@ -24,6 +24,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/check_builtins.c \
 			$(SRC_DIR)/exit.c \
 			$(SRC_DIR)/echo.c \
+			$(SRC_DIR)/expand_var.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

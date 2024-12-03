@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:29:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/27 14:29:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:38:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ static	t_tokens	*token_lstlast(t_tokens *tokens)
 	return (tokens);
 }
 
+static	int	quote_status(char *str)
+{
+	int	last;
+
+	last = ft_strlen(str) - 1;
+	if (str[0] == 39 && str[last] == 39)
+		return (S_QUOTE);
+	else if (str[0] == 34 && str[last] == 34)
+		return (D_QUOTE);
+	else
+		return (NONE);
+}
+
 void	token_lstadd(t_tokens *tokens, char *word, char *sep)
 {
 	t_tokens	*new;
@@ -60,6 +73,8 @@ t_tokens	*token_lstnew(char *word, char *sep)
 	new = ft_calloc(1, sizeof(t_tokens));
 	if (!new)
 		return (NULL);
+	if (word)
+		new->quote = quote_status(word);
 	new->word = word;
 	new->sep = sep;
 	new->i = 0;

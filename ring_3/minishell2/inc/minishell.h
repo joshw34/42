@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/02 13:55:48 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:26:25 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include <sys/types.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+
+# define NONE 0
+# define S_QUOTE 1
+# define D_QUOTE 2
 
 /* STRUCT TYPEDEFS */
 typedef enum e_tok_list
@@ -54,6 +58,7 @@ typedef struct s_tokens
 	char			*word;
 	char			*sep;
 	int				i;
+	int				quote;
 	struct s_tokens	*next;
 	struct s_tokens	*prev;
 }	t_tokens;
@@ -100,7 +105,7 @@ char		*get_realpwd(void);
 void		print_pwd(t_data *data);
 
 /* token_list.c */
-t_tokens	*get_tokens(char *user_input);
+t_tokens	*get_tokens(t_data *data, char *user_input);
 
 /* token_list_utils.c */
 void		token_lstclear(t_tokens *tokens);
@@ -121,5 +126,8 @@ void		exit_cmd(t_data *data);
 
 /* echo.c */
 void		echo_cmd(t_data *data);
+
+/* expand_var.c */
+void	expand_var(t_data *data, t_tokens *token);
 
 #endif

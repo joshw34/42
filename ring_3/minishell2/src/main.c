@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/27 14:28:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:29:15 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ void	minishell(char **env)
 	{
 		if (data)
 			data->user_input = get_input(data);
-		data->tokens = get_tokens(data->user_input);
+		data->tokens = get_tokens(data, data->user_input);
+		printf("%s\n\n", data->user_input);
+		t_tokens	*temp = data->tokens;
+		while (temp != NULL)
+		{
+			printf("Token %d\nSep %s\nWord %s\nQuote %d\n\n", temp->i, temp->sep, temp->word, temp->quote);
+			temp = temp->next;
+		}
 		check_builtins(data); 
 		free_data_struct(data, true);
 	}

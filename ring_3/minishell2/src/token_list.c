@@ -6,13 +6,40 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/27 14:00:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:25:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_tokens	*get_tokens(char *user_input)
+static	void	expand_strings(t_data *data, t_tokens *tokens)
+{
+	while (tokens != NULL)
+	{
+		if (tokens->quote == NONE)
+			expand_var(data, tokens);
+		//else if (tokens->quote == D_QUOTE)
+		//	other thing;
+		tokens = tokens->next;
+	}
+}
+
+static	bool	check_separator(char *str)
+{
+	if (ft_strncmp(str, "|", 2) == 0)
+		return (true);
+	else if (ft_strncmp(str, "<", 2) == 0)
+		return (true);
+	else if (ft_strncmp(str, ">", 2) == 0)
+		return (true);
+	else if (ft_strncmp(str, "<<", 3) == 0)
+		return (true);
+	else if (ft_strncmp(str, ">>", 3) == 0)
+		return (true);
+	return (false);
+}
+
+t_tokens	*get_tokens(t_data *data, char *user_input)
 {
 	int			i;
 	char		**split;
@@ -25,9 +52,13 @@ t_tokens	*get_tokens(char *user_input)
 	tokens = token_lstnew(ft_strdup(split[0]), NULL);
 	while (split[i])
 	{
-		token_lstadd(tokens, ft_strdup(split[i]), NULL);
+		if (check_separator(split[i]) == true)
+			token_lstadd(tokens, NULL, ft_strdup(split[i]));
+		else
+			token_lstadd(tokens, ft_strdup(split[i]), NULL);
 		i++;
 	}
 	free_array(split);
+	expand_strings(data, tokens);
 	return (tokens);
 }
