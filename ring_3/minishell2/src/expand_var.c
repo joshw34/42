@@ -6,52 +6,44 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 15:21:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:05:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static	void	add_var_start(t_data *data, t_tokens *token, char *temp, int end)
+static	void	add_var_start(t_tokens *tok, char *var, int end)
 {
-	char	*var;
 	char	*part_2;
 	char	*new;
 
-	var = ft_strdup(get_var(data->env, temp));
-	part_2 = ft_strdup(token->word + end);
+	part_2 = ft_strdup(tok->word + end);
 	new = ft_strjoin(var, part_2);
-	free(token->word);
-	token->word = new;
-	free(var);
+	free(tok->word);
+	tok->word = new;
 	free(part_2);
 }
 
-static	void	add_var_end(t_data *data, t_tokens *token, char *temp, int start)
+static	void	add_var_end(t_tokens *tok, char *var, int start)
 {
-	char	*var;
 	char	*part_1;
 	char	*new;
 
-	var = ft_strdup(get_var(data->env, temp));
 	part_1 = ft_calloc(start + 1, sizeof(char));
-	ft_strlcpy(part_1, token->word, start);
+	ft_strlcpy(part_1, tok->word, start);
 	new = ft_strjoin(part_1, var);
-	free(token->word);
-	token->word = new;
-	free(var);
+	free(tok->word);
+	tok->word = new;
 	free(part_1);
 }
 
-static	void	add_var_middle(t_data *data, t_tokens *token, char *temp, int start, int end)
+static	void	add_var_middle(t_tokens *token, char *var, int start, int end)
 {
-	char	*var;
 	char	*part_1;
 	char	*part_2;
 	char	*new_temp;
 	char	*new_final;
 
-	var = ft_strdup(get_var(data->env, temp));
 	part_1 = ft_calloc(start + 1, sizeof(char));
 	ft_strlcpy(part_1, token->word, start);
 	part_2 = ft_strdup(token->word + end);
@@ -59,31 +51,33 @@ static	void	add_var_middle(t_data *data, t_tokens *token, char *temp, int start,
 	new_final = ft_strjoin(new_temp, part_2);
 	free(token->word);
 	token->word = new_final;
-	free(var);
 	free(part_1);
 	free(part_2);
 	free(new_temp);
 }
 
-static	void	replace_var_string(t_data *data, t_tokens *token, int start, int end)
+static	void	var_swap(t_data *data, t_tokens *token, int start, int end)
 {
-	char *temp;
+	char	*temp;
+	char	*var;
 
 	temp = ft_strdup(token->word + start);
 	temp[end - start] = '\0';
-	if (get_var(data->env, temp) == NULL)
-		return ;
+	var = ft_strdup(get_var(data->env, temp));
+	if (var == NULL)
+		return (free(temp));
 	if (ft_strlen(token->word) == ft_strlen(temp) + 1)
 	{
 		free(token->word);
 		token->word = ft_strdup(get_var(data->env, temp));
 	}
 	else if (start > 1 && (size_t)end < ft_strlen(token->word))
-		add_var_middle(data, token, temp, start, end);
+		add_var_middle(token, var, start, end);
 	else if (start > 1)
-		add_var_end(data, token, temp, start);
+		add_var_end(token, var, start);
 	else if ((size_t)end < ft_strlen(token->word))
-		add_var_start(data, token, temp, end);
+		add_var_start(token, var, end);
+	free(var);
 	free(temp);
 }
 
@@ -110,5 +104,5 @@ void	expand_var(t_data *data, t_tokens *token)
 		i++;
 	}
 	if (start > 0 && end > start)
-		replace_var_string(data, token, start, end);
+		var_swap(data, token, start, end);
 }

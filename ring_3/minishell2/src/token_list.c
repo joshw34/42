@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/03 15:25:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:32:53 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 	{
 		if (tokens->quote == NONE)
 			expand_var(data, tokens);
-		//else if (tokens->quote == D_QUOTE)
-		//	other thing;
 		tokens = tokens->next;
 	}
 }
@@ -44,7 +42,7 @@ t_tokens	*get_tokens(t_data *data, char *user_input)
 	int			i;
 	char		**split;
 	t_tokens	*tokens;
-	
+
 	i = 1;
 	if (user_input[0] == '\0' || is_whitespace(user_input) == true)
 		return (NULL);

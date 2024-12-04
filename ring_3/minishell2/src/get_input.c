@@ -6,12 +6,12 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/21 16:04:21 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:31:28 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
- 
+
 char	*get_prompt(char **env)
 {
 	char	*user;
