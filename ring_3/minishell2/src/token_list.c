@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 15:32:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:59:52 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 	while (tokens != NULL)
 	{
 		if (tokens->quote == NONE)
+		{
+			expand_tilda(data, tokens);
 			expand_var(data, tokens);
+			//expand_path(data, tokens);
+		}
 		tokens = tokens->next;
 	}
 }

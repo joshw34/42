@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 16:05:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:28:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ static	void	var_swap(t_data *data, t_tokens *token, int start, int end)
 	temp[end - start] = '\0';
 	var = ft_strdup(get_var(data->env, temp));
 	if (var == NULL)
+	{
+		remove_fake_var(token, start, end);
 		return (free(temp));
+	}
 	if (ft_strlen(token->word) == ft_strlen(temp) + 1)
 	{
 		free(token->word);
