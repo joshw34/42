@@ -6,11 +6,23 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/05 12:59:52 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:18:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static	void	remove_quotes(t_tokens *token)
+{
+	char	*temp;
+	int		last;
+
+	temp = ft_strdup(token->word + 1);
+	last = ft_strlen(temp) - 1;
+	temp[last] = '\0';
+	free(token->word);
+	token->word = temp;
+}
 
 static	void	expand_strings(t_data *data, t_tokens *tokens)
 {
@@ -20,8 +32,16 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 		{
 			expand_tilda(data, tokens);
 			expand_var(data, tokens);
-			//expand_path(data, tokens);
+			expand_path(tokens);
 		}
+		else if (tokens->quote == D_QUOTE)
+		{
+			expand_tilda(data, tokens);
+			expand_var(data, tokens);
+			remove_quotes(tokens);
+		}
+		else if (tokens->quote == S_QUOTE)
+			remove_quotes(tokens);
 		tokens = tokens->next;
 	}
 }

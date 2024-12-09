@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/05 12:28:32 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:25:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ static	void	var_swap(t_data *data, t_tokens *token, int start, int end)
 
 void	expand_var(t_data *data, t_tokens *token)
 {
-	int	start;
-	int	end;
-	int	i;
+	int		start;
+	int		end;
+	size_t	i;
 
 	i = 0;
 	start = -1;
 	end = -1;
-	while (token->word[i])
+	while (token->word[i] != '\0')
 	{
 		if (token->word[i] == '$')
 		{
@@ -108,4 +108,6 @@ void	expand_var(t_data *data, t_tokens *token)
 	}
 	if (start > 0 && end > start)
 		var_swap(data, token, start, end);
+	if (i < ft_strlen(token->word))
+		expand_var(data, token);
 }

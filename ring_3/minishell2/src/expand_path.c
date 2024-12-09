@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_path.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 11:29:43 by jwhitley          #+#    #+#             */
+/*   Updated: 2024/12/09 13:03:23 by jwhitley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void	expand_tilda(t_data *data, t_tokens *token)
@@ -7,7 +19,9 @@ void	expand_tilda(t_data *data, t_tokens *token)
 
 	temp = NULL;
 	new = NULL;
-	if (token->word[0] == '~' && token->word[1] == '\0')
+	if (token->word[0] != '~')
+		return ;
+	else if (token->word[0] == '~' && token->word[1] == '\0')
 		new = ft_strdup(get_var(data->env, "HOME"));
 	else if (token->word[0] == '~')
 	{
@@ -19,23 +33,39 @@ void	expand_tilda(t_data *data, t_tokens *token)
 	token->word = new;
 }
 
-static	void	build_real_path(char *path, char *new)
+static	void	build_real_path(t_tokens *token, char *path, char **new, int i)
 {
 	char	*temp;
 	char	*temp_2;
 	int		last;
 
-	temp = NULL;
-	temp_2 = NULL;
-	last = ft_strlen(path) - 1;
-	if ()
+	while (new[i])
+	{
+		temp = NULL;
+		temp_2 = NULL;
+		last = ft_strlen(path) - 1;
+		if (path[last] != '/')
+		{
+			temp_2 = ft_strjoin(path, "/");
+			temp = ft_strjoin(temp_2, new[i]);
+			free(temp_2);
+		}
+		else
+			temp = ft_strjoin(path, new[i]);
+		free(path);
+		path = ft_strdup(temp);
+		free(temp);
+		i++;
+	}
+	free(token->word);
+	token->word = path;
 }
 
 static	void	go_to_parent(char *str)
 {
 	int	i;
 
-	i = ft_strlen(str);
+	i = ft_strlen(str) - 1;
 	if (str[i] == '/')
 		i--;
 	while (i >= 0 && str[i] != '/')
@@ -43,12 +73,12 @@ static	void	go_to_parent(char *str)
 	str[i + 1] = '\0';
 }
 
-void	expand_path(t_data *data, t_tokens *token)
+void	expand_path(t_tokens *token)
 {
 	char	**split;
 	char	*cwd;
 	int		i;
-	
+
 	split = NULL;
 	cwd = NULL;
 	i = 0;
@@ -60,13 +90,11 @@ void	expand_path(t_data *data, t_tokens *token)
 	{
 		if (ft_strncmp(split[i], "..", 3) == 0)
 			go_to_parent(cwd);
-		if (ft_strncmp(split[i], "..", 3) != 0 && ft_strncmp(split[i], ".", 2) != 0)
+		if (ft_strncmp(split[i], "..", 3) != 0 && ft_strncmp(split[i], ".", 2)
+			!= 0)
 			break ;
 		i++;
 	}
-	while (split[i])
-	{
-		build_real_path(cwd, split[i]);
-		i++;
-	}
+	build_real_path(token, cwd, split, i);
+	free_array(split);
 }
