@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/09 11:31:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:12:06 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,13 @@
 # define D_QUOTE 2
 
 /* STRUCT TYPEDEFS */
-typedef enum e_tok_list
-{
-	WORD = 1,
-	PIPE,
-	GREAT,
-	GREAT_GREAT,
-	LESS,
-	LESS_LESS,
-}	t_tok_list;
-
 typedef struct s_cmd
 {
 	char	*cmd;
-	char	*args;
+	char	**args;
 	int		cmd_n;
-	bool	pipe_in;
-	bool	pipe_out;
+	char	*redir_in;
+	char	*redir_out;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -67,6 +57,7 @@ typedef struct s_data
 {
 	char			*user_input;
 	struct s_tokens	*tokens;
+	struct s_cmd	*cmds;
 	char			**env;
 }	t_data;
 
@@ -115,6 +106,9 @@ t_tokens	*token_lstnew(char *word, char *sep);
 /* cmd_list.c */
 t_cmd		*get_cmds(t_data *data);
 
+/* cmd_list_utils.c */
+int			cmd_count(t_tokens *tokens);
+
 /* utils.c */
 bool		is_whitespace(char *str);
 
@@ -128,13 +122,13 @@ void		exit_cmd(t_data *data);
 void		echo_cmd(t_data *data);
 
 /* expand_var.c */
-void	expand_var(t_data *data, t_tokens *token);
+void		expand_var(t_data *data, t_tokens *token);
 
 /* expand_var_2.c */
-void	remove_fake_var(t_tokens *token, int start, int end);
+void		remove_fake_var(t_tokens *token, int start, int end);
 
 /* expand_path.c */
-void	expand_tilda(t_data *data, t_tokens *token);
-void	expand_path(t_tokens *token);
+void		expand_tilda(t_data *data, t_tokens *token);
+void		expand_path(t_tokens *token);
 
 #endif

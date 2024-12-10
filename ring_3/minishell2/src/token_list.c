@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/09 13:18:42 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:37:47 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 {
 	while (tokens != NULL)
 	{
-		if (tokens->quote == NONE)
+		if (tokens->word != NULL && tokens->quote == NONE)
 		{
 			expand_tilda(data, tokens);
 			expand_var(data, tokens);
 			expand_path(tokens);
 		}
-		else if (tokens->quote == D_QUOTE)
+		else if (tokens->word != NULL && tokens->quote == D_QUOTE)
 		{
 			expand_tilda(data, tokens);
 			expand_var(data, tokens);
 			remove_quotes(tokens);
 		}
-		else if (tokens->quote == S_QUOTE)
+		else if (tokens->word != NULL && tokens->quote == S_QUOTE)
 			remove_quotes(tokens);
 		tokens = tokens->next;
 	}

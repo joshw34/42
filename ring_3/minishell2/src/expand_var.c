@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:00:20 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/09 13:25:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:33:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	expand_var(t_data *data, t_tokens *token)
 	i = 0;
 	start = -1;
 	end = -1;
-	while (token->word[i] != '\0')
+	while (token->word != NULL && token->word[i] != '\0')
 	{
 		if (token->word[i] == '$')
 		{

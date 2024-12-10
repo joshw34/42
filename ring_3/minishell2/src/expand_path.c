@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/09 13:03:23 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:35:09 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	expand_tilda(t_data *data, t_tokens *token)
 
 	temp = NULL;
 	new = NULL;
-	if (token->word[0] != '~')
+	if (token->word == NULL || token->word[0] != '~')
 		return ;
 	else if (token->word[0] == '~' && token->word[1] == '\0')
 		new = ft_strdup(get_var(data->env, "HOME"));

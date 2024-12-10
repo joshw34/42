@@ -20,6 +20,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/token_list.c \
 			$(SRC_DIR)/token_list_utils.c \
 			$(SRC_DIR)/cmd_list.c \
+			$(SRC_DIR)/cmd_list_utils.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/check_builtins.c \
 			$(SRC_DIR)/exit.c \
