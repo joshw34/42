@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:29:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/03 12:38:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:35:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	token_lstadd(t_tokens *tokens, char *word, char *sep)
 	if (!new)
 		return ;
 	temp->next = new;
+	new->processed = false;
 	new->i = temp->i + 1;
 	new->prev = temp;
 	new->next = NULL;
@@ -78,6 +79,7 @@ t_tokens	*token_lstnew(char *word, char *sep)
 	new->word = word;
 	new->sep = sep;
 	new->i = 0;
+	new->processed = false;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

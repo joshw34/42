@@ -28,6 +28,9 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/expand_var.c \
 			$(SRC_DIR)/expand_var_2.c \
 			$(SRC_DIR)/expand_path.c \
+			$(SRC_DIR)/redir_list_input.c \
+			$(SRC_DIR)/redir_list_output.c \
+			$(SRC_DIR)/DEBUG_FUNCS.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

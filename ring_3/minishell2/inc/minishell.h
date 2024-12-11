@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/10 13:12:06 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:01:50 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,30 @@
 # define S_QUOTE 1
 # define D_QUOTE 2
 
+# define IN 0
+# define OUT 1
+
+# define INFILE 0
+# define HEREDOC 1
+# define OUTFILE 2
+# define APPEND 3
+
 /* STRUCT TYPEDEFS */
+typedef struct s_redir
+{
+	char			*filename;
+	int				direction;
+	int				mode;
+	int				fd;
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_cmd
 {
-	char	*cmd;
-	char	**args;
-	int		cmd_n;
-	char	*redir_in;
-	char	*redir_out;
+	char			*cmd;
+	int				cmd_n;
+	struct s_redir	*in;
+	struct s_redir	*out;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -49,6 +65,7 @@ typedef struct s_tokens
 	char			*sep;
 	int				i;
 	int				quote;
+	bool			processed;
 	struct s_tokens	*next;
 	struct s_tokens	*prev;
 }	t_tokens;
@@ -107,6 +124,8 @@ t_tokens	*token_lstnew(char *word, char *sep);
 t_cmd		*get_cmds(t_data *data);
 
 /* cmd_list_utils.c */
+char		*parse_cmd(t_tokens *tokens, int start, int end);
+int			cmd_find_end(int start, t_tokens *tokens);
 int			cmd_count(t_tokens *tokens);
 
 /* utils.c */
@@ -130,5 +149,17 @@ void		remove_fake_var(t_tokens *token, int start, int end);
 /* expand_path.c */
 void		expand_tilda(t_data *data, t_tokens *token);
 void		expand_path(t_tokens *token);
+
+/* redir_list_input.c */
+t_redir		*get_input_redir(t_tokens *tokens, int start, int end);
+
+/* redir_list_output.c */
+t_redir		*get_output_redir(t_tokens *tokens, int start, int end);
+
+/* DEBUG_FUNCS.c */
+void		DB_print_tokens(t_data *data);
+void		DB_print_cmds(t_data *data);
+void		DB_print_output_redir(t_redir *output);
+void		DB_print_input_redir(t_redir *input);
 
 #endif
