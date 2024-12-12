@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/11 16:08:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:15:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	minishell(char **env)
 		data->tokens = get_tokens(data, data->user_input);
 		//DB_print_tokens(data);
 		data->cmds =get_cmds(data);
+		//DB_print_tokens(data);
 		DB_print_cmds(data);
 		//check_builtins(data); 
 		free_data_struct(data, true);

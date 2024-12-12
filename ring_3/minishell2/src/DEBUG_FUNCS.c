@@ -1,5 +1,15 @@
 #include "../inc/minishell.h"
 
+void	DB_print_array(char **array)
+{
+	int	i = 0;
+	while (array[i])
+	{
+		printf("%d\t%s\n", i, array[i]);
+		i++;
+	}
+}
+
 void	DB_print_tokens(t_data *data)
 {
 	t_tokens *temp = data->tokens;
@@ -22,8 +32,9 @@ void	DB_print_cmds(t_data *data)
 
 	while (temp != NULL)
 	{
-		printf("CMD: %d\n", temp->cmd_n);
+		printf("\nCOMMAND #%d\n", temp->cmd_n);
 		printf("Command: %s\n", temp->cmd);
+		printf("fd_in: %d\nfd_out: %d\n", temp->fd_in, temp->fd_out);
 		DB_print_input_redir(temp->in);
 		DB_print_output_redir(temp->out);
 		temp = temp->next;
@@ -32,7 +43,7 @@ void	DB_print_cmds(t_data *data)
 
 void	DB_print_output_redir(t_redir *output)
 {
-	printf("OUTPUT REDIRECTION:\n");
+	printf("\nOUTPUT REDIRECTION:\n");
 	if (output == NULL)
 		printf("No Output Redirection\n");
 	else
@@ -49,7 +60,7 @@ void	DB_print_output_redir(t_redir *output)
 
 void	DB_print_input_redir(t_redir *input)
 {
-	printf("INPUT REDIRECTION:\n");
+	printf("\nINPUT REDIRECTION:\n");
 	if (input == NULL)
 		printf("No Input Redirection\n");
 	else

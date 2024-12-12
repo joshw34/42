@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:13:45 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/11 15:44:00 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:26:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static	void	output_redir_add(t_redir *output, t_tokens *tokens)
 {
 	t_redir	*new;
+	t_redir	*temp_output;
 	
 	new = ft_calloc(1, sizeof(t_redir));
-	while (output->next != NULL)
-		output = output->next;
-	output->next = new;
+	temp_output = output;
+	while (temp_output->next != NULL)
+		temp_output = temp_output->next;
+	temp_output->next = new;
 	if (tokens->sep[0] == '>' && tokens->sep[1] == '\0')
 		new->mode = OUTFILE;
 	else
@@ -52,25 +54,27 @@ static	t_redir	*output_redir_new(t_tokens *tokens)
 
 t_redir	*get_output_redir(t_tokens *tokens, int start, int end)
 {
-	t_redir	*output;
+	t_redir		*output;
+	t_tokens	*temp_tok;
 
 	output = NULL;
-	while (tokens != NULL && tokens->i != start)
-		tokens = tokens->next;
-	while (tokens != NULL && tokens->i != end)
+	temp_tok = tokens;
+	while (temp_tok != NULL && temp_tok->i != start)
+		temp_tok = temp_tok->next;
+	while (temp_tok != NULL && temp_tok->i != end)
 	{
-		if (tokens->sep != NULL)
+		if (temp_tok->sep != NULL)
 		{
-			if (ft_strncmp(tokens->sep, ">", 2) == 0
-				|| ft_strncmp(tokens->sep, ">>", 3) == 0)
+			if (ft_strncmp(temp_tok->sep, ">", 2) == 0
+				|| ft_strncmp(temp_tok->sep, ">>", 3) == 0)
 			{
 				if (output == NULL)
-					output = output_redir_new(tokens);
+					output = output_redir_new(temp_tok);
 				else
-					output_redir_add(output, tokens);
+					output_redir_add(output, temp_tok);
 			}
 		}
-		tokens = tokens->next;
+		temp_tok = temp_tok->next;
 	}
 	return (output);
 }

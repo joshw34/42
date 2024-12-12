@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/10 11:37:47 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:53:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ t_tokens	*get_tokens(t_data *data, char *user_input)
 	if (user_input[0] == '\0' || is_whitespace(user_input) == true)
 		return (NULL);
 	split = ft_split(user_input, ' ');
-	tokens = token_lstnew(ft_strdup(split[0]), NULL);
+	DB_print_array(split);
+	if (check_separator(split[0]) == true)
+		tokens = token_lstnew(NULL, ft_strdup(split[0]));
+	else
+		tokens = token_lstnew(ft_strdup(split[0]), NULL);
 	while (split[i])
 	{
 		if (check_separator(split[i]) == true)

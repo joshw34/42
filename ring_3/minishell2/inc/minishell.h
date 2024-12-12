@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/11 16:01:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:02:17 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			*cmd;
+	int				pid;
+	int				fd_in;
+	int				fd_out;
+	int				pipe_fd[2];
 	int				cmd_n;
+	char			**env;
 	struct s_redir	*in;
 	struct s_redir	*out;
 	struct s_cmd	*prev;
@@ -157,6 +162,7 @@ t_redir		*get_input_redir(t_tokens *tokens, int start, int end);
 t_redir		*get_output_redir(t_tokens *tokens, int start, int end);
 
 /* DEBUG_FUNCS.c */
+void		DB_print_array(char **array);
 void		DB_print_tokens(t_data *data);
 void		DB_print_cmds(t_data *data);
 void		DB_print_output_redir(t_redir *output);
