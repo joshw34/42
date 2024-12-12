@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/12 15:02:17 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:50:49 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			*cmd;
+	char			**args;
 	int				pid;
 	int				fd_in;
 	int				fd_out;
