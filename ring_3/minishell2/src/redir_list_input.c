@@ -6,17 +6,33 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:11:52 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/12 11:23:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:50:22 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+void	redir_list_clear(t_redir *redir)
+{
+	t_redir	*current;
+	t_redir	*next;
+
+	current = redir;
+	while (current != NULL)
+	{
+		next = current->next;
+		if (current->filename)
+			free(current->filename);
+		free(current);
+		current = next;
+	}
+}
+
 static	void	input_redir_add(t_redir *input, t_tokens *tokens)
 {
 	t_redir	*new;
 	t_redir	*temp_input;
-	
+
 	new = ft_calloc(1, sizeof(t_redir));
 	temp_input = input;
 	while (temp_input->next != NULL)

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/11/21 16:04:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:54:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 {
 	int		i;
 	int		j;
-	int		len;
 	char	*temp;
 	char	**ret;
 
@@ -26,11 +25,13 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 	if (!ret)
 		return (NULL);
 	temp = ft_strjoin(var, "=");
-	len = ft_strlen(temp);
-	while (old_env[i])
+	while (old_env[i] != NULL)
 	{
-		if (ft_strncmp(old_env[i], temp, len) == 0)
+		if (ft_strncmp(old_env[i], temp, ft_strlen(temp)) == 0)
+		{
 			i++;
+			continue ;
+		}
 		ret[j] = ft_strdup(old_env[i]);
 		i++;
 		j++;

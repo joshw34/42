@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:13:45 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/12 13:26:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:51:33 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	void	output_redir_add(t_redir *output, t_tokens *tokens)
 {
 	t_redir	*new;
 	t_redir	*temp_output;
-	
+
 	new = ft_calloc(1, sizeof(t_redir));
 	temp_output = output;
 	while (temp_output->next != NULL)

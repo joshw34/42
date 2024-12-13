@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:13:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/12 14:48:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:49:48 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ static	char	*join_cmd(t_tokens *tokens, int end)
 	char	*ret;
 	char	*temp_word;
 	char	*temp_join;
-	
+
 	ret = NULL;
-	//temp_word = NULL;
-	//temp_join = NULL;
 	while (tokens != NULL && tokens->i <= end)
 	{
-		if (tokens->processed == false && tokens->word !=NULL)
+		if (tokens->processed == false && tokens->word != NULL)
 		{
 			temp_word = ft_strjoin(tokens->word, " ");
 			if (ret == NULL)
@@ -41,26 +39,15 @@ static	char	*join_cmd(t_tokens *tokens, int end)
 	}
 	return (ret);
 }
+
 char	*parse_cmd(t_tokens *tokens, int start, int end)
 {
 	t_tokens	*temp_1;
-	//t_tokens	*temp_2;
-	//size_t		len;
 	char		*cmd;
 
 	temp_1 = tokens;
 	while (temp_1 != NULL && temp_1->i != start)
 		temp_1 = temp_1->next;
-	/*temp_2 = temp_1;
-	len = 0;
-	while (temp_2 != NULL && temp_2->i <= end)
-	{
-		if (temp_2->processed == false && temp_2->word != NULL)
-			len = len + ft_strlen(temp_2->word);
-		temp_2 = temp_2->next;
-	}
-	if (len == 0)
-		return (NULL);*/
 	cmd = join_cmd(temp_1, end);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:29:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/11 11:35:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:47:10 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	token_lstclear(t_tokens *tokens)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->word);
+		if (current->word)
+			free(current->word);
+		if (current->sep)
+			free(current->sep);
 		free(current);
 		current = next;
 	}

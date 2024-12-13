@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/12 15:50:49 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:00:20 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_cmd
 	int				pipe_fd[2];
 	int				cmd_n;
 	char			**env;
+	struct s_data	*data;
 	struct s_redir	*in;
 	struct s_redir	*out;
 	struct s_cmd	*prev;
@@ -110,7 +111,7 @@ bool		var_is_valid(char *new_var);
 char		*find_var(char **env, char *var);
 
 /* cd.c */
-void		change_dir(t_data *data, char *new_dir);
+void		change_dir(t_cmd *cmd);
 
 /* cd_utils.c */
 char		*get_realpwd(void);
@@ -127,6 +128,7 @@ void		token_lstadd(t_tokens *tokens, char *word, char *sep);
 t_tokens	*token_lstnew(char *word, char *sep);
 
 /* cmd_list.c */
+void		cmd_list_clear(t_cmd *cmds);
 t_cmd		*get_cmds(t_data *data);
 
 /* cmd_list_utils.c */
@@ -138,13 +140,13 @@ int			cmd_count(t_tokens *tokens);
 bool		is_whitespace(char *str);
 
 /* check_builtins.c */
-bool		check_builtins(t_data *data);
+bool		check_builtins(t_cmd *cmd);
 
 /* exit.c */
 void		exit_cmd(t_data *data);
 
 /* echo.c */
-void		echo_cmd(t_data *data);
+void		echo_cmd(t_cmd *cmd);
 
 /* expand_var.c */
 void		expand_var(t_data *data, t_tokens *token);
@@ -157,6 +159,7 @@ void		expand_tilda(t_data *data, t_tokens *token);
 void		expand_path(t_tokens *token);
 
 /* redir_list_input.c */
+void		redir_list_clear(t_redir *redir);
 t_redir		*get_input_redir(t_tokens *tokens, int start, int end);
 
 /* redir_list_output.c */

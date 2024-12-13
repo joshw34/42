@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 15:31:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:48:16 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,17 @@ static	void	go_back(t_data *data)
 		return ;
 }
 
-void	change_dir(t_data *data, char *new_dir)
+void	change_dir(t_cmd *cmd)
 {
+	char *new_dir;
+
+	new_dir = cmd->args[1];
 	if (ft_strncmp(new_dir, "-", 2) == 0)
-		go_back(data);
+		go_back(cmd->data);
 	else if (ft_strncmp(new_dir, "~", 2) == 0)
-		go_home(data);
+		go_home(cmd->data);
 	else if (new_dir[0] == '~' && new_dir[1] != '\0')
-		go_home_expand(data, new_dir);
+		go_home_expand(cmd->data, new_dir);
 	else
-		go_full_path(data, new_dir);
+		go_full_path(cmd->data, new_dir);
 }
