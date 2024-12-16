@@ -6,13 +6,13 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/10 11:35:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:08:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	expand_tilda(t_data *data, t_tokens *token)
+void	expand_tilde(t_data *data, t_tokens *token)
 {
 	char	*temp;
 	char	*new;

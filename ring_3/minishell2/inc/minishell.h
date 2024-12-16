@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/16 11:39:32 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:09:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void		expand_var(t_data *data, t_tokens *token);
 void		remove_fake_var(t_tokens *token, int start, int end);
 
 /* expand_path.c */
-void		expand_tilda(t_data *data, t_tokens *token);
+void		expand_tilde(t_data *data, t_tokens *token);
 void		expand_path(t_tokens *token);
 
 /* redir_list_input.c */

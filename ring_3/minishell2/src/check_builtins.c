@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:25 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/13 13:57:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:27:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool	check_builtins(t_cmd *cmd)
 		exit_cmd(cmd->data);
 	else if (ft_strncmp(cmd->args[0], "env", 4) == 0)
 		print_env(cmd->data);
+	else if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
+		echo_cmd(cmd);
 	else if (cmd->args[1] == NULL)
 		return (false);
 	else if (ft_strncmp(cmd->args[0], "cd", 3) == 0)
@@ -28,8 +30,6 @@ bool	check_builtins(t_cmd *cmd)
 		export_env(cmd->data, cmd->args[1]);
 	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
 		remove_var(cmd->data, cmd->args[1]);
-	else if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
-		echo_cmd(cmd);
 	else
 		return (false);
 	return (true);
