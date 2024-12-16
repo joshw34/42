@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/13 14:00:20 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:39:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,28 +96,34 @@ void		free_array(char **array);
 /* get_input.c */
 char		*get_input(t_data *data);
 
-/* var_get_print.c */
-void		print_env(t_data *data);
-char		*get_var(char **env, char *var);
+/* builtin_cd.c */
+void		change_dir(t_cmd *cmd);
 
-/* var_export.c */
+/* builtin_cd_utils.c */
+char		*get_realpwd(void);
+
+/* builtin_echo.c */
+void		echo_cmd(t_cmd *cmd);
+
+/* builtin_exit.c */
+void		exit_cmd(t_data *data);
+
+/* builtin_pwd.c */
+void		print_pwd(t_data *data);
+
+/* builtin_var_export.c */
 bool		remove_var(t_data *data, char *var);
 bool		export_env(t_data *data, char *new_var);
 
-/* var_export_utils.c */
+/* builtin_var_export_utils.c */
 bool		var_is_valid(char *new_var);
 
-/* var_utils.c */
+/* builtin_var_get_print.c */
+void		print_env(t_data *data);
+char		*get_var(char **env, char *var);
+
+/* builtin_var_utils.c */
 char		*find_var(char **env, char *var);
-
-/* cd.c */
-void		change_dir(t_cmd *cmd);
-
-/* cd_utils.c */
-char		*get_realpwd(void);
-
-/* pwd.c */
-void		print_pwd(t_data *data);
 
 /* token_list.c */
 t_tokens	*get_tokens(t_data *data, char *user_input);
@@ -141,12 +147,6 @@ bool		is_whitespace(char *str);
 
 /* check_builtins.c */
 bool		check_builtins(t_cmd *cmd);
-
-/* exit.c */
-void		exit_cmd(t_data *data);
-
-/* echo.c */
-void		echo_cmd(t_cmd *cmd);
 
 /* expand_var.c */
 void		expand_var(t_data *data, t_tokens *token);
