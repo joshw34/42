@@ -17,26 +17,24 @@ int	execute_command(t_cmd *command_array)
 {
 	char	**fullpath;
 	char	**anchor;
-	//char	**command_and_option;
-
-	//printf("the command : %s is located at %p the fd in == %i  fd out == %i in == %p && out == %p\n",command_array->cmd, command_array, command_array->fd_in, command_array->fd_out, command_array->in, command_array->out);
-	//printf("ENV located at %p\n", command_array->env);
-
-	//print_env(command_array->data);
 
 	if (!command_array->cmd)
 		return (-1);
-	printf("A\n");
-	//if (access(command_array->cmd, X_OK) == 0)
-	//	execve(command_array->cmd, command_array->cmd, command_array->env);
+	if (access(command_array->cmd, X_OK) == 0)
+			execve(command_array->cmd, command_array->args, command_array->env);
+	
 	if (ft_strchr(command_array->cmd, '/'))
 		return (-1);
-	printf("B\n");
+	//if (check_builtins(command_array))
+	//	exit (0);
+	//printf("B\n");
 	//command_and_option = command_array->args;
+	if (redirection_and_execution_builtin(command_array))
+		return (1);
 	fullpath = get_path_array(command_array->env, (command_array->args)[0]);
 	if (!fullpath)
 		return (-1);
-	printf("C\n");
+	//printf("C\n");
 	anchor = fullpath;
 	while (*fullpath)
 	{
@@ -44,6 +42,9 @@ int	execute_command(t_cmd *command_array)
 		if (execve(*fullpath, command_array->args, command_array->env) == -1)
 			++fullpath;
 	}
+	ft_putstr_fd(command_array->cmd, STDERR_FILENO);
+	ft_putstr_fd(" : command not found\n", STDERR_FILENO);
+
 	free_2d_array(anchor);
 	//free_2d_array(command_and_option);
 	return (-1);
@@ -75,11 +76,20 @@ int	exec_command(char **env, char **arg)
 	return (-1);
 }
 */
+
+
+
+void	fork_redirection_and_execution(t_cmd *command_array)
+{
+	command_array->pid = fork();
+	if (!command_array->pid)
+		redirection_and_execution(command_array);
+}
+
 void processing_commands(t_cmd *command_array)
 {
 	while (command_array)
 	{
-	
 		if (command_array->prev)
 		{
 			command_array->fd_in = command_array->prev->pipe_fd[0];	
@@ -92,18 +102,13 @@ void processing_commands(t_cmd *command_array)
 				perror("pipe");
 			command_array->fd_out = command_array->pipe_fd[1];
 		}
-		command_array->pid = fork();
-		if (!command_array->pid)
-			redirection_and_execution(command_array);
+		fork_redirection_and_execution(command_array);
 		if (command_array->next)
 			close(command_array->pipe_fd[1]);
 		else if (!command_array->next && command_array->fd_in)
 				close(command_array->fd_in);
-		printf("FATHER :: the command : %s is located at %p the fd in == %i  fd out == %i in == %p && out == %p\n",command_array->cmd, command_array, command_array->fd_in, command_array->fd_out, command_array->in, command_array->out);
 		command_array = command_array->next;
-
 	}
-
 }
 
 void shell_execution(t_cmd *command_array)

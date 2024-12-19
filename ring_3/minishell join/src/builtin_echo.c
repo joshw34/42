@@ -12,18 +12,39 @@
 
 #include "../inc/minishell.h"
 
+
+static int	only_n_after_minus(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i++] == '-')
+	{
+		while (arg[i])
+		{
+			if(arg[i++] != 'n')
+				return (0);
+		}
+		return (1);	
+	}
+	else
+		return (0);
+}
+
 void	echo_cmd(t_cmd *cmd)
 {
-	if (!cmd->args[1])
+	int	i;
+
+	i = 1;
+	if (!cmd->args[i])
 	{
 		printf("\n");
 		return ;
 	}
-	if (ft_strncmp(cmd->args[1], "-n", 3) == 0)
-	{
-		if (cmd->args[2] != NULL)
-			printf("%s", cmd->args[2]);
-	}
-	else
-		printf("%s\n", cmd->args[1]);
+	//if (ft_strncmp(cmd->args[1], "-n", 3) == 0)
+	while (only_n_after_minus(cmd->args[i]))
+		++i;
+	while (cmd->args[i])
+		printf("%s\n", cmd->args[i++]);
+	
 }

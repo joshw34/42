@@ -48,6 +48,8 @@ char	*parse_cmd(t_tokens *tokens, int start, int end)
 	temp_1 = tokens;
 	while (temp_1 != NULL && temp_1->i != start)
 		temp_1 = temp_1->next;
+	if (temp_1 == NULL)
+		return (NULL);
 	cmd = join_cmd(temp_1, end);
 	return (cmd);
 }

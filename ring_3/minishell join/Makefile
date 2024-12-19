@@ -39,6 +39,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/redirection_file_opening.c \
 			$(SRC_DIR)/redirection_handling.c \
 			$(SRC_DIR)/multi_processing_handling.c \
+			$(SRC_DIR)/builtin_execution_handling.c \
 
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

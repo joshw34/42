@@ -178,6 +178,8 @@ int		exec_command(char **env, char **arg);
 /* free_memory_function.c */
 void	free_2d_array(char **array);
 /* redirection_handling.c */
+void	redirection_file_checking_and_selection
+			(t_cmd **command_array, int direction);
 void	redirection_and_execution(t_cmd *command_array);
 void	redirecting_std_input(t_cmd *command_array);
 void	redirecting_std_output(t_cmd *command_array);
@@ -189,6 +191,7 @@ void	processing_commands(t_cmd *command_array);
 void	shell_execution(t_cmd *command_array);
 /* multi_procesing.c */
 void	waiting_sons_processes(t_cmd *command_array, int *status);
-
-
+/*builtin_execution_handling.c*/
+bool	is_a_builtin(t_cmd *cmd);
+int redirection_and_execution_builtin(t_cmd *cmd);
 #endif

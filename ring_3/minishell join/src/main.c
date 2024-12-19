@@ -22,10 +22,11 @@ void	minishell(char **env)
 			data->user_input = get_input(data);
 		data->tokens = get_tokens(data, data->user_input);
 		data->cmds =get_cmds(data);
-		if (data->cmds != NULL)
-			check_builtins(data->cmds);
 		//DB_print_cmds(data);
-		shell_execution(data->cmds);
+		if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds)) ///dont forget to redirect output;
+			redirection_and_execution_builtin(data->cmds);
+		else
+			shell_execution(data->cmds);
 		free_data_struct(data, true);
 	}
 	free_data_struct(data, false);

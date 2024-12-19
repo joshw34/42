@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/13 12:48:16 by jwhitley         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:27:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,12 @@ void	change_dir(t_cmd *cmd)
 	char *new_dir;
 
 	new_dir = cmd->args[1];
-	if (ft_strncmp(new_dir, "-", 2) == 0)
-		go_back(cmd->data);
+	if (!new_dir)
+		go_home(cmd->data);
 	else if (ft_strncmp(new_dir, "~", 2) == 0)
 		go_home(cmd->data);
+	else if (ft_strncmp(new_dir, "-", 2) == 0)
+		go_back(cmd->data);
 	else if (new_dir[0] == '~' && new_dir[1] != '\0')
 		go_home_expand(cmd->data, new_dir);
 	else

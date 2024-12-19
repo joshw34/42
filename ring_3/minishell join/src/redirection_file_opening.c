@@ -17,7 +17,7 @@ static int open_infile (t_redir *redirection)
 	int	fd;
 
 	fd = open((redirection)->filename, O_RDONLY, 0777);
-	printf("Open infile fd == %i\n", fd);
+	//printf("Open infile fd == %i\n", fd);
 	return (fd);
 }
 
@@ -30,12 +30,12 @@ static int open_outfile (t_redir *redirection)
 		{
 			
 			fd = open((redirection)->filename, O_WRONLY | O_APPEND);
-			printf("Outfile append mode fd == %i\n", fd);
+			//printf("Outfile append mode fd == %i\n", fd);
 		}
 	else
 	{
 		fd = open((redirection)->filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		printf("Outfile OPen mode fd == %i\n", fd);
+		//printf("Outfile OPen mode fd == %i\n", fd);
 	}	
 	return (fd);
 }

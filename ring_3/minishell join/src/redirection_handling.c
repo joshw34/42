@@ -12,7 +12,7 @@
 
 #include "../inc/minishell.h"
 
-static void	redirection_file_checking_and_selection(t_cmd **command_array, int direction)
+void	redirection_file_checking_and_selection(t_cmd **command_array, int direction)
 {
 	t_redir	*redirection;
 	int		fd;
@@ -58,8 +58,8 @@ void redirecting_std_output(t_cmd *command_array)
 void	redirection_and_execution(t_cmd *command_array)
 {
 	int fd_in;
-
 	fd_in = -1;
+
 	if (!command_array->prev && command_array->in)
 		redirection_file_checking_and_selection(&command_array, 0);
 	redirecting_std_input(command_array);
@@ -68,7 +68,7 @@ void	redirection_and_execution(t_cmd *command_array)
 	if (command_array->next)
 		close(command_array->pipe_fd[0]);
 	redirecting_std_output(command_array);
-	printf("the command : %s is located at %p the fd in == %i  fd out == %i in == %p && out == %p\n",command_array->cmd, command_array, command_array->fd_in, command_array->fd_out, command_array->in, command_array->out);
 	if (execute_command(command_array) == -1)
 		exit(127);
+	exit(0);
 }

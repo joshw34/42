@@ -66,8 +66,9 @@ static	t_cmd	*cmdlist_new(t_data *data, int start, int end, int n_cmds)
 	new->out = get_output_redir(data->tokens, start, end);
 	new->cmd_n = n_cmds;
 	new->cmd = parse_cmd(data->tokens, start, end);
-	printf("CMD= %s", new->cmd);
-	new->args = ft_split(new->cmd, ' ');
+	//printf("CMD= %s", new->cmd);
+	if (new->cmd)
+		new->args = ft_split(new->cmd, ' ');
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->data = data;

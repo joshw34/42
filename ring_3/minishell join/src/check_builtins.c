@@ -22,10 +22,10 @@ bool	check_builtins(t_cmd *cmd)
 		print_env(cmd->data);
 	else if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
 		echo_cmd(cmd);
-	else if (cmd->args[1] == NULL)
-		return (false);
 	else if (ft_strncmp(cmd->args[0], "cd", 3) == 0)
 		change_dir(cmd);
+	else if (cmd->args[1] == NULL)
+		return (false);
 	else if (ft_strncmp(cmd->args[0], "export", 7) == 0)
 		export_env(cmd->data, cmd->args[1]);
 	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
