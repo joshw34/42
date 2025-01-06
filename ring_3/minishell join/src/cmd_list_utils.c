@@ -22,7 +22,8 @@ static	char	*join_cmd(t_tokens *tokens, int end)
 	while (tokens != NULL && tokens->i <= end)
 	{
 		if (tokens->processed == false && tokens->word != NULL)
-		{
+		{	
+
 			temp_word = ft_strjoin(tokens->word, " ");
 			if (ret == NULL)
 				ret = ft_strdup(temp_word);

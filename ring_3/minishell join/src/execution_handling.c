@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution_handling.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:40:04 by cngogang          #+#    #+#             */
-/*   Updated: 2024/12/11 10:40:23 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:20:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
 
 int	execute_command(t_cmd *command_array)
 {
@@ -20,11 +19,14 @@ int	execute_command(t_cmd *command_array)
 
 	if (!command_array->cmd)
 		return (-1);
+	//printf("cmd %s && args %s env %p\n", command_array->cmd, command_array->args[0], command_array->env);
+	//printf("X_OK access return %i\n", access(command_array->cmd, X_OK));
+	//printf("F_OK access return %i\n", access(command_array->cmd, F_OK));
+	//execve(command_array->cmd, command_array->args, command_array->env);
 	if (access(command_array->cmd, X_OK) == 0)
 			execve(command_array->cmd, command_array->args, command_array->env);
-	
-	if (ft_strchr(command_array->cmd, '/'))
-		return (-1);
+	//if (ft_strchr(command_array->cmd, '/'))
+	//	return (-1);
 	//if (check_builtins(command_array))
 	//	exit (0);
 	//printf("B\n");
@@ -44,9 +46,7 @@ int	execute_command(t_cmd *command_array)
 	}
 	ft_putstr_fd(command_array->cmd, STDERR_FILENO);
 	ft_putstr_fd(" : command not found\n", STDERR_FILENO);
-
 	free_2d_array(anchor);
-	//free_2d_array(command_and_option);
 	return (-1);
 }
 
@@ -78,12 +78,20 @@ int	exec_command(char **env, char **arg)
 */
 
 
+static	void	child_action(int sigint)
+{
+	if (sigint == SIGINT)
+		printf("\n");
+}
 
 void	fork_redirection_and_execution(t_cmd *command_array)
 {
 	command_array->pid = fork();
+	signal(SIGINT, child_action);
 	if (!command_array->pid)
+	{
 		redirection_and_execution(command_array);
+	}
 }
 
 void processing_commands(t_cmd *command_array)
@@ -114,7 +122,7 @@ void processing_commands(t_cmd *command_array)
 void shell_execution(t_cmd *command_array)
 {
 	int	status;
-
+	
 	processing_commands(command_array);
 	waiting_sons_processes(command_array, &status);
 }

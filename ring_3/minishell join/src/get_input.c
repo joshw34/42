@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 15:31:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:16:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ char	*get_input(t_data *data)
 
 	prompt = get_prompt(data->env);
 	ret = readline(prompt);
+	if (!ret)
+	{
+		printf("\nExiting...\n");
+		free(prompt);
+		free_data_struct(data, true);
+		exit(0);
+	}
 	free(prompt);
 	add_history(ret);
 	return (ret);

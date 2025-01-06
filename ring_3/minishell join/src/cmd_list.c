@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:06:26 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/13 13:10:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:32:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ void	cmd_list_clear(t_cmd *cmds)
 	}
 }
 
+static	void	cmd_trim_spaces(t_cmd *cmds)
+{
+	char	*temp;
+
+	temp = ft_strtrim(cmds->cmd, " ");
+	if (temp)
+	{
+		free(cmds->cmd);
+		cmds->cmd = temp;
+	}
+}
+
 static	void	cmdlist_add(t_cmd *cmds, t_data *data, int start, int end)
 {
 	t_cmd	*new;
@@ -49,6 +61,7 @@ static	void	cmdlist_add(t_cmd *cmds, t_data *data, int start, int end)
 	new->cmd_n = temp_cmds->cmd_n;
 	new->cmd = parse_cmd(data->tokens, start, end);
 	new->args = ft_split(new->cmd, ' ');
+	cmd_trim_spaces(new);
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->data = data;
@@ -66,9 +79,9 @@ static	t_cmd	*cmdlist_new(t_data *data, int start, int end, int n_cmds)
 	new->out = get_output_redir(data->tokens, start, end);
 	new->cmd_n = n_cmds;
 	new->cmd = parse_cmd(data->tokens, start, end);
-	//printf("CMD= %s", new->cmd);
 	if (new->cmd)
 		new->args = ft_split(new->cmd, ' ');
+	cmd_trim_spaces(new);
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->data = data;

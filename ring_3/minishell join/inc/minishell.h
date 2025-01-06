@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/16 14:09:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:34:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/types.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 
 # define NONE 0
 # define S_QUOTE 1
@@ -143,6 +144,7 @@ int			cmd_find_end(int start, t_tokens *tokens);
 int			cmd_count(t_tokens *tokens);
 
 /* utils.c */
+char		*parse_argv(char **argv);
 bool		is_whitespace(char *str);
 
 /* check_builtins.c */
