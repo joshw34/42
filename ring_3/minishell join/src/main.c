@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/06 17:28:18 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:14:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	minishell(char **env)
 		if (data)
 			data->user_input = get_input(data);
 		data->tokens = get_tokens(data, data->user_input);
+		//DB_print_tokens(data);
 		data->cmds =get_cmds(data);
+		//DB_print_cmds(data);
+		//DB_print_array(data->cmds->args);
 		if (data->cmds)
 		{
 			if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds)) ///dont forget to redirect output;

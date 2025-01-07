@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/16 14:14:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:00:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 		{
 			expand_tilde(data, tokens);
 			expand_var(data, tokens);
-			remove_quotes(tokens);
+			//remove_quotes(tokens);
 		}
 		else if (tokens->word != NULL && tokens->quote == S_QUOTE)
 			remove_quotes(tokens);
@@ -70,7 +70,7 @@ t_tokens	*get_tokens(t_data *data, char *user_input)
 	i = 1;
 	if (user_input[0] == '\0' || is_whitespace(user_input) == true)
 		return (NULL);
-	split = ft_split(user_input, ' ');
+	split = ft_split_new(user_input, ' ');
 	if (check_separator(split[0]) == true)
 		tokens = token_lstnew(NULL, ft_strdup(split[0]));
 	else

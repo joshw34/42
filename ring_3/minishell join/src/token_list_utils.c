@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:29:58 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/13 11:47:10 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:28:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	t_tokens	*token_lstlast(t_tokens *tokens)
 	return (tokens);
 }
 
-static	int	quote_status(char *str)
+int	quote_status(char *str)
 {
 	int	last;
 

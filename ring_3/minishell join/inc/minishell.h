@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/06 14:34:43 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:50:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ t_tokens	*get_tokens(t_data *data, char *user_input);
 /* token_list_utils.c */
 void		token_lstclear(t_tokens *tokens);
 void		token_lstadd(t_tokens *tokens, char *word, char *sep);
+int	quote_status(char *str);
 t_tokens	*token_lstnew(char *word, char *sep);
 
 /* cmd_list.c */
@@ -196,4 +197,13 @@ void	waiting_sons_processes(t_cmd *command_array, int *status);
 /*builtin_execution_handling.c*/
 bool	is_a_builtin(t_cmd *cmd);
 int redirection_and_execution_builtin(t_cmd *cmd);
+
+/* split_new.c */
+char 	**ft_split_new(char const *s, char c);
+
+/* split_new_utils.c */
+bool 	in_quotes(const char *str, int i);
+int		find_end_quote(const char *str, int i);
+int		find_next_string(const char *str, char c);
+
 #endif
