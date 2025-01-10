@@ -17,11 +17,11 @@ char	*get_prompt(char **env)
 	char	*user;
 	char	*dir;
 	char	*prompt;
-	int		last;
+//	int		last;
 
 	user = ft_strjoin(get_var(env, "USER"), "@");
 	dir = ft_strjoin(get_var(env, "PWD"), " $ ");
-	last = ft_strlen(dir);
+//	last = ft_strlen(dir);
 	if (dir[0] == '/' && dir[1] == ' ')
 		prompt = ft_strjoin(user, dir);
 	else

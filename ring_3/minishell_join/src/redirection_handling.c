@@ -57,9 +57,9 @@ void	redirecting_std_output(t_cmd *command_array)
 
 void	redirection_and_execution(t_cmd *command_array)
 {
-	int	fd_in;
+//	int	fd_in;
 
-	fd_in = -1;
+//	fd_in = -1;
 	if (!command_array->prev && command_array->in)
 		redirection_file_checking_and_selection(&command_array, 0);
 	redirecting_std_input(command_array);

@@ -31,8 +31,9 @@ void	action_2(int sigint)
 
 void	action_rl(int sig)
 {
-	int	signal;
+//	int	signal;
 
-	signal = sig;
+//	signal = sig;
+	(void)sig;
 	exit (1);
 }
