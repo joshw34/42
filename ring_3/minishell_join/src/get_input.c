@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2024/12/04 15:31:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ char	*get_prompt(char **env)
 	char	*user;
 	char	*dir;
 	char	*prompt;
-//	int		last;
 
 	user = ft_strjoin(get_var(env, "USER"), "@");
 	dir = ft_strjoin(get_var(env, "PWD"), " $ ");
-//	last = ft_strlen(dir);
 	if (dir[0] == '/' && dir[1] == ' ')
 		prompt = ft_strjoin(user, dir);
 	else
@@ -40,9 +38,10 @@ char	*get_input(t_data *data)
 	ret = readline(prompt);
 	if (!ret)
 	{
-		printf("\nExiting...\n");
+		printf("\nexit\n");
 		free(prompt);
 		free_data_struct(data, true);
+		g_last_signal = 127;
 		exit(0);
 	}
 	free(prompt);

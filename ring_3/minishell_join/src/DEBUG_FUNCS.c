@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   DEBUG_FUNCS.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:20 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/07 15:41:24 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:22:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	DB_print_array(char **array)
+void	db_print_array(char **array)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	while (array[i])
 	{
 		printf("%d\t%s\n", i, array[i]);
@@ -22,10 +24,11 @@ void	DB_print_array(char **array)
 	}
 }
 
-void	DB_print_tokens(t_data *data)
+void	db_print_tokens(t_data *data)
 {
-	t_tokens *temp = data->tokens;
+	t_tokens	*temp;
 
+	temp = data->tokens;
 	while (temp != NULL)
 	{
 		printf("TOKEN: %d\n", temp->i);
@@ -38,11 +41,13 @@ void	DB_print_tokens(t_data *data)
 	}
 }
 
-void	DB_print_cmds(t_data *data)
+void	db_print_cmds(t_data *data)
 {
-	t_cmd	*temp = data->cmds;
-	int		i = 1;
+	t_cmd	*temp;
+	int		i;
 
+	temp = data->cmds;
+	i = 0;
 	while (temp != NULL)
 	{
 		printf("\nCOMMAND #%d\n", i);
@@ -52,14 +57,14 @@ void	DB_print_cmds(t_data *data)
 		printf("located at: %p\n", temp);
 		printf("Prev: %p\n", temp->prev);
 		printf("Next: %p\n", temp->next);
-		DB_print_input_redir(temp->in);
-		DB_print_output_redir(temp->out);
+		db_print_input_redir(temp->in);
+		db_print_output_redir(temp->out);
 		temp = temp->next;
 		i++;
 	}
 }
 
-void	DB_print_output_redir(t_redir *output)
+void	db_print_output_redir(t_redir *output)
 {
 	printf("\nOUTPUT REDIRECTION:\n");
 	if (output == NULL)
@@ -76,7 +81,7 @@ void	DB_print_output_redir(t_redir *output)
 	}
 }
 
-void	DB_print_input_redir(t_redir *input)
+void	db_print_input_redir(t_redir *input)
 {
 	printf("\nINPUT REDIRECTION:\n");
 	if (input == NULL)

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:13:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 17:14:18 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:17:52 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ static	char	*join_cmd(t_tokens *tokens, int end)
 	while (tokens != NULL && tokens->i <= end)
 	{
 		if (tokens->processed == false && tokens->word != NULL)
-		{	
-			if (tokens->quote != S_QUOTE)
-				expand_path(tokens);
+		{
+			expand_path(tokens);
 			temp_word = ft_strjoin(tokens->word, " ");
 			if (ret == NULL)
 				ret = ft_strdup(temp_word);

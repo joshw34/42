@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_var_get_print.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:32 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 19:21:13 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_env(t_data *data)
 		printf("%s\n", data->env[i]);
 		i++;
 	}
-	last_signal = 0;
+	g_last_signal = 0;
 }
 
 char	*get_var(char **env, char *var)

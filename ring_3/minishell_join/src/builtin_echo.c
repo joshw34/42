@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:47 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 14:27:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	echo_cmd(t_cmd *cmd)
 	if (!cmd->args[i])
 	{
 		printf("\n");
-		last_signal = 0;
+		g_last_signal = 0;
 		return ;
 	}
 	if (only_n_after_minus(cmd->args[i]) == 0)
@@ -69,5 +69,5 @@ void	echo_cmd(t_cmd *cmd)
 	}
 	else
 		echo_print(cmd, i + 1);
-	last_signal = 0;
+	g_last_signal = 0;
 }

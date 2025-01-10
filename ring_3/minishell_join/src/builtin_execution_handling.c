@@ -6,22 +6,22 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 11:46:36 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/09 17:25:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:55:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void fetch_status_code(t_cmd *cmd)
+static void	fetch_status_code(t_cmd *cmd)
 {
 	char	*status_code_char;
-	
-	status_code_char = ft_itoa(last_signal);
-	if(!status_code_char)
+
+	status_code_char = ft_itoa(g_last_signal);
+	if (!status_code_char)
 		return ;
 	free(cmd->args[0]);
 	free(cmd->cmd);
-	cmd->args[0] = status_code_char;	
+	cmd->args[0] = status_code_char;
 	cmd->cmd = ft_strdup(status_code_char);
 }
 

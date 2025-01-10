@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:43 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 15:27:25 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:18:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	expand_tilde(t_data *data, t_tokens *token)
 
 	temp = NULL;
 	new = NULL;
-	if (token->word == NULL || token->word[0] != '~')
+	if (token->word == NULL || token->word[0] != '~'
+		|| get_var(data->env, "HOME") == NULL)
 		return ;
 	else if (token->word[0] == '~' && token->word[1] == '\0')
 		new = ft_strdup(get_var(data->env, "HOME"));
@@ -82,7 +83,7 @@ void	expand_path(t_tokens *token)
 	split = NULL;
 	cwd = NULL;
 	i = 0;
-	if (token->word[0] != '.')
+	if (token->word[0] != '.' || token->quote == S_QUOTE)
 		return ;
 	split = ft_split(token->word, '/');
 	cwd = get_realpwd();

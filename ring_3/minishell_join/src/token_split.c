@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:40:21 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/08 15:40:22 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:16:08 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static	void	trim_strings(char **arr)
 
 static	void	create_strings(char const *str, char **arr, int word_count)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*temp;
 
 	i = 0;

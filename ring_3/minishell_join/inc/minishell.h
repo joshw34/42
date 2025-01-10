@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 19:10:13 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:22:06 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # define APPEND 3
 
 # define HERE_DOC_PATH "./here_doc_temp" 
-
 
 /* STRUCT TYPEDEFS */
 typedef struct s_redir
@@ -91,7 +90,7 @@ typedef struct s_data
 	struct sigaction	sig_act;
 }	t_data;
 
-extern int	last_signal;  
+extern int	g_last_signal;
 
 /* FUNCTION PROTOTYPES*/
 /* init_data_struct.c */
@@ -110,6 +109,8 @@ void					change_dir(t_cmd *cmd);
 
 /* builtin_cd_utils.c */
 char					*get_realpwd(void);
+void					go_home_sysenv(t_data *data);
+void					go_home_expand_sysenv(t_data *data, char *new_dir);
 
 /* builtin_echo.c */
 void					echo_cmd(t_cmd *cmd);
@@ -179,49 +180,51 @@ t_redir					*get_input_redir(t_tokens *tokens, int start, int end);
 t_redir					*get_output_redir(t_tokens *tokens, int start, int end);
 
 /* DEBUG_FUNCS.c */
-void					DB_print_array(char **array);
-void					DB_print_tokens(t_data *data);
-void					DB_print_cmds(t_data *data);
-void					DB_print_output_redir(t_redir *output);
-void					DB_print_input_redir(t_redir *input);
+void					db_print_array(char **array);
+void					db_print_tokens(t_data *data);
+void					db_print_cmds(t_data *data);
+void					db_print_output_redir(t_redir *output);
+void					db_print_input_redir(t_redir *input);
 
 /* fetch_path_command.c */
 char					**get_path_array(char **env, char *arg);
 int						exec_command(char **env, char **arg);
+
 /* free_memory_function.c */
 void					free_2d_array(char **array);
+
 /* redirection_handling.c */
 void					redirection_file_checking_and_selection(
 							t_cmd **command_array, int direction);
 void					redirection_and_execution(t_cmd *command_array);
 void					redirecting_std_input(t_cmd *command_array);
 void					redirecting_std_output(t_cmd *command_array);
+
 /* redirection_file_opening.c */
 int						open_file(t_redir *redirection);
+
 /* execution_handling.c */
 int						execute_command(t_cmd *command_array);
 void					processing_commands(t_cmd *command_array);
 void					shell_execution(t_cmd *command_array);
+
 /* multi_procesing.c */
 void					waiting_sons_processes(t_cmd *command_array,
 							int *status);
-/*builtin_execution_handling.c*/
+/* builtin_execution_handling.c */
 bool					is_a_builtin(t_cmd *cmd);
 int						redirection_and_execution_builtin(t_cmd *cmd);
-/*signal_handling.c*/
-void					action(int sigint);
-void					action_2(int sigint);
-void					action_rl(int sig);
-void					sig_init(struct sigaction *sig_act);
-void					sig_init_2(struct sigaction *sig_act);
-void					sig_block_init(sigset_t *block_mask);
+
+/* signal_handling.c */
+void					standard_behavior(int sigint);
+void					here_doc_open_behavior(int sig);
 
 /* token_split.c */
-char 	**token_split(char const *s, char c);
+char					**token_split(char const *s, char c);
 
 /* token_split_utils.c */
-bool 	in_quotes(const char *str, int i);
-int		find_end_quote(const char *str, int i);
-int		find_next_string(const char *str, char c);
+bool					in_quotes(const char *str, int i);
+int						find_end_quote(const char *str, int i);
+int						find_next_string(const char *str, char c);
 
 #endif

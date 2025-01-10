@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:36:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 15:50:19 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:08:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static	void	expand_strings(t_data *data, t_tokens *tokens)
 		if (tokens->word != NULL && tokens->quote == NONE)
 		{
 			expand_tilde(data, tokens);
-			//if (tokens->word[0] == '$' /*&& is_special_char(tokens->word + 1) == false*/)
 			expand_var(data, tokens);
 		}
 		else if (tokens->word != NULL && tokens->quote == D_QUOTE)
 		{
 			expand_tilde(data, tokens);
-			if (tokens->word[0] == '$' && tokens->word[1] != '!'
-				&& tokens->word[1] != '?')
-				expand_var(data, tokens);
+			expand_var(data, tokens);
 		}
 		else if (tokens->word != NULL && tokens->quote == S_QUOTE)
 			remove_quotes(tokens);
@@ -69,7 +66,8 @@ t_tokens	*get_tokens(t_data *data, char *user_input)
 	t_tokens	*tokens;
 
 	i = 1;
-	if (!user_input || user_input[0] == '\0' || is_whitespace(user_input) == true)
+	if (!user_input || user_input[0] == '\0'
+		|| is_whitespace(user_input) == true)
 		return (NULL);
 	split = token_split(user_input, ' ');
 	if (check_separator(split[0]) == true)

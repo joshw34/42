@@ -6,7 +6,7 @@
 /*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:03:53 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/08 12:15:29 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 10:25:47 by cngogang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	create_here_doc(t_redir *redirection)
 {
 	int		fd;
 
-	signal(SIGINT, action_rl);
+	signal(SIGINT, here_doc_open_behavior);
 	if (!access(HERE_DOC_PATH, F_OK))
 		unlink(HERE_DOC_PATH);
 	fd = open(HERE_DOC_PATH, O_CREAT | O_RDWR | O_APPEND, 0777);

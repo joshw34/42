@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:59:56 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 16:02:11 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:14:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*parse_argv(char **argv)
 		free(temp);
 		i++;
 	}
-	printf("**%s**\n", result);
 	return (result);
 }
 
@@ -54,17 +53,18 @@ bool	is_special_str(char *str)
 {
 	if (ft_strchr(str, '!') != 0 || ft_strchr(str, '?') != 0
 		|| ft_strchr(str, '$') != 0 || ft_strchr(str, '*') != 0
-			|| ft_strchr(str, '&') != 0 || ft_strchr(str, ';') != 0)
+		|| ft_strchr(str, '&') != 0 || ft_strchr(str, ';') != 0)
 		return (true);
 	if (ft_strchr(str, '(') != 0 || ft_strchr(str, ')') != 0
 		|| ft_strchr(str, '[') != 0 || ft_strchr(str, ']') != 0)
 		return (true);
 	if (ft_strchr(str, '=') != 0 || ft_strchr(str, '~') != 0
 		|| ft_strchr(str, '\\') != 0 || ft_strchr(str, '|') != 0
-			|| ft_strchr(str, 37) != 0)
+		|| ft_strchr(str, 37) != 0)
 		return (true);
 	return (false);
 }
+
 bool	is_special_char(char c)
 {
 	if (c == '!' || c == '?' || c == '$' || c == '*' || c == '&' || c == ';')

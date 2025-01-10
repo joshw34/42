@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 18:47:58 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:18:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int last_signal;
+int	g_last_signal;
 
 void	minishell_non_int(char **env, char **argv)
 {
@@ -40,7 +40,7 @@ void	minishell(char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, action);
+		signal(SIGINT, standard_behavior);
 		if (data)
 			data->user_input = get_input(data);
 		data->tokens = get_tokens(data, data->user_input);
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **env)
 {
 	if (env[0] == NULL)
 		exit(EXIT_FAILURE);
-	last_signal = 0;
+	g_last_signal = 0;
 	if (ac == 1)
 		minishell(env);
 	else

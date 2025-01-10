@@ -32,7 +32,6 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/builtin_var_utils.c \
 			$(SRC_DIR)/DEBUG_FUNCS.c \
 			$(SRC_DIR)/fetch_path_command.c \
-			$(SRC_DIR)/redirection_structure_functions.c \
 			$(SRC_DIR)/execution_handling.c \
 			$(SRC_DIR)/free_memory_function.c \
 			$(SRC_DIR)/redirection_file_opening.c \

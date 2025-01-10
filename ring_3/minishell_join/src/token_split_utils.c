@@ -6,13 +6,13 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:40:25 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/08 15:40:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:15:26 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-bool in_quotes(const char *str, int i)
+bool	in_quotes(const char *str, int i)
 {
 	if (str[i] == 34)
 	{
@@ -47,7 +47,6 @@ int	find_end_quote(const char *str, int i)
 
 	c = str[i];
 	ret = i + 1;
-
 	while (str[ret] && str[ret] != c)
 	{
 		ret++;

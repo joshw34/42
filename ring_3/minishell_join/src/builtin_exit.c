@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 19:38:26 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void	exit_cmd(t_data *data)
 	{
 		len = ft_strlen(data->cmds->args[1]) + 1;
 		ft_strlcpy(exit_code, data->cmds->args[1], len);
-		printf("QQQQ%sQQQQ\n", exit_code);
 		free_data_struct(data, false);
 		exit(ft_atoi(exit_code));
 	}
 	else
 	{
 		free_data_struct(data, false);
-		exit(last_signal);
+		exit(g_last_signal);
 	}
 }

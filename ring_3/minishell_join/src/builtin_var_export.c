@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_var_export.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 19:19:42 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,23 @@ bool	export_env(t_data *data, char *new_var)
 	char	*old_var;
 
 	if (var_is_valid(new_var) == false)
-		return (last_signal = 1, false);
+		return (g_last_signal = 1, false);
 	split = ft_split(new_var, '=');
 	if (!split[0])
-		return (last_signal = 1, free_array(split), false);
+		return (g_last_signal = 1, free_array(split), false);
 	old_var = find_var(data->env, split[0]);
 	if (old_var)
 	{
 		replace_var(data, new_var);
 		free_array(split);
-		return (last_signal = 0, true);
+		return (g_last_signal = 0, true);
 	}
 	else
 	{
 		add_var(data, new_var);
 		free_array(split);
-		return (last_signal = 0, true);
+		return (g_last_signal = 0, true);
 	}
 	free_array(split);
-	last_signal = 0;
+	g_last_signal = 0;
 }

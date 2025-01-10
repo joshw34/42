@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:01 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/09 19:09:44 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:11:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	multi_free(int count, ...)
 {
 	int		i;
 	va_list	args;
+	void	*ptr;
 
 	va_start(args, count);
 	i = 0;
 	while (i < count)
 	{
-		void *ptr = va_arg(args, void*);
+		ptr = va_arg(args, void *);
 		free(ptr);
 		i++;
 	}
