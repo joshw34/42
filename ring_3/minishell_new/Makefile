@@ -14,6 +14,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/token_splitter.c \
 			$(SRC_DIR)/token_list.c \
 			$(SRC_DIR)/token_utils.c \
+			$(SRC_DIR)/token_add_spaces.c \
 			$(SRC_DIR)/free.c \
 			$(SRC_DIR)/free_list_clear.c \
 			$(SRC_DIR)/signal_handling.c \

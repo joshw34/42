@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 03:44:23 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:31:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	token_double_quote(char *input, int *i)
 		j++;
 	while (input[j] && input[j] != 34)
 		j++;
-	if (input[j + 1])
+	if (input[j] && input[j + 1])
 	{
 		j++;
 		while (input[j])
@@ -58,7 +58,7 @@ static	void	token_single_quote(char *input, int *i)
 		j++;
 	while (input[j] && input[j] != 39)
 		j++;
-	if (input[j + 1])
+	if (input[j] && input[j + 1])
 	{
 		j++;
 		while (input[j])
@@ -86,9 +86,10 @@ static	void	token_no_quote(char **input, int *i)
 	{
 		spaces_to_add = separator_is_spaced(*input, j);
 		//printf("%d\n", spaces_to_add);
+		ft_printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx\n");
 		if (spaces_to_add != 0)
 		{
-			add_spaces(input, &j, (*input)[j], spaces_to_add);
+			add_spaces(input, &j, spaces_to_add);
 			break ;
 		}
 		if ((*input)[j] == ' ')

@@ -5,8 +5,7 @@ relative paths to be expanded just before execution
 add export with no arguments function
 
 fallback $USER and $PWD for prompt
-    -add this to the get_var
-
+    
 move here_doc functionality to parsing
 -check input for necessary expansions
 
