@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 02:12:28 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:13:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	valid_input(char *input)
 {
-	if (!input || input[0] == '\0' || is_whitespace(input) == false)
+	if (!input || input[0] == '\0' || is_whitespace(input) == true)
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 14:00:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:44:59 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,11 @@ static	void	token_no_quote(char **input, int *i)
 	while ((*input)[j] && ((*input)[j] != 34 && (*input)[j] != 39))
 	{
 		spaces_to_add = separator_is_spaced(*input, j);
+		printf("j = %d, char = %c, spc_to_add = %d\n", j, (*input)[j], spaces_to_add);
 		if (spaces_to_add != 0)
 		{
+			ft_printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
+			sleep(10);
 			add_spaces(input, &j, spaces_to_add);
 			break ;
 		}
@@ -94,7 +97,10 @@ static	void	token_no_quote(char **input, int *i)
 		{
 			(*input)[j] = 31;
 			if ((*input)[j + 1] != ' ')
+			{
+				printf("BREAK\n");
 				break ;
+			}
 		}
 		j++;
 	}
@@ -111,13 +117,16 @@ char	**split_tokens(char **input)
 	i = 0;
 	while ((*input)[i])
 	{
+		//ft_printf("%s\n", *input);
 		q_status = set_status((*input)[i]);
+		//ft_printf("i = %d  q_status = %d\n",i, q_status);
 		if (q_status == NONE)
 			token_no_quote(input, &i);
 		else if (q_status == S_QUOTE)
 			token_single_quote(*input, &i);
 		else if (q_status == D_QUOTE)
 			token_double_quote(*input, &i);
+		printf("END LOOP %s\n", *input);
 		i++;
 	}
 	return (ft_split(*input, 31));

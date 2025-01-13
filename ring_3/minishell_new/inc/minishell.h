@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 13:32:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:28:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 # define HEREDOC 1
 # define OUTFILE 2
 # define APPEND 3
+
+# define ERROR_1 "Minishell: Error: Unexpected EOF: Unclosed "
+# define ERROR_2 "Minishell: Error: Unexpected newline"
+# define ERROR_3 "Minishell: Error: Unexpected token "
 
 # define HERE_DOC_PATH "./here_doc_temp" 
 
@@ -112,23 +116,29 @@ char					*get_input(t_data *data);
 /* process_user_input.c */
 bool					process_user_input(t_data *data);
 
-/* tokeniser.c */
-bool					get_tokens(t_data *data);
-
 /* token_splitter.c */
 char					**split_tokens(char **input);
-
-/* token_list.c */
-bool					token_list(t_data *data, char **split);
 
 /* token_check_spaces.c */
 int						separator_is_spaced(char *input, int i);
 
-/* token_utils.c */
-bool					is_a_separator(char c);
-
 /* token_add_spaces. */
 void					add_spaces(char **input, int *index, int new_spaces);
+
+/* token_expand.c */
+bool					expand_tokens(t_tokens *token);
+
+/* token_syntax.c */
+bool					sep_syntax(t_tokens * token);
+bool					word_syntax(char *str);
+
+/* token_expand_utils.c */
+
+/* token_list.c */
+bool					token_list(t_data *data, char **split);
+
+/* token_utils.c */
+bool					is_a_separator(char c);
 
 /* signal_handling.c */
 void					standard_behavior(int sigint);

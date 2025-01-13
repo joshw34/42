@@ -10,10 +10,12 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/init_data_struct.c \
 			$(SRC_DIR)/get_input.c \
 			$(SRC_DIR)/process_user_input.c \
-			$(SRC_DIR)/tokeniser.c \
 			$(SRC_DIR)/token_splitter.c \
 			$(SRC_DIR)/token_check_spaces.c \
 			$(SRC_DIR)/token_add_spaces.c \
+			$(SRC_DIR)/token_expand.c \
+			$(SRC_DIR)/token_syntax.c \
+			$(SRC_DIR)/token_expand_utils.c \
 			$(SRC_DIR)/token_list.c \
 			$(SRC_DIR)/token_utils.c \
 			$(SRC_DIR)/free.c \
@@ -32,7 +34,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
-CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -lreadline -lhistory
 
 all: $(NAME)
