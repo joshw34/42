@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 11:40:35 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:32:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,11 @@ char					**split_tokens(char **input);
 /* token_list.c */
 bool					token_list(t_data *data, char **split);
 
-/* token_utils.c */
+/* token_check_spaces.c */
 int						separator_is_spaced(char *input, int i);
+
+/* token_utils.c */
+bool					is_a_separator(char c);
 
 /* token_add_spaces. */
 void					add_spaces(char **input, int *index, int new_spaces);
