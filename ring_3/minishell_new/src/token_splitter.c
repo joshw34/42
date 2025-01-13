@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 18:44:59 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:11:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ static	void	token_no_quote(char **input, int *i)
 		printf("j = %d, char = %c, spc_to_add = %d\n", j, (*input)[j], spaces_to_add);
 		if (spaces_to_add != 0)
 		{
-			ft_printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
-			sleep(10);
+			//ft_printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n");
+			//sleep(10);
 			add_spaces(input, &j, spaces_to_add);
 			break ;
 		}
