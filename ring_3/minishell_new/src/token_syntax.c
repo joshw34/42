@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:01:16 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 17:29:06 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:07:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static	bool	check_quotes(char *str)
 
 bool	sep_syntax(t_tokens * token)
 {
+	if (token->sep[0] == '|' && token->i == 0)
+		return (printf("%s '%s'\n", ERROR_3, token->next->sep), false);
 	if (!token->next)
 		return(printf("%s\n", ERROR_2), false);
 	if (token->next->sep)

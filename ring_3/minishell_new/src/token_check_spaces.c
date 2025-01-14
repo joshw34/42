@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 20:13:21 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 18:51:21 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:49:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	separator_is_spaced(char *input, int i)
 	counter = 0;
 	if (input[i] == '|')
 	{
-		if (!(i == 0 || input[i - 1] == ' ') || input[i - 1] == 31)
+		if (!(i == 0 || input[i - 1] == ' ' || input[i - 1] == 31))
 			counter += 1;
 		if (!(input[i + 1] == '\0' || input[i + 1] == ' '))
 			counter += 2;

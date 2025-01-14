@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 17:28:35 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:08:09 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define HEREDOC 1
 # define OUTFILE 2
 # define APPEND 3
+# define WORD 4
+# define PIPE 5
 
 # define ERROR_1 "Minishell: Error: Unexpected EOF: Unclosed "
 # define ERROR_2 "Minishell: Error: Unexpected newline"
@@ -80,7 +82,7 @@ typedef struct s_tokens
 	char				*word;
 	char				*sep;
 	int					i;
-	//int					quote;
+	int					type;
 	bool				processed;
 	struct s_tokens		*next;
 	struct s_tokens		*prev;
@@ -138,6 +140,7 @@ bool					word_syntax(char *str);
 bool					token_list(t_data *data, char **split);
 
 /* token_utils.c */
+void					set_token_type(t_tokens *token);
 bool					is_a_separator(char c);
 
 /* signal_handling.c */

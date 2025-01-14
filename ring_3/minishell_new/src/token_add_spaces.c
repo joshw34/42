@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:32:03 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 12:10:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:54:40 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,14 @@ static	void	add_spaces_single(char **input, int *index, int new_spaces)
 
 void	add_spaces(char **input, int *index, int new_spaces)
 {
-	if ((*input)[*index] != (*input)[*index + 1])
+	printf("ADD SPACES\n");
+	if (!(*input)[*index + 1] || (*input)[*index] == '|')
+	{
+		add_spaces_single(input, index, new_spaces);
+		printf("ADD SPACES 2\n");
+
+	}
+	else if ((*input)[*index] != (*input)[*index + 1])
 		add_spaces_single(input, index, new_spaces);
 	else
 		add_spaces_double(input, index, new_spaces);

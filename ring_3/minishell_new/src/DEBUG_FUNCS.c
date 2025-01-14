@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:20 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/12 23:03:42 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:07:14 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	db_print_tokens(t_data *data)
 		printf("TOKEN: %d\n", temp->i);
 		printf("Word: %s\n", temp->word);
 		printf("Sep: %s\n", temp->sep);
-		//printf("Quotes: %d\n", temp->quote);
+		printf("Type: %d\n", temp->type);
 		printf("Processed: %d\n", temp->processed);
 		printf("\n");
 		temp = temp->next;

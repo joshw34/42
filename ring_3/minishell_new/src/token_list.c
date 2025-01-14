@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:34:49 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 17:34:22 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:35:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static	t_tokens	*token_lstnew(char *word, char *sep)
 	new = ft_calloc(1, sizeof(t_tokens));
 	if (!new)
 		return (NULL);
-	//if (word)
-	//	new->quote = quote_status(word);
 	new->word = word;
 	new->sep = sep;
 	new->i = 0;
 	new->processed = false;
 	new->next = NULL;
 	new->prev = NULL;
+	set_token_type(new);
 	return (new);
 }
 
@@ -53,6 +52,7 @@ static	void	token_lstadd(t_tokens *tokens, char *word, char *sep)
 	new->i = temp->i + 1;
 	new->prev = temp;
 	new->next = NULL;
+	set_token_type(new);
 }
 
 static	bool	check_separator(char *str)
