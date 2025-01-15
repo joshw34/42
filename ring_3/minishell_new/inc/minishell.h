@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/14 15:08:09 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:38:13 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,27 +119,23 @@ char					*get_input(t_data *data);
 bool					process_user_input(t_data *data);
 
 /* token_splitter.c */
-char					**split_tokens(char **input);
-
-/* token_check_spaces.c */
-int						separator_is_spaced(char *input, int i);
-
-/* token_add_spaces. */
 void					add_spaces(char **input, int *index, int new_spaces);
+char					**split_tokens(char **input);
 
 /* token_expand.c */
 bool					expand_tokens(t_tokens *token);
+
+/* token_expand_utils.c */
 
 /* token_syntax.c */
 bool					sep_syntax(t_tokens * token);
 bool					word_syntax(char *str);
 
-/* token_expand_utils.c */
-
 /* token_list.c */
 bool					token_list(t_data *data, char **split);
 
 /* token_utils.c */
+int						check_sep_spacing(char *input, int i);
 void					set_token_type(t_tokens *token);
 bool					is_a_separator(char c);
 
@@ -173,6 +169,7 @@ bool					is_whitespace(char *str);
 char					*get_realpwd(void);
 
 /* DEBUG_FUNCS.c */
+void					db_print_with_seps(char *str);
 void					db_print_array(char **array);
 void					db_print_tokens(t_data *data);
 void					db_print_cmds(t_data *data);

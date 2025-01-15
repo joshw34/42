@@ -6,11 +6,36 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/14 17:18:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:37:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	add_spaces(char **input, int *index, int new_spaces)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	temp = ft_calloc(1, ft_strlen(*input) + 2);
+	while ((*input)[j])
+	{
+		if ((new_spaces == 1 && j == (*index)) || (new_spaces == 2 && j == (*index + 1)))
+		{
+			temp[i] = 31;
+			i++;
+		}
+		temp[i] = (*input)[j];
+		i++;
+		j++;
+	}
+	free(*input);
+	*input = ft_strdup(temp);
+	free(temp);
+}
 
 static	int	set_status(char c)
 {
@@ -22,59 +47,35 @@ static	int	set_status(char c)
 		return (NONE);
 }
 
-static	void	token_double_quote(char *input, int *i)
+static	void	token_quote(char *input, int *i, char c)
 {
 	int	j;
 
 	j = *i;
 	if (input[j + 1])
 		j++;
-	while (input[j] && input[j] != 34)
+	while (input[j] && input[j] != c)
 		j++;
-	if (input[j] == '\0' || is_a_separator(input[j]) == true)
-		j--;
-	*i = j;
-}
-
-static	void	token_single_quote(char *input, int *i)
-{
-	int	j;
-
-	j = *i;
-	if (input[j + 1])
-		j++;
-	while (input[j] && input[j] != 39)
-		j++;
-	if (input[j] == '\0' || is_a_separator(input[j]) == true)
+	if (input[j] == '\0')
 		j--;
 	*i = j;
 }
 
 static	void	token_no_quote(char **input, int *i)
 {
-	int	j;
 	int	spaces_to_add;
 
-	j = *i;
-	while ((*input)[j] && ((*input)[j] != 34 && (*input)[j] != 39))
+	if ((*input)[*i] == ' ')
 	{
-		spaces_to_add = separator_is_spaced(*input, j);
-		if (spaces_to_add != 0)
-		{
-			add_spaces(input, &j, spaces_to_add);
-			break ;
-		}
-		if ((*input)[j] == ' ')
-		{
-			(*input)[j] = 31;
-			if ((*input)[j + 1] != ' ')
-				break ;
-		}
-		j++;
+		(*input)[*i] = 31;
+		return ;
 	}
-	if ((*input)[j] == '\0')
-		j--;
-	*i = j;
+	spaces_to_add = check_sep_spacing(*input, *i);
+	if (spaces_to_add == 2)
+		add_spaces(input, i, spaces_to_add);
+	spaces_to_add = check_sep_spacing(*input, *i);
+	if (spaces_to_add == 1)
+		add_spaces(input, i, spaces_to_add);
 }
 
 char	**split_tokens(char **input)
@@ -88,11 +89,8 @@ char	**split_tokens(char **input)
 		q_status = set_status((*input)[i]);
 		if (q_status == NONE)
 			token_no_quote(input, &i);
-		else if (q_status == S_QUOTE)
-			token_single_quote(*input, &i);
-		else if (q_status == D_QUOTE)
-			token_double_quote(*input, &i);
-		printf("END LOOP %s\n", *input);
+		else if (q_status == S_QUOTE || q_status == D_QUOTE)
+			token_quote(*input, &i, (*input)[i]);
 		i++;
 	}
 	return (ft_split(*input, 31));

@@ -6,11 +6,44 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:29:04 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/14 15:07:52 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:38:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static	int	check_sep_spacing_2(char *input, int i)
+{
+	if (input[i + 1] != input[i])
+	{
+		if (input[i + 1] != '\0' && input[i + 1] != ' ' && input [i + 1] != 31)
+			return (2);
+		if (i != 0 && input[i - 1] != ' ' && input[i - 1] != 31 && input[i - 1] != input[i])
+			return (1);
+	}
+	else if (input[i + 1] == input[i])
+	{
+		if (i != 0 && input[i - 1] == input[i])
+			return (2);
+		if (i != 0 && input[i - 1] != ' ' && input[i - 1] != 31)
+			return (1);
+	}
+	return (0);
+}
+
+int	check_sep_spacing(char *input, int i)
+{
+	if (input[i] == '|')
+	{
+		if (input[i + 1] != '\0' && input[i + 1] != ' ' && input[i + 1] != 31)
+			return (2);
+		if (i != 0 && input[i - 1] != ' ' && input[i - 1] != 31)
+			return (1);
+	}
+	if (input[i] == '>' || input[i] == '<')
+		return (check_sep_spacing_2(input, i));
+	return (0);
+}
 
 void	set_token_type(t_tokens *token)
 {

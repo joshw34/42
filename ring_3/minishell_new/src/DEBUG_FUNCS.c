@@ -6,11 +6,29 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:20 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/14 15:07:14 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:00:52 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	db_print_with_seps(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 31)
+			write(1, "*", 1);
+		else
+			write(1, &str[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
+
 
 void	db_print_array(char **array)
 {
