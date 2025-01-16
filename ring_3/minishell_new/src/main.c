@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/12 16:32:38 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:42:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	minishell(char **env)
 
 	data = init_data_struct(env);
 	signal(SIGQUIT, SIG_IGN);
-	while (1)
+	int i = 0;
+	while (i < 3)
 	{
 		signal(SIGINT, standard_behavior);
 		if (process_user_input(data) == true)
@@ -49,7 +50,9 @@ void	minishell(char **env)
 				shell_execution(data->cmds);*/
 		}
 		free_data_struct(data, true);
+		i++;
 	}
+	free_data_struct(data, false);
 }
 
 int	main(int ac, char **av, char **env)

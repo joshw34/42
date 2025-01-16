@@ -6,11 +6,21 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:29:04 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/15 17:38:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:53:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	set_status(char c)
+{
+	if (c == 39)
+		return (S_QUOTE);
+	else if (c == 34)
+		return (D_QUOTE);
+	else
+		return (NONE);
+}
 
 static	int	check_sep_spacing_2(char *input, int i)
 {

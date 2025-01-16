@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:34:49 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/14 14:35:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:57:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	t_tokens	*token_lstlast(t_tokens *tokens)
 	return (tokens);
 }
 
-static	t_tokens	*token_lstnew(char *word, char *sep)
+static	t_tokens	*token_lstnew(t_data *data, char *word, char *sep)
 {
 	t_tokens	*new;
 
@@ -34,17 +34,18 @@ static	t_tokens	*token_lstnew(char *word, char *sep)
 	new->processed = false;
 	new->next = NULL;
 	new->prev = NULL;
+	new->data = data;
 	set_token_type(new);
 	return (new);
 }
 
-static	void	token_lstadd(t_tokens *tokens, char *word, char *sep)
+static	void	token_lstadd(t_data *data, t_tokens *toks, char *wd, char *sep)
 {
 	t_tokens	*new;
 	t_tokens	*temp;
 
-	temp = token_lstlast(tokens);
-	new = token_lstnew(word, sep);
+	temp = token_lstlast(toks);
+	new = token_lstnew(data, wd, sep);
 	if (!new)
 		return ;
 	temp->next = new;
@@ -76,9 +77,9 @@ bool	token_list(t_data *data, char **split)
 	
 	i = 1;
 	if (check_separator(split[0]) == true)
-		data->tokens = token_lstnew(NULL, ft_strdup(split[0]));
+		data->tokens = token_lstnew(data, NULL, ft_strdup(split[0]));
 	else
-		data->tokens = token_lstnew(ft_strdup(split[0]), NULL);
+		data->tokens = token_lstnew(data, ft_strdup(split[0]), NULL);
 	if (!data->tokens)
 	{
 		free_array(split);
@@ -87,9 +88,9 @@ bool	token_list(t_data *data, char **split)
 	while (split[i])
 	{
 		if (check_separator(split[i]) == true)
-			token_lstadd(data->tokens, NULL, ft_strdup(split[i]));
+			token_lstadd(data, data->tokens, NULL, ft_strdup(split[i]));
 		else
-			token_lstadd(data->tokens, ft_strdup(split[i]), NULL);
+			token_lstadd(data, data->tokens, ft_strdup(split[i]), NULL);
 		i++;
 	}
 	free_array(split);

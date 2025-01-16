@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/15 17:37:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:53:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ void	add_spaces(char **input, int *index, int new_spaces)
 	free(*input);
 	*input = ft_strdup(temp);
 	free(temp);
-}
-
-static	int	set_status(char c)
-{
-	if (c == 39)
-		return (S_QUOTE);
-	else if (c == 34)
-		return (D_QUOTE);
-	else
-		return (NONE);
 }
 
 static	void	token_quote(char *input, int *i, char c)

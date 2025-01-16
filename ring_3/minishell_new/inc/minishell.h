@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/15 17:38:13 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:46:54 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_tokens
 	int					i;
 	int					type;
 	bool				processed;
+	struct s_data		*data;
 	struct s_tokens		*next;
 	struct s_tokens		*prev;
 }	t_tokens;
@@ -126,6 +127,12 @@ char					**split_tokens(char **input);
 bool					expand_tokens(t_tokens *token);
 
 /* token_expand_utils.c */
+void					expand_tok_var(char **str, int start, int end, char **env);
+void					remove_tok_quotes(char **str, int open, int close);
+int						find_section_end(char *str, int start, int q_status);
+
+/* token_str_join.c */
+int					token_str_join(char **str, char *new, int start, int end);
 
 /* token_syntax.c */
 bool					sep_syntax(t_tokens * token);
@@ -135,6 +142,7 @@ bool					word_syntax(char *str);
 bool					token_list(t_data *data, char **split);
 
 /* token_utils.c */
+int						set_status(char c);
 int						check_sep_spacing(char *input, int i);
 void					set_token_type(t_tokens *token);
 bool					is_a_separator(char c);
