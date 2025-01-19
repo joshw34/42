@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:05:00 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 09:53:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:41:49 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	add_spaces(char **input, int *index, int new_spaces)
 	temp = ft_calloc(1, ft_strlen(*input) + 2);
 	while ((*input)[j])
 	{
-		if ((new_spaces == 1 && j == (*index)) || (new_spaces == 2 && j == (*index + 1)))
+		if ((new_spaces == 1 && j == (*index))
+			|| (new_spaces == 2 && j == (*index + 1)))
 		{
 			temp[i] = 31;
 			i++;

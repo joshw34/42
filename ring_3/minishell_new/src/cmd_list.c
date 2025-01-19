@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:06:26 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:31:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:46:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static	void	cmdlist_add(t_cmd *cmds, t_data *data, int start, int end)
 	new->cmd_n = temp_cmds->cmd_n;
 	new->cmd = parse_cmd(data->tokens, start, end);
 	new->args = parse_cmd_args(data->tokens, start, end);
-	//cmd_remove_quotes(new);
 	cmd_trim_spaces(new);
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
@@ -83,8 +82,7 @@ static	t_cmd	*cmdlist_new(t_data *data, int start, int end, int n_cmds)
 	new->cmd_n = n_cmds;
 	new->cmd = parse_cmd(data->tokens, start, end);
 	if (new->cmd)
-			new->args = parse_cmd_args(data->tokens, start, end);
-	//cmd_remove_quotes(new);
+		new->args = parse_cmd_args(data->tokens, start, end);
 	cmd_trim_spaces(new);
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:03:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 21:52:58 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:43:21 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static	int	remove_section(t_tokens *tok, int var_name_len)
 	return (tok->start);
 }
 
-static	char	*get_end_section(t_tokens *tok, char *first_part, int var_name_len)
+static	char	*get_end_section(t_tokens *tok, char *first_part,
+	int var_name_len)
 {
 	char	*ret;
 	char	*temp;
@@ -96,24 +97,23 @@ static	int	insert_var(t_tokens *tok, char *new_var, int var_name_len)
 	free(temp2);
 	tok->start = new_start;
 	tok->end = ft_strlen(tok->word) - len_after_end;
-	return(tok->start);
+	return (tok->start);
 }
 
-int	token_str_join(t_tokens *tok, char *new_var, int var_name_len, char *var_name)
+int	token_str_join(t_tokens *tok, char *new_var, int var_name_len,
+	char *var_name)
 {
-	printf("NEW_VAR = %s, len = %d\n", new_var, var_name_len);
 	char	*exit_code;
 
 	if (var_name_len == 1 && var_name[0] == '?')
 	{
 		exit_code = ft_itoa(g_last_signal);
-		printf("EXIT CODE: %s\n", exit_code);
 		insert_var(tok, exit_code, ft_strlen(exit_code));
 		free(exit_code);
 		return (tok->start);
 	}
 	else if (!new_var)
-		return(remove_section(tok, var_name_len));
+		return (remove_section(tok, var_name_len));
 	else
-		return(insert_var(tok, new_var, var_name_len));
+		return (insert_var(tok, new_var, var_name_len));
 }

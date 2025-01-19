@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:01:16 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 21:11:33 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:44:01 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	bool	check_quotes(char *str)
 	}
 	if (q_total % 2 == 0)
 		return (true);
-	else 
+	else
 		return (printf("%s %c", ERROR_1, c), false);
 }
 
@@ -59,13 +59,10 @@ bool	sep_syntax(t_tokens *token)
 {
 	if (token->sep[0] == '|' && token->i == 0)
 		return (printf("%s '%s'\n", ERROR_3, token->next->sep), false);
-	printf("PASSED FIRST CHECK\n");
 	if (!token->next)
-		return(printf("%s\n", ERROR_2), false);
-	printf("PASSED SECOND CHECK\n");
+		return (printf("%s\n", ERROR_2), false);
 	if (token->next->sep)
 		return (printf("%s '%s'\n", ERROR_3, token->next->sep), false);
-	printf("PASSED THIRD CHECK\n");
 	return (true);
 }
 

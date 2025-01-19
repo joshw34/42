@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:29:04 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:06:10 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:44:38 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static	int	check_sep_spacing_2(char *input, int i)
 	{
 		if (input[i + 1] != '\0' && input[i + 1] != ' ' && input [i + 1] != 31)
 			return (2);
-		if (i != 0 && input[i - 1] != ' ' && input[i - 1] != 31 && input[i - 1] != input[i])
+		if (i != 0 && input[i - 1] != ' ' && input[i - 1] != 31
+			&& input[i - 1] != input[i])
 			return (1);
 	}
 	else if (input[i + 1] == input[i])

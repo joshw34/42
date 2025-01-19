@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:29:27 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 18:15:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:41:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	remove_tok_quotes(t_tokens *tok)
 {
-	printf("BEFORE QUOTE REMOVAL: %s, start = %d, end = %d\n", tok->word, tok->start, tok->end);
 	int		new_size;
 	int		i;
 	int		j;
@@ -40,7 +39,6 @@ void	remove_tok_quotes(t_tokens *tok)
 	tok->word = ft_strdup(new);
 	free(new);
 	tok->end = tok->end - 2;
-	printf("AFTER QUOTE REMOVAL: %s, start = %d, end = %d\n", tok->word, tok->start, tok->end);
 }
 
 void	find_section_end(t_tokens *tok)
@@ -49,12 +47,11 @@ void	find_section_end(t_tokens *tok)
 	char	c;
 
 	i = tok->start;
-	//printf("FIND; str = %s  q_status = %d\n", str + i, q_status);
 	if (tok->q_status == NONE)
 	{
 		while (tok->word[i] && tok->word[i] != 34 && tok->word[i] != 39)
 			i++;
-		i--;	
+		i--;
 	}
 	else if ((tok->q_status == S_QUOTE || tok->q_status == D_QUOTE)
 		&& tok->word[i + 1])

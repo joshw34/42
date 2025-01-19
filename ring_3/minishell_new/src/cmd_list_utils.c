@@ -6,36 +6,11 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:13:18 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 21:15:38 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:45:42 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	cmd_remove_quotes(t_cmd *cmd)
-{
-	int		i;
-	int		last;
-	char	*temp;
-
-	i = 0;
-	if (!cmd->cmd)
-		return ;
-	while (cmd->args[i])
-	{
-		last = ft_strlen(cmd->args[i]) - 1;
-		if ((cmd->args[i][0] == 34 && cmd->args[i][last] == 34)
-			|| (cmd->args[i][0] == 39 && cmd->args[i][last] == 39))
-		{
-			temp = ft_strdup(cmd->args[i] + 1);
-			temp[last - 1] = '\0';
-			free(cmd->args[i]);
-			cmd->args[i] = ft_strdup(temp);
-			free(temp);
-		}
-		i++;
-	}
-}
 
 static	char	*join_cmd(t_tokens *tokens, int end)
 {

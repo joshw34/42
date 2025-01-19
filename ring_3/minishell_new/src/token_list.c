@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:34:49 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 14:57:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:41:27 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static	bool	check_separator(char *str)
 bool	token_list(t_data *data, char **split)
 {
 	int	i;
-	
+
 	i = 1;
 	if (check_separator(split[0]) == true)
 		data->tokens = token_lstnew(data, NULL, ft_strdup(split[0]));

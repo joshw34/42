@@ -6,22 +6,23 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 21:55:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:40:30 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static	int		process_var(t_tokens *tok)
+static	int	process_var(t_tokens *tok)
 {
 	int		i;
 	int		j;
 	char	*temp;
-	
+
 	j = 0;
 	i = tok->start + 1;
 	temp = ft_calloc(ft_strlen(tok->word) + 1, sizeof(char));
-	while (i <= tok->end && tok->word[i] && tok->word[i] != ' ' && tok->word[i] != '$')
+	while (i <= tok->end && tok->word[i] && tok->word[i] != ' '
+		&& tok->word[i] != '$')
 	{
 		temp[j] = tok->word[i];
 		i++;
@@ -31,7 +32,8 @@ static	int		process_var(t_tokens *tok)
 	}
 	if (!temp[0])
 		return (i);
-	i = token_str_join(tok, get_var(tok->data->env, temp), ft_strlen(temp), temp);
+	i = token_str_join(tok, get_var(tok->data->env, temp),
+			ft_strlen(temp), temp);
 	free(temp);
 	return (i);
 }
@@ -45,8 +47,9 @@ static	void	expand_tok_var(t_tokens *tok)
 	{
 		if (tok->word[i] == '$')
 		{
-			if (tok->word[i + 1] && (ft_isalnum(tok->word[i + 1]) == 1 || tok->word[i + 1] == '_' || tok->word[i + 1] == '?'))
-			{	
+			if (tok->word[i + 1] && (ft_isalnum(tok->word[i + 1]) == 1
+					|| tok->word[i + 1] == '_' || tok->word[i + 1] == '?'))
+			{
 				tok->start = i;
 				i = process_var(tok);
 				continue ;
@@ -85,10 +88,8 @@ static	bool	process_word(t_tokens *tok)
 		tok->q_status = set_status(tok->word[i]);
 		tok->start = i;
 		find_section_end(tok);
-		printf("START: str: %s, start: %d, end: %d\n\n\n", tok->word, tok->start, tok->end);
 		expand_token_section(tok);
 		i = tok->end;
-		printf("END: str: %s, start: %d, end: %d\n\n\n", tok->word, tok->start, tok->end);
 		if (i < 0 || tok->word[i] == '\0')
 			break ;
 		i++;
@@ -103,17 +104,15 @@ bool	check_and_expand_tokens(t_tokens *token)
 	temp = token;
 	while (temp != NULL)
 	{
-		//printf("token %d before: %s\n", temp->i, temp->word);
 		if (temp->word)
 		{
 			if (word_syntax(temp->word) == false)
 				return (false);
 			if (process_word(temp) == false)
 				return (false);
-			//printf("token %d after: %s\n", temp->i, temp->word);
 		}
 		else if (temp->sep)
-		{	
+		{
 			printf("SEP = %s\n", temp->sep);
 			if (sep_syntax(temp) == false)
 				return (false);
