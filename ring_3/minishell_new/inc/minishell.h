@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:45:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:18:50 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char					**split_tokens(char **input);
 bool					check_and_expand_tokens(t_tokens *token);
 
 /* token_expand_utils.c */
+void					expand_tilde(t_tokens *tok);
 void					remove_tok_quotes(t_tokens *tok);
 void					find_section_end(t_tokens *tok);
 

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:40:30 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:05:26 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static	void	expand_token_section(t_tokens *tok)
 	{
 		if (tok->type == WORD)
 		{
+			expand_tilde(tok);
 			expand_tok_var(tok);
 		}
 	}

@@ -6,12 +6,34 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:29:27 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:41:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:21:50 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include <stdbool.h>
+
+void	expand_tilde(t_tokens *tok)
+{
+	char	*temp1;
+	char	*temp2;
+
+	if (get_var(tok->data->env, "HOME") == NULL)
+		temp1 = getenv("HOME");
+	else
+		temp1 = get_var(tok->data->env, "HOME");
+	if (tok->word[0] == '~')
+	{
+		temp2 = ft_strdup(tok->word + 1);
+		free(tok->word);
+		tok->word = ft_strjoin(temp1, temp2);
+		free(temp2);
+		tok->start = ft_strlen(temp1);
+		tok->end = tok->end + ft_strlen(temp1) - 1;
+	}
+	else
+		return ;
+}
 
 void	remove_tok_quotes(t_tokens *tok)
 {
