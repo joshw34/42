@@ -19,6 +19,7 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/token_utils.c \
 			$(SRC_DIR)/cmd_list.c \
 			$(SRC_DIR)/cmd_list_utils.c \
+			$(SRC_DIR)/cmd_list_parse_args.c \
 			$(SRC_DIR)/redir_list_input.c \
 			$(SRC_DIR)/redir_list_output.c \
 			$(SRC_DIR)/free.c \

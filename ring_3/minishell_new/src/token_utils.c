@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:29:04 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 09:53:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:06:10 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	set_token_type(t_tokens *token)
 	{
 		if (token->sep[0] == '|')
 			token->type = PIPE;
+		if (token->sep[0] == '>' && token->sep[1] == '>')
+			token->type = APPEND;
 		if (token->sep[0] == '>' && token->sep[1] == '\0')
 			token->type = OUTFILE;
-		if (token->sep[0] == '>')
-			token->type = APPEND;
+		if (token->sep[0] == '<' && token->sep[1] == '<')
+			token->type = HEREDOC;
 		if (token->sep[0] == '<' && token->sep[1] == '\0')
 			token->type = INFILE;
-		if (token->sep[0] == '<')
-			token->type = HEREDOC;
 	}
 	else if (token->word)
 	{

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 20:32:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:11:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,9 @@ void					cmd_remove_quotes(t_cmd *cmd);
 char					*parse_cmd(t_tokens *tokens, int start, int end);
 int						cmd_find_end(int start, t_tokens *tokens);
 int						cmd_count(t_tokens *tokens);
+
+/* cmd_list_parse_args.c */
+char					**parse_cmd_args(t_tokens *tokens, int start, int end);
 
 /* redir_list_input.c */
 void					redir_list_clear(t_redir *redir);

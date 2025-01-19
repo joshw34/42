@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:20 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/16 18:33:35 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 22:25:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	db_print_cmds(t_data *data)
 		printf("Next: %p\n", temp->next);
 		db_print_input_redir(temp->in);
 		db_print_output_redir(temp->out);
+		db_print_array(temp->args);
 		temp = temp->next;
 		i++;
 	}
