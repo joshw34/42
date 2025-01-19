@@ -21,7 +21,7 @@ static	bool	get_tokens(t_data *data)
 		return (ft_putstr_fd("Error: failed to split input", 2), false);
 	if (token_list(data, split) == false)
 		return(ft_putstr_fd("Error: failed to create token list", 2), false);
-	if (expand_tokens(data->tokens) == false)
+	if (check_and_expand_tokens(data->tokens) == false)
 		return (false);
 	db_print_tokens(data);
 	return (true);

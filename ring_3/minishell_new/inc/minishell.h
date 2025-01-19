@@ -83,6 +83,9 @@ typedef struct s_tokens
 	char				*sep;
 	int					i;
 	int					type;
+	int					start;
+	int					end;
+	int					q_status;
 	bool				processed;
 	struct s_data		*data;
 	struct s_tokens		*next;
@@ -124,15 +127,14 @@ void					add_spaces(char **input, int *index, int new_spaces);
 char					**split_tokens(char **input);
 
 /* token_expand.c */
-bool					expand_tokens(t_tokens *token);
+bool					check_and_expand_tokens(t_tokens *token);
 
 /* token_expand_utils.c */
-void					expand_tok_var(char **str, int start, int end, char **env);
-void					remove_tok_quotes(char **str, int open, int close);
-int						find_section_end(char *str, int start, int q_status);
+void					remove_tok_quotes(t_tokens *tok);
+void					find_section_end(t_tokens *tok);
 
 /* token_str_join.c */
-int					token_str_join(char **str, char *new, int start, int end);
+int						token_str_join(t_tokens *tok, char *new_var, int var_name_len, char *var_name);
 
 /* token_syntax.c */
 bool					sep_syntax(t_tokens * token);

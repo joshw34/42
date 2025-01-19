@@ -12,55 +12,108 @@
 
 #include "../inc/minishell.h"
 
-static	int	join_start(char **str, char *new, int offset)
+static	void	rebuild_str(t_tokens *tok, char *temp1, char *temp2)
 {
+	if (!temp1 && !temp2)
+		tok->word = ft_strdup("");
+	else if (temp1 && temp2)
+	{
+		tok->word = ft_strjoin(temp1, temp2);
+		multi_free(2, temp1, temp2);
+	}
+	else if (temp1)
+	{
+		tok->word = ft_strdup(temp1);
+		free(temp1);
+	}
+	else if (temp2)
+	{
+		tok->word = ft_strdup(temp2);
+		free(temp2);
+	}
+}
+
+static	int	remove_section(t_tokens *tok, int var_name_len)
+{
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = NULL;
+	temp2 = NULL;
+	if (tok->start != 0)
+	{
+		temp1 = ft_strdup(tok->word);
+		temp1[tok->start] = '\0';
+	}
+	if (tok->word[tok->start + var_name_len + 1] != '\0')
+		temp2 = ft_strdup(tok->word + tok->start + var_name_len + 1);
+	free(tok->word);
+	rebuild_str(tok, temp1, temp2);
+	tok->end = tok->end - (var_name_len + 1);
+	return (tok->start);
+}
+
+static	char	*get_end_section(t_tokens *tok, char *first_part, int var_name_len)
+{
+	char	*ret;
 	char	*temp;
 
-	temp = NULL;
-	if (!new)
+	if (tok->word[tok->start + var_name_len + 1])
 	{
-		temp = ft_strdup(*str + offset);
-		free(*str);
-		*str = ft_strdup(temp);
-		free(temp);
-		return (0);
+		temp = ft_strdup(tok->word + tok->start + var_name_len + 1);
+		ret = ft_strjoin(first_part, temp);
+		multi_free(2, temp, first_part);
 	}
 	else
 	{
-		//printf("NEW: %s\nSTR: %s\nINDEX = %d\n", new, *str, offset);
-		temp = ft_strjoin(new, *str + offset);
-		free(*str);
-		*str = ft_strdup(temp);
-		free(temp);
-		return (ft_strlen(new) - 1);
+		ret = ft_strdup(first_part);
+		free(first_part);
 	}
+	return (ret);
 }
 
-static	int	replace_str(char **str, char *new)
+static	int	insert_var(t_tokens *tok, char *new_var, int var_name_len)
 {
-	if (!new)
-	{
-		free(*str);
-		*str = ft_strdup("");
-	}
+	char	*temp1;
+	char	*temp2;
+	int		new_start;
+	int		len_after_end;
+
+	len_after_end = ft_strlen(tok->word + tok->end);
+	if (tok->start == 0)
+		temp1 = ft_strdup(new_var);
 	else
 	{
-		free(*str);
-		*str = ft_strdup(new);
+		temp2 = ft_strdup(tok->word);
+		temp2[tok->start] = '\0';
+		temp1 = ft_strjoin(temp2, new_var);
+		free(temp2);
 	}
-	return (ft_strlen(*str) - 1);
+	new_start = ft_strlen(temp1);
+	temp2 = get_end_section(tok, temp1, var_name_len);
+	free(tok->word);
+	tok->word = ft_strdup(temp2);
+	free(temp2);
+	tok->start = new_start;
+	tok->end = ft_strlen(tok->word) - len_after_end;
+	return(tok->start);
 }
 
-int	token_str_join(char **str, char *new, int start, int last_char)
+int	token_str_join(t_tokens *tok, char *new_var, int var_name_len, char *var_name)
 {
-	//printf("END: %d\n", end);
-	if (start == 0 && (size_t)last_char == (ft_strlen(*str) - 1))
-		return (replace_str(str, new));
-	else if (start == 0)
-		return (printf("RETURNING\n"), join_start(str, new, last_char + 1));
-	/*else if (start > 0 && end < ft_strlen(*str) - 1)
-		join_mid();
-	else if (start > 0 && end == ft_strlen(*str) - 1)
-		join_end();*/
-	return (0);
+	printf("NEW_VAR = %s, len = %d\n", new_var, var_name_len);
+	char	*exit_code;
+
+	if (var_name_len == 1 && var_name[0] == '?')
+	{
+		exit_code = ft_itoa(g_last_signal);
+		printf("EXIT CODE: %s\n", exit_code);
+		insert_var(tok, exit_code, ft_strlen(exit_code));
+		free(exit_code);
+		return (tok->start);
+	}
+	else if (!new_var)
+		return(remove_section(tok, var_name_len));
+	else
+		return(insert_var(tok, new_var, var_name_len));
 }

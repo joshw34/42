@@ -42,14 +42,17 @@ static	bool	check_quotes(char *str)
 	return (true);
 }
 
-bool	sep_syntax(t_tokens * token)
+bool	sep_syntax(t_tokens *token)
 {
 	if (token->sep[0] == '|' && token->i == 0)
 		return (printf("%s '%s'\n", ERROR_3, token->next->sep), false);
+	printf("PASSED FIRST CHECK\n");
 	if (!token->next)
 		return(printf("%s\n", ERROR_2), false);
+	printf("PASSED SECOND CHECK\n");
 	if (token->next->sep)
 		return (printf("%s '%s'\n", ERROR_3, token->next->sep), false);
+	printf("PASSED THIRD CHECK\n");
 	return (true);
 }
 

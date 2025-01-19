@@ -12,41 +12,89 @@
 
 #include "../inc/minishell.h"
 
-static	int	expand_full(char **str, int q_status, int type, char **env)
+static	int		process_var(t_tokens *tok)
 {
-	(void)type;
-	if (q_status == S_QUOTE)
-		remove_tok_quotes(str, 0, ft_strlen(*str) - 1);
-	if (q_status == D_QUOTE)
+	int		i;
+	int		j;
+	char	*temp;
+	
+	j = 0;
+	i = tok->start + 1;
+	temp = ft_calloc(ft_strlen(tok->word) + 1, sizeof(char));
+	while (i <= tok->end && tok->word[i] && tok->word[i] != ' ' && tok->word[i] != '$')
 	{
-		remove_tok_quotes(str, 0, ft_strlen(*str) - 1);
-		if (type == WORD)
-			expand_tok_var(str, 0 , ft_strlen(*str), env);
+		temp[j] = tok->word[i];
+		i++;
+		j++;
+		if (j == 0 && temp[j] == '?')
+			break ;
 	}
-	return (ft_strlen(*str) - 1);
+	i = token_str_join(tok, get_var(tok->data->env, temp), ft_strlen(temp), temp);
+	free(temp);
+	return (i);
 }
 
-static	bool	process_word(char **str, int type, char **env)
+static	void	expand_tok_var(t_tokens *tok)
 {
 	int	i;
-	int	start;
-	int end;
-	int	q_status;
+
+	i = tok->start;
+	while (i < tok->end)
+	{
+		if (tok->word[i] == '$')
+		{
+			if (tok->word[i + 1] && (ft_isalnum(tok->word[i + 1]) == 1 || tok->word[i + 1] == '_' || tok->word[i + 1] == '?'))
+			{	
+				tok->start = i;
+				i = process_var(tok);
+				continue ;
+			}
+		}
+		i++;
+	}
+}
+
+static	void	expand_token_section(t_tokens *tok)
+{
+	if (tok->q_status == S_QUOTE)
+		remove_tok_quotes(tok);
+	if (tok->q_status == D_QUOTE)
+	{
+		remove_tok_quotes(tok);
+		if (tok->type == WORD)
+			expand_tok_var(tok);
+	}
+	if (tok->q_status == NONE)
+	{
+		if (tok->type == WORD)
+		{
+			expand_tok_var(tok);
+		}
+	}
+}
+
+static	bool	process_word(t_tokens *tok)
+{
+	int	i;
 
 	i = 0;
-	while ((*str)[i])
+	while (tok->word[i])
 	{
-		q_status = set_status((*str)[i]);
-		start = i;
-		end = find_section_end(*str, start, q_status);
-		if (i == 0 && (size_t)end == (ft_strlen(*str) - 1))
-			i = expand_full(str, q_status, type, env);
+		tok->q_status = set_status(tok->word[i]);
+		tok->start = i;
+		find_section_end(tok);
+		printf("START: str: %s, start: %d, end: %d\n\n\n", tok->word, tok->start, tok->end);
+		expand_token_section(tok);
+		i = tok->end;
+		printf("END: str: %s, start: %d, end: %d\n\n\n", tok->word, tok->start, tok->end);
+		if (tok->word[i] == '\0')
+			break ;
 		i++;
 	}
 	return (true);
 }
 
-bool	expand_tokens(t_tokens *token)
+bool	check_and_expand_tokens(t_tokens *token)
 {
 	t_tokens	*temp;
 
@@ -58,13 +106,14 @@ bool	expand_tokens(t_tokens *token)
 		{
 			if (word_syntax(temp->word) == false)
 				return (false);
-			if (process_word(&temp->word, temp->type, temp->data->env) == false)
+			if (process_word(temp) == false)
 				return (false);
 			//printf("token %d after: %s\n", temp->i, temp->word);
 		}
 		else if (temp->sep)
 		{	
-			if (sep_syntax(token) == false)
+			printf("SEP = %s\n", temp->sep);
+			if (sep_syntax(temp) == false)
 				return (false);
 		}
 		temp = temp->next;

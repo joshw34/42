@@ -11,50 +11,11 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <stdbool.h>
 
-static	int		substitute_var(char **str, int start, char **env)
+void	remove_tok_quotes(t_tokens *tok)
 {
-	int		i;
-	int		j;
-	char	*temp;
-	
-	j = 0;
-	i = start + 1;
-	temp = ft_calloc(ft_strlen(*str) + 1, sizeof(char));
-	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '$')
-	{
-		temp[j] = (*str)[i];
-		i++;
-		j++;
-	}
-	//printf("temp: %s\n", temp);
-	i = token_str_join(str, get_var(env, temp), start, j);
-	free(temp);
-	return (i);
-}
-
-void	expand_tok_var(char **str, int start, int end, char **env)
-{
-	int	i;
-
-	i = start;
-	//printf("EXPAND: %s\ni = %d  end = %d\n", *str, i, end);
-	while (i < end)
-	{
-		//printf("LOOP\n");
-		if ((*str)[i] == '$')
-		{
-			i = substitute_var(str, i, env);
-			end = ft_strlen(*str);
-			printf("STR: %s\n", *str);
-			printf("i = %d  end = %d\n", i, end);
-		}
-		i++;
-	}
-}
-
-void	remove_tok_quotes(char **str, int open, int close)
-{
+	printf("BEFORE QUOTE REMOVAL: %s, start = %d, end = %d\n", tok->word, tok->start, tok->end);
 	int		new_size;
 	int		i;
 	int		j;
@@ -62,44 +23,49 @@ void	remove_tok_quotes(char **str, int open, int close)
 
 	i = 0;
 	j = 0;
-	new_size = ft_strlen(*str) - 2;
+	new_size = ft_strlen(tok->word) - 2;
 	new = ft_calloc(new_size + 1, sizeof(char));
-	while ((*str)[i])
+	while (tok->word[i])
 	{
-		if (i == open || i == close)
+		if (i == tok->start || i == tok->end)
 			i++;
 		else
 		{
-			new[j] = (*str)[i];
+			new[j] = tok->word[i];
 			j++;
 			i++;
 		}
 	}
-	free(*str);
-	*str = ft_strdup(new);
+	free(tok->word);
+	tok->word = ft_strdup(new);
 	free(new);
+	tok->end = tok->end - 2;
+	printf("AFTER QUOTE REMOVAL: %s, start = %d, end = %d\n", tok->word, tok->start, tok->end);
 }
 
-int	find_section_end(char *str, int start, int q_status)
+void	find_section_end(t_tokens *tok)
 {
 	int		i;
 	char	c;
 
-	i = start;
+	i = tok->start;
 	//printf("FIND; str = %s  q_status = %d\n", str + i, q_status);
-	if (q_status == NONE)
+	if (tok->q_status == NONE)
 	{
-		while (str[i] && str[i] != 34 && str[i] != 39)
+		while (tok->word[i] && tok->word[i] != 34 && tok->word[i] != 39)
 			i++;
+		i--;	
 	}
-	else if ((q_status == S_QUOTE || q_status == D_QUOTE) && str[i + 1])
+	else if ((tok->q_status == S_QUOTE || tok->q_status == D_QUOTE)
+		&& tok->word[i + 1])
 	{
-		c = str[i];
+		c = tok->word[i];
 		i++;
-		while (str[i] != c)
+		while (tok->word[i] != c)
 			i++;
 	}
-	if (str[i] == '\0')
-		return (i - 1);
-	return (i);
+	if (tok->word[i] == '\0')
+		tok->end = i - 1;
+	else
+		tok->end = i;
 }

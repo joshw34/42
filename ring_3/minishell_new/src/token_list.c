@@ -35,6 +35,9 @@ static	t_tokens	*token_lstnew(t_data *data, char *word, char *sep)
 	new->next = NULL;
 	new->prev = NULL;
 	new->data = data;
+	new->start = -1;
+	new->end = -1;
+	new->q_status = -1;
 	set_token_type(new);
 	return (new);
 }
