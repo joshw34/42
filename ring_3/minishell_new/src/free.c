@@ -6,17 +6,17 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:01 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/12 20:04:52 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:22:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/*static	void	free_cmds(t_data *data)
+static	void	free_cmds(t_data *data)
 {
 	cmd_list_clear(data->cmds);
 	data->cmds = NULL;
-}*/
+}
 
 static	void	free_tokens(t_data *data)
 {
@@ -40,8 +40,8 @@ void	free_data_struct(t_data *data, bool keep_env)
 	}
 	if (data->tokens)
 		free_tokens(data);
-	/*if (data->cmds)
-		free_cmds(data);*/
+	if (data->cmds)
+		free_cmds(data);
 	if (keep_env == false)
 		free(data);
 	if (!access(HERE_DOC_PATH, F_OK))

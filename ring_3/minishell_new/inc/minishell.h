@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 16:46:54 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:32:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,23 @@ int						set_status(char c);
 int						check_sep_spacing(char *input, int i);
 void					set_token_type(t_tokens *token);
 bool					is_a_separator(char c);
+
+/* cmd_list.c */
+void					cmd_list_clear(t_cmd *cmds);
+t_cmd					*get_cmds(t_data *data);
+
+/* cmd_list_utils.c */
+void					cmd_remove_quotes(t_cmd *cmd);
+char					*parse_cmd(t_tokens *tokens, int start, int end);
+int						cmd_find_end(int start, t_tokens *tokens);
+int						cmd_count(t_tokens *tokens);
+
+/* redir_list_input.c */
+void					redir_list_clear(t_redir *redir);
+t_redir					*get_input_redir(t_tokens *tokens, int start, int end);
+
+/* redir_list_output.c */
+t_redir					*get_output_redir(t_tokens *tokens, int start, int end);
 
 /* signal_handling.c */
 void					standard_behavior(int sigint);

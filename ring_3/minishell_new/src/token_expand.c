@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 16:45:41 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:55:36 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static	int		process_var(t_tokens *tok)
 		if (j == 0 && temp[j] == '?')
 			break ;
 	}
+	if (!temp[0])
+		return (i);
 	i = token_str_join(tok, get_var(tok->data->env, temp), ft_strlen(temp), temp);
 	free(temp);
 	return (i);
@@ -87,7 +89,7 @@ static	bool	process_word(t_tokens *tok)
 		expand_token_section(tok);
 		i = tok->end;
 		printf("END: str: %s, start: %d, end: %d\n\n\n", tok->word, tok->start, tok->end);
-		if (tok->word[i] == '\0')
+		if (i < 0 || tok->word[i] == '\0')
 			break ;
 		i++;
 	}

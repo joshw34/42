@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:26:40 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 18:31:53 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:39:23 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static	bool	get_tokens(t_data *data)
 	if (check_and_expand_tokens(data->tokens) == false)
 		return (false);
 	db_print_tokens(data);
+	data->cmds = get_cmds(data);
+	if (!data->cmds)
+		return (false);
+	db_print_cmds(data);
 	return (true);
 }
 
