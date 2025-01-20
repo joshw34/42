@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 23:05:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:46:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ static	int	process_var(t_tokens *tok)
 	int		j;
 	char	*temp;
 
-	j = 0;
+	j = 1;
 	i = tok->start + 1;
 	temp = ft_calloc(ft_strlen(tok->word) + 1, sizeof(char));
-	while (i <= tok->end && tok->word[i] && tok->word[i] != ' '
-		&& tok->word[i] != '$')
+	temp[0] = tok->word[i];
+	i++;
+	while (i <= tok->end && tok->word[i] && (ft_isalnum(tok->word[i]) == 1
+		|| tok->word[i] == '_'))
 	{
+		if (temp[0] == '?' || (temp[0] >= 48 && temp[0] <= 57))
+			break ;
 		temp[j] = tok->word[i];
 		i++;
 		j++;
-		if (j == 0 && temp[j] == '?')
-			break ;
 	}
 	if (!temp[0])
 		return (i);
@@ -38,7 +40,7 @@ static	int	process_var(t_tokens *tok)
 	return (i);
 }
 
-static	void	expand_tok_var(t_tokens *tok)
+void	expand_tok_var(t_tokens *tok)
 {
 	int	i;
 
@@ -110,6 +112,8 @@ bool	check_and_expand_tokens(t_tokens *token)
 			if (word_syntax(temp->word) == false)
 				return (false);
 			if (process_word(temp) == false)
+				return (false);
+			if (temp->type == HEREDOC && process_heredoc(temp->data, temp->word) == false)
 				return (false);
 		}
 		else if (temp->sep)

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 23:18:50 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:12:03 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define ERROR_2 "Minishell: Error: Unexpected newline"
 # define ERROR_3 "Minishell: Error: Unexpected token "
 
-# define HERE_DOC_PATH "./here_doc_temp" 
+# define HERE_DOC_PATH "./.here_doc_temp" 
 
 /* STRUCT TYPEDEFS */
 typedef struct s_redir
@@ -127,6 +127,7 @@ void					add_spaces(char **input, int *index, int new_spaces);
 char					**split_tokens(char **input);
 
 /* token_expand.c */
+void					expand_tok_var(t_tokens *tok);
 bool					check_and_expand_tokens(t_tokens *token);
 
 /* token_expand_utils.c */
@@ -142,6 +143,7 @@ bool					sep_syntax(t_tokens * token);
 bool					word_syntax(char *str);
 
 /* token_list.c */
+t_tokens				*token_lstnew(t_data *data, char *word, char *sep);
 bool					token_list(t_data *data, char **split);
 
 /* token_utils.c */
@@ -149,6 +151,12 @@ int						set_status(char c);
 int						check_sep_spacing(char *input, int i);
 void					set_token_type(t_tokens *token);
 bool					is_a_separator(char c);
+
+/* token_process_heredoc.c */
+bool					process_heredoc(t_data *data, char *delimiter);
+
+/* token_heredoc_var_insert.c */
+int						hd_var_insert(t_tokens *temp, char *new_var, char *var_name);
 
 /* cmd_list.c */
 void					cmd_list_clear(t_cmd *cmds);

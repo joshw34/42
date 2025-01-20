@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:34:49 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:41:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:10:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	t_tokens	*token_lstlast(t_tokens *tokens)
 	return (tokens);
 }
 
-static	t_tokens	*token_lstnew(t_data *data, char *word, char *sep)
+t_tokens	*token_lstnew(t_data *data, char *word, char *sep)
 {
 	t_tokens	*new;
 

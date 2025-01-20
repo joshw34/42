@@ -17,6 +17,8 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/token_str_join.c \
 			$(SRC_DIR)/token_list.c \
 			$(SRC_DIR)/token_utils.c \
+			$(SRC_DIR)/token_process_heredoc.c \
+			$(SRC_DIR)/token_heredoc_insert_var.c \
 			$(SRC_DIR)/cmd_list.c \
 			$(SRC_DIR)/cmd_list_utils.c \
 			$(SRC_DIR)/cmd_list_parse_args.c \
@@ -38,7 +40,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 REMOVE = rm -f
 CC = clang
-CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -lreadline -lhistory
 
 all: $(NAME)
