@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:20 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/19 22:25:36 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:07:43 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	db_print_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		printf("%d\t%s\n", i, array[i]);
+		printf("%d\t*%s*\n", i, array[i]);
 		i++;
 	}
 }

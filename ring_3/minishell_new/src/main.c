@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/16 13:42:12 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:31:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,17 @@ void	minishell(char **env)
 
 	data = init_data_struct(env);
 	signal(SIGQUIT, SIG_IGN);
-	int i = 0;
-	while (i < 3)
+	while (1)
 	{
 		signal(SIGINT, standard_behavior);
 		if (process_user_input(data) == true)
 		{
-			/*if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds))
+			if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds))
 				redirection_and_execution_builtin(data->cmds);
 			else
-				shell_execution(data->cmds);*/
+				shell_execution(data->cmds);
 		}
 		free_data_struct(data, true);
-		i++;
 	}
 	free_data_struct(data, false);
 }

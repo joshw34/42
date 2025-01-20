@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:57:33 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 14:36:15 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:40:00 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ static	void	hd_var_insert_end(t_tokens *temp, char *new, int *i, int *j)
 	}
 }
 
-static	void	hd_var_insert_mid(t_tokens *temp, char *new_var, char *new, int *j)
+static	void	hd_var_insert_mid(t_tokens *temp, char *new_var,
+				char *new, int *j)
 {
 	int	i;
-	
+
 	i = 0;
 	if (new_var != NULL)
 	{
@@ -53,7 +54,8 @@ int	hd_var_insert(t_tokens *temp, char *new_var, char *var_name)
 	i = 0;
 	j = 0;
 	k = 0;
-	new = ft_calloc(ft_strlen(temp->word) + ft_strlen(new_var) + 1, sizeof(char));
+	new = ft_calloc(ft_strlen(temp->word) + ft_strlen(new_var) + 1,
+			sizeof(char));
 	while (i < temp->start)
 	{
 		new[j] = temp->word[i];
@@ -69,4 +71,3 @@ int	hd_var_insert(t_tokens *temp, char *new_var, char *var_name)
 	multi_free(2, new, var_name);
 	return (temp->start);
 }
-

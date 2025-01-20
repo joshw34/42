@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:32 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:16:51 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	print_env(t_data *data)
 		return ;
 	while (data->env[i])
 	{
-		printf("%s\n", data->env[i]);
+		if (ft_strchr(data->env[i], '=') != 0)
+			printf("%s\n", data->env[i]);
 		i++;
 	}
 	g_last_signal = 0;

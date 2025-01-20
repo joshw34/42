@@ -29,11 +29,22 @@ SRC_FILES =	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/signal_handling.c \
 			$(SRC_DIR)/builtin_cd.c \
 			$(SRC_DIR)/builtin_cd_utils.c \
+			$(SRC_DIR)/builtin_echo.c \
+			$(SRC_DIR)/builtin_execution_handling.c \
+			$(SRC_DIR)/builtin_exit.c \
+			$(SRC_DIR)/builtin_pwd.c \
 			$(SRC_DIR)/builtin_var_export.c \
+			$(SRC_DIR)/builtin_var_export_2.c \
 			$(SRC_DIR)/builtin_var_export_utils.c \
 			$(SRC_DIR)/builtin_var_get_print.c \
 			$(SRC_DIR)/builtin_var_utils.c \
+			$(SRC_DIR)/check_builtins.c \
 			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/execution_handling.c \
+			$(SRC_DIR)/fetch_path_command.c \
+			$(SRC_DIR)/multi_processing_handling.c \
+			$(SRC_DIR)/redirection_file_opening.c \
+			$(SRC_DIR)/redirection_handling.c \
 			$(SRC_DIR)/DEBUG_FUNCS.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

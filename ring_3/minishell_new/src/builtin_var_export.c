@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:53:57 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ bool	remove_var(t_data *data, char *var)
 	int		size;
 
 	size = 0;
+	if (!var)
+		return (true);
 	if (find_var(data->env, var) == NULL)
 		return (false);
 	while (data->env[size])
@@ -114,11 +116,13 @@ bool	export_env(t_data *data, char *new_var)
 	char	**split;
 	char	*old_var;
 
+	if (!new_var)
+		return (print_ascii_sorted_env(data), true);
 	if (var_is_valid(new_var) == false)
 		return (g_last_signal = 1, false);
 	split = ft_split(new_var, '=');
 	if (!split[0])
-		return (g_last_signal = 1, free_array(split), false);
+		return (g_last_signal = 1,free_array(split), false);
 	old_var = find_var(data->env, split[0]);
 	if (old_var)
 	{

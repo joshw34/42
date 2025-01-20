@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 15:46:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:35:50 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	process_var(t_tokens *tok)
 	temp[0] = tok->word[i];
 	i++;
 	while (i <= tok->end && tok->word[i] && (ft_isalnum(tok->word[i]) == 1
-		|| tok->word[i] == '_'))
+			|| tok->word[i] == '_'))
 	{
 		if (temp[0] == '?' || (temp[0] >= 48 && temp[0] <= 57))
 			break ;
@@ -113,7 +113,8 @@ bool	check_and_expand_tokens(t_tokens *token)
 				return (false);
 			if (process_word(temp) == false)
 				return (false);
-			if (temp->type == HEREDOC && process_heredoc(temp->data, temp->word) == false)
+			if (temp->type == HEREDOC && process_heredoc(temp->data, temp->word)
+				== false)
 				return (false);
 		}
 		else if (temp->sep)

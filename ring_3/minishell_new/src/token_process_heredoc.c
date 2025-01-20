@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:15:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 15:48:16 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:38:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	int	get_var_end(t_tokens *temp, int i)
 static	void	expand_hd_vars(t_tokens *temp)
 {
 	int	i;
-	
+
 	i = temp->start;
 	while (temp->word[i])
 	{
@@ -51,7 +51,9 @@ static	void	expand_hd_vars(t_tokens *temp)
 		{
 			while (temp->word[i] != '$')
 				i++;
-			if (temp->word[i + 1] && (temp->word[i + 1] == '?' || ft_isalnum(temp->word[i + 1]) == 1 || temp->word[i + 1] == '_'))
+			if (temp->word[i + 1] && (temp->word[i + 1] == '?'
+					|| ft_isalnum(temp->word[i + 1]) == 1
+					|| temp->word[i + 1] == '_'))
 			{
 				temp->start = i;
 				i = get_var_end(temp, i + 1);
@@ -90,7 +92,8 @@ bool	process_heredoc(t_data *data, char *delimiter)
 	while (1)
 	{
 		line = readline("heredoc> ");
-		if (!line || (ft_strlen(line) == ft_strlen(delimiter) && ft_strncmp(line, delimiter, (ft_strlen(delimiter))) == 0))
+		if (!line || (ft_strlen(line) == ft_strlen(delimiter)
+				&& ft_strncmp(line, delimiter, (ft_strlen(delimiter))) == 0))
 		{
 			free(line);
 			break ;

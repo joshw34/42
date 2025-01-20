@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_var_utils.c                                :+:      :+:    :+:   */
+/*   multi_processing_handling.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:57:51 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 19:20:47 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/12/16 12:07:24 by cngogang          #+#    #+#             */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*find_var(char **env, char *var)
+void	waiting_sons_processes(t_cmd *command_array, int *status)
 {
-	int		i;
-	int		len;
-
-	i = 0;
-	len = ft_strlen(var);
-	while (env[i])
+	while (command_array)
 	{
-		if (ft_strncmp(var, env[i], len) == 0)
-		{
-			if (env[i][len] == '\0' || env[i][len] == '=')
-			return (env[i]);
-		}
-		i++;
+		while (waitpid(command_array->pid, status, 0) == -1)
+			;
+		command_array = command_array->next;
 	}
-	return (NULL);
+	g_last_signal = WEXITSTATUS(*status);
 }

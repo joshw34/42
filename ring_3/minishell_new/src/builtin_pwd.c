@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_var_utils.c                                :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:57:51 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 19:20:47 by jwhitley         ###   ########.fr       */
+/*   Created: 2024/11/26 12:47:45 by jwhitley          #+#    #+#             */
+/*   Updated: 2025/01/10 14:48:07 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*find_var(char **env, char *var)
+void	print_pwd(t_data *data)
 {
-	int		i;
-	int		len;
-
-	i = 0;
-	len = ft_strlen(var);
-	while (env[i])
-	{
-		if (ft_strncmp(var, env[i], len) == 0)
-		{
-			if (env[i][len] == '\0' || env[i][len] == '=')
-			return (env[i]);
-		}
-		i++;
-	}
-	return (NULL);
+	printf("%s", get_var(data->env, "PWD"));
+	printf("\n");
+	g_last_signal = 0;
 }

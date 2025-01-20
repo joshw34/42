@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/13 14:13:34 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:46:58 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,19 @@ bool	valid_input(char *input)
 	return (true);
 }
 
-static	char	*get_prompt(char **env)
+static	char	*get_prompt(void)
 {
 	char	*user;
 	char	*dir;
 	char	*prompt;
-	char	*fallback_pwd;
+	char	*pwd;
 
-	if (get_var(env, "USER") != NULL)
-		user = ft_strjoin(get_var(env, "USER"), "@");
-	else
-		user = ft_strjoin(getenv("USER"), "@");
-	if (get_var(env, "PWD") == NULL)
-	{
-		fallback_pwd = get_realpwd();
-		dir = ft_strjoin(fallback_pwd, " $ ");
-		free(fallback_pwd);
-	}
-	else
-		dir = ft_strjoin(get_var(env, "PWD"), " $ ");
+	user = ft_strjoin(getenv("USER"), "@");
+	pwd = get_realpwd();
+	if (pwd[0] == '\0')
+		return (user);
+	dir = ft_strjoin(pwd, " $ ");
+	free(pwd);
 	if (dir[0] == '/' && dir[1] == ' ')
 		prompt = ft_strjoin(user, dir);
 	else
@@ -51,7 +45,7 @@ char	*get_input(t_data *data)
 	char	*ret;
 	char	*prompt;
 
-	prompt = get_prompt(data->env);
+	prompt = get_prompt();
 	ret = readline(prompt);
 	if (!ret)
 	{

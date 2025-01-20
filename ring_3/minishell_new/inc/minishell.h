@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 15:12:03 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:07:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,28 @@ void					change_dir(t_cmd *cmd);
 void					go_home_sysenv(t_data *data);
 void					go_home_expand_sysenv(t_data *data, char *new_dir);
 
+/* builtin_echo.c */
+void					echo_cmd(t_cmd *cmd);
+
+/* builtin_execution_handling.c */
+int						redirection_and_execution_builtin(t_cmd *cmd);
+bool					is_a_builtin(t_cmd *cmd);
+
+/* builtin_exit.c */
+void					exit_cmd(t_data *data);
+
+/* builtin_pwd.c */
+void					print_pwd(t_data *data);
+
 /* builtin_var_export.c */
 bool					export_env(t_data *data, char *new_var);
 bool					remove_var(t_data *data, char *var);
 
+/* builtin_var_export_2.c */
+void				    print_ascii_sorted_env(t_data *data);
+
 /* builtin_var_export_utils.c */
+void					export_env_all_arg(t_cmd *cmd);
 bool					var_is_valid(char *new_var);
 
 /* builtin_var_get_print.c */
@@ -201,6 +218,30 @@ char					*get_var(char **env, char *var);
 
 /* builtin_var_utils.c */
 char					*find_var(char **env, char *var);
+
+/* check_builtins.c */
+bool					check_builtins(t_cmd *cmd);
+
+/* execution_handling.c */
+int						execute_command(t_cmd *command_array);
+void					processing_commands(t_cmd *command_array);
+void					shell_execution(t_cmd *command_array);
+
+/* fetch_path_command.c */
+char					**get_path_array(char **env, char *arg);
+int						exec_command(char **env, char **arg);
+
+/* multi_procesing.c */
+void					waiting_sons_processes(t_cmd *command_array, int *status);
+
+/* redirection_file_opening.c */
+int						open_file(t_redir *redirection);
+
+/* redirection_handling.c */
+void					redirection_file_checking_and_selection(t_cmd **command_array, int direction);
+void					redirection_and_execution(t_cmd *command_array);
+void					redirecting_std_input(t_cmd *command_array);
+void					redirecting_std_output(t_cmd *command_array);
 
 /* utils.c */
 bool					is_whitespace(char *str);
