@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/10 15:24:20 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:58:13 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static	void	go_full_path(t_data *data, char *new_dir)
 	{
 		chdir(new_dir);
 		temp_new_dir = get_realpwd();
+		if (!temp_new_dir)
+			printf("%s\n", ERROR_4);
 		temp_pwd = ft_strjoin("PWD=", temp_new_dir);
 		temp_oldpwd = ft_strjoin("OLDPWD=", get_var(data->env, "PWD"));
 		export_env(data, temp_pwd);

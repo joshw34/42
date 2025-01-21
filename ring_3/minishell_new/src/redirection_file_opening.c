@@ -6,12 +6,12 @@
 /*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:03:53 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/10 10:25:47 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:45:35 by cngogang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
+/*
 static void	put_user_input_in_temp_doc(int fd, t_redir *redirection)
 {
 	char	*input;
@@ -50,7 +50,7 @@ static void	create_here_doc(t_redir *redirection)
 	fd = open(HERE_DOC_PATH, O_CREAT | O_RDWR | O_APPEND, 0777);
 	put_user_input_in_temp_doc(fd, redirection);
 	close (fd);
-}
+}*/
 
 static int	open_infile(t_redir *redirection)
 {
@@ -58,7 +58,7 @@ static int	open_infile(t_redir *redirection)
 
 	if (redirection->mode == 1)
 	{
-		create_here_doc(redirection);
+		//create_here_doc(redirection);
 		fd = open(HERE_DOC_PATH, O_RDONLY, 0777);
 	}
 	else

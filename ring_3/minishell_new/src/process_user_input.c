@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_user_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:26:40 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 20:07:48 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:25:39 by cngogang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	bool	get_tokens(t_data *data)
 		return (ft_putstr_fd("Error: failed to create token list", 2), false);
 	if (check_and_expand_tokens(data->tokens) == false)
 		return (false);
-	db_print_tokens(data);
+	//db_print_tokens(data);
 	return (true);
 }
 
@@ -39,6 +39,6 @@ bool	process_user_input(t_data *data)
 	data->cmds = get_cmds(data);
 	if (!data->cmds)
 		return (false);
-	//db_print_cmds(data);
+	db_print_cmds(data);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 16:53:57 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:26:22 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 {
 	int		i;
 	int		j;
-	char	*temp;
+	int		len;
 	char	**ret;
 
 	i = 0;
 	j = 0;
+	len = ft_strlen(var);
 	ret = ft_calloc(size, sizeof(char *));
 	if (!ret)
 		return (NULL);
-	temp = ft_strjoin(var, "=");
 	while (old_env[i] != NULL)
 	{
-		if (ft_strncmp(old_env[i], temp, ft_strlen(temp)) == 0)
+		if (ft_strncmp(old_env[i], var, len) == 0 && (var[len] == '='
+			|| var[len] == '\0'))
 		{
 			i++;
 			continue ;
@@ -36,7 +37,6 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 		i++;
 		j++;
 	}
-	free(temp);
 	return (ret);
 }
 

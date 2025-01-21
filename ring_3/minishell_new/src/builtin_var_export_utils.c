@@ -6,11 +6,25 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:53:47 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 19:13:49 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:37:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	unset_env_all_arg(t_cmd *cmd)
+{
+	int	i;
+
+	i = 1;
+	if (!cmd->args[i])
+		return ;
+	while (cmd->args[i])
+	{
+		remove_var(cmd->data, cmd->args[i]);
+		++i;
+	}
+}
 
 void	export_env_all_arg(t_cmd *cmd)
 {

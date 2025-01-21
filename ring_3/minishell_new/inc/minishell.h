@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 17:07:24 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:55:26 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@
 # define ERROR_1 "Minishell: Error: Unexpected EOF: Unclosed "
 # define ERROR_2 "Minishell: Error: Unexpected newline"
 # define ERROR_3 "Minishell: Error: Unexpected token "
+# define ERROR_4 "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory"
 
-# define HERE_DOC_PATH "./.here_doc_temp" 
+# define HERE_DOC_PATH "/tmp/.here_doc_temp" 
 
 /* STRUCT TYPEDEFS */
 typedef struct s_redir
@@ -71,8 +72,7 @@ typedef struct s_cmd
 	int					cmd_n;
 	char				**env;
 	struct s_data		*data;
-	struct s_redir		*in;
-	struct s_redir		*out;
+	struct s_redir		*redir;
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
 }	t_cmd;
@@ -170,12 +170,9 @@ int						cmd_count(t_tokens *tokens);
 /* cmd_list_parse_args.c */
 char					**parse_cmd_args(t_tokens *tokens, int start, int end);
 
-/* redir_list_input.c */
+/* redir_list.c */
 void					redir_list_clear(t_redir *redir);
-t_redir					*get_input_redir(t_tokens *tokens, int start, int end);
-
-/* redir_list_output.c */
-t_redir					*get_output_redir(t_tokens *tokens, int start, int end);
+t_redir					*get_redir_list(t_tokens *tokens, int start, int end);
 
 /* signal_handling.c */
 void					standard_behavior(int sigint);
@@ -209,6 +206,7 @@ bool					remove_var(t_data *data, char *var);
 void				    print_ascii_sorted_env(t_data *data);
 
 /* builtin_var_export_utils.c */
+void					unset_env_all_arg(t_cmd *cmd);
 void					export_env_all_arg(t_cmd *cmd);
 bool					var_is_valid(char *new_var);
 

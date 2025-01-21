@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:32 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 19:16:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:49:39 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*get_var(char **env, char *var)
 
 	ret = find_var(env, var);
 	if (!ret)
+		return (NULL);
+	if (ft_strchr(ret, '=') == 0)
 		return (NULL);
 	return (ft_strchr(ret, '=') + 1);
 }

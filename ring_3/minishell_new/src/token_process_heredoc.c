@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_process_heredoc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:15:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 17:38:39 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:53:52 by cngogang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,30 +78,64 @@ static	char	*expand_line(t_data *data, char *line)
 	return (processed_line);
 }
 
-bool	process_heredoc(t_data *data, char *delimiter)
-{
-	int		fd;
-	char	*line;
-	char	*processed;
 
-	if (access(HERE_DOC_PATH, F_OK))
-		unlink(HERE_DOC_PATH);
-	fd = open(HERE_DOC_PATH, O_CREAT | O_WRONLY | O_TRUNC, 0777);
-	if (fd == -1)
-		return (printf("Minishell: Error opening heredoc"), false);
+
+static void put_user_input_in_temp_doc(int fd, char *delimiter, t_data *data)
+{
+	int		i;
+	char	*processed;
+	char	*line;
+
+	i = 0;
 	while (1)
 	{
 		line = readline("heredoc> ");
-		if (!line || (ft_strlen(line) == ft_strlen(delimiter)
-				&& ft_strncmp(line, delimiter, (ft_strlen(delimiter))) == 0))
+
+		if (line == NULL)
 		{
-			free(line);
-			break ;
+			printf("Minishell: warning: here-document at line %i "
+				"delimited by end-of-file (wanted : '%s')\n",
+				i, delimiter);
+			return ;
 		}
+		
+		if (ft_strlen(line) == ft_strlen(delimiter) && strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
+			{
+				printf("line == %s\n delimiter = %s\n", line, delimiter);
+				free(line);
+				return ;
+			}
 		processed = expand_line(data, line);
 		write(fd, processed, ft_strlen(processed));
 		multi_free(2, line, processed);
+		++i;
 	}
-	close(fd);
-	return (true);
+	return ;
+			
+}
+
+bool	process_heredoc(t_data *data, char *delimiter)
+{
+	int		fd;
+	int		pid;
+	
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (!pid)
+	{
+		signal(SIGINT, here_doc_open_behavior);
+		if (!access(HERE_DOC_PATH, F_OK))
+			unlink(HERE_DOC_PATH);
+		fd = open(HERE_DOC_PATH, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+		if (fd == -1)
+			return (printf("Minishell: Error opening heredoc"), false);
+		put_user_input_in_temp_doc(fd, delimiter, data);
+		close(fd);
+		exit (1);
+	}
+	waitpid(pid, &g_last_signal, 0);
+	signal(SIGINT,standard_behavior);
+	if (!access(HERE_DOC_PATH, F_OK))
+		return (true);
+	return (false);
 }

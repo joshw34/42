@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:06:26 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:46:27 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:57:19 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void	cmd_list_clear(t_cmd *cmds)
 			free(current->cmd);
 		if (current->args)
 			free_array(current->args);
-		if (current->in)
-			redir_list_clear(current->in);
-		if (current->out)
-			redir_list_clear(current->out);
+		if (current->redir)
+			redir_list_clear(current->redir);
 		free(current);
 		current = next;
 	}
@@ -58,8 +56,7 @@ static	void	cmdlist_add(t_cmd *cmds, t_data *data, int start, int end)
 	while (temp_cmds->next != NULL)
 		temp_cmds = temp_cmds->next;
 	temp_cmds->next = new;
-	new->in = get_input_redir(data->tokens, start, end);
-	new->out = get_output_redir(data->tokens, start, end);
+	new->redir = get_redir_list(data->tokens, start, end);
 	new->cmd_n = temp_cmds->cmd_n;
 	new->cmd = parse_cmd(data->tokens, start, end);
 	new->args = parse_cmd_args(data->tokens, start, end);
@@ -77,8 +74,7 @@ static	t_cmd	*cmdlist_new(t_data *data, int start, int end, int n_cmds)
 	t_cmd	*new;
 
 	new = ft_calloc(1, sizeof(t_cmd));
-	new->in = get_input_redir(data->tokens, start, end);
-	new->out = get_output_redir(data->tokens, start, end);
+	new->redir = get_redir_list(data->tokens, start, end);
 	new->cmd_n = n_cmds;
 	new->cmd = parse_cmd(data->tokens, start, end);
 	if (new->cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 18:46:58 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:19:03 by cngogang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_input(t_data *data)
 	{
 		printf("\nexit\n");
 		free(prompt);
-		free_data_struct(data, true);
+		free_data_struct(data, false);
 		g_last_signal = 127;
 		exit(0);
 	}

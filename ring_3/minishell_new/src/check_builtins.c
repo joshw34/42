@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:25 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 17:54:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:49:15 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	check_builtins(t_cmd *cmd)
 	else if (ft_strncmp(cmd->args[0], "export", 7) == 0)
 		export_env_all_arg(cmd);
 	else if (ft_strncmp(cmd->args[0], "unset", 6) == 0)
-		remove_var(cmd->data, cmd->args[1]);
+		unset_env_all_arg(cmd);
 	else
 		return (false);
 	return (true);
