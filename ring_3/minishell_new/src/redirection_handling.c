@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_handling.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 10:20:30 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/21 17:03:58 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:23:58 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	redirection_file_checking_and_selection(t_cmd **command_array,
-int direction)
+void	redirection_file_checking_and_selection(t_cmd **command_array)
 {
 	t_redir	*redirection;
 	int		fd;
 
 	fd = 0;
-	if (!direction)
-		redirection = (*command_array)->in;
-	else
-		redirection = (*command_array)->out;
+	redirection = (*command_array)->redir;
 	while (redirection)
 	{
-		if (fd)
-			close(fd);
+		if (redirection->direction == IN)
+			close((*command_array)->fd_in);
+		else
+			close((*command_array)->fd_out);
 		fd = open_file(redirection);
 		if (fd == -1)
 		{
 			perror("open file");
 			exit(1);
 		}
+		if (redirection->direction == IN)
+			(*command_array)->fd_in = fd;
+		else
+			(*command_array)->fd_out = fd;
 		redirection = redirection->next;
 	}
-	if (!direction)
-		(*command_array)->fd_in = fd;
-	else
-		(*command_array)->fd_out = fd;
 }
 
 void	redirecting_std_input(t_cmd *command_array)
@@ -55,16 +53,19 @@ void	redirecting_std_output(t_cmd *command_array)
 		close(command_array->fd_out);
 }
 
+static	void	redirecting_output_input(t_cmd *command_array)
+{
+	redirecting_std_input(command_array);
+	redirecting_std_output(command_array);
+}
+
 void	redirection_and_execution(t_cmd *command_array)
 {
-	if (command_array->in)
-		redirection_file_checking_and_selection(&command_array, 0);
-	redirecting_std_input(command_array);
-	if (command_array->out)
-		redirection_file_checking_and_selection(&command_array, 1);
 	if (command_array->next)
 		close(command_array->pipe_fd[0]);
-	redirecting_std_output(command_array);
+	if (command_array->redir)
+		redirection_file_checking_and_selection(&command_array);
+	redirecting_output_input(command_array);
 	if (execute_command(command_array) == -1)
 		exit(127);
 	exit(0);

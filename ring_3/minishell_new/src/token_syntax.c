@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:01:16 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/19 22:44:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:06:12 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	bool	check_quotes(char *str)
 	if (q_total % 2 == 0)
 		return (true);
 	else
-		return (printf("%s %c", ERROR_1, c), false);
+		return (printf("%s %c\n", ERROR_1, c), false);
 }
 
 bool	sep_syntax(t_tokens *token)

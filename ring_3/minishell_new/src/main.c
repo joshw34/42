@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:54:48 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 21:08:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:10:17 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int	g_last_signal;
 
-/*void	minishell_non_int(char **env, char **argv)
+void	minishell_non_int(char **env, char *av2)
 {
 	t_data	*data;
 
 	data = init_data_struct(env);
-	data->user_input = parse_argv(argv);
-	data->tokens = get_tokens(data, data->user_input);
-	data->cmds = get_cmds(data);
-	if (data->cmds && data->cmds->args[0] != NULL)
+	if (process_user_input_non_int(data, av2) == true)
 	{
 		if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds))
 			redirection_and_execution_builtin(data->cmds);
@@ -30,17 +27,17 @@ int	g_last_signal;
 			shell_execution(data->cmds);
 	}
 	free_data_struct(data, false);
-}*/
+}
 
 void	minishell(char **env)
 {
 	t_data	*data;
 
 	data = init_data_struct(env);
-	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		signal(SIGINT, standard_behavior);
+		signal(SIGQUIT, SIG_IGN);
 		if (process_user_input(data) == true)
 		{
 			if (data->cmds->cmd_n == 1 && is_a_builtin(data->cmds))
@@ -55,13 +52,18 @@ void	minishell(char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	if (env[0] == NULL)
-		exit(EXIT_FAILURE);
 	g_last_signal = 0;
 	if (ac == 1)
 		minishell(env);
-	(void)av;
-	/*else
-		minishell_non_int(env, av + 1);*/
-	return (0);
+	if (ac > 1)
+	{
+		if (command_option(av[1]) == true)
+		{
+			if (av[2] != NULL)
+				minishell_non_int(env, av[2]);
+			else
+				ft_putstr_fd(ERROR_6, 2);
+		}
+	}
+	return (g_last_signal);
 }

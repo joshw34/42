@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_handling.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:40:04 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/21 15:46:42 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:13:46 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 static void	print_error_finding_command(t_cmd *command_array)
 {
-	ft_putstr_fd(command_array->cmd, STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	if (access(command_array->args[0], F_OK != 0))
+	{
+		ft_putstr_fd(command_array->args[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	}
+	else if (access(command_array->args[0], X_OK) != 0)
+	{
+		ft_putstr_fd(command_array->args[0], STDERR_FILENO);
+		ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+		g_last_signal = 126;
+	}
 }
 
 int	execute_command(t_cmd *command_array)
@@ -27,8 +36,8 @@ int	execute_command(t_cmd *command_array)
 		return (-1);
 	if (access(command_array->args[0], X_OK) == 0)
 		execve(command_array->args[0], command_array->args, command_array->env);
-	//if (redirection_and_execution_builtin(command_array))
-	//	return (0);
+	if (redirection_and_execution_builtin(command_array))
+		return (0);
 	fullpath = get_path_array(command_array->env, (command_array->args)[0]);
 	if (!fullpath)
 		return (print_error_finding_command(command_array), -1);
@@ -48,6 +57,7 @@ void	fork_redirection_and_execution(t_cmd *command_array)
 	command_array->pid = fork();
 	if (!command_array->pid)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		redirection_and_execution(command_array);
 	}
 	signal(SIGINT, SIG_IGN);
@@ -82,7 +92,6 @@ void	shell_execution(t_cmd *command_array)
 {
 	int	status;
 
-	printf("HERE\n");
 	processing_commands(command_array);
 	waiting_sons_processes(command_array, &status);
 }

@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:39 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 13:58:13 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:04:41 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	void	go_full_path(t_data *data, char *new_dir)
 		chdir(new_dir);
 		temp_new_dir = get_realpwd();
 		if (!temp_new_dir)
-			printf("%s\n", ERROR_4);
+			printf("%s%s\n", ERROR_4, ERROR_4_2);
 		temp_pwd = ft_strjoin("PWD=", temp_new_dir);
 		temp_oldpwd = ft_strjoin("OLDPWD=", get_var(data->env, "PWD"));
 		export_env(data, temp_pwd);
@@ -119,6 +119,8 @@ void	change_dir(t_cmd *cmd)
 
 	new_dir = cmd->args[1];
 	g_last_signal = 0;
+	if (cmd->args[2])
+		return (g_last_signal = 1, ft_putstr_fd(ERROR_7, 2));
 	if (!new_dir && get_var(cmd->data->env, "HOME") == NULL)
 		return (ft_putstr_fd("Error: HOME is not set\n", 2));
 	if (!new_dir)

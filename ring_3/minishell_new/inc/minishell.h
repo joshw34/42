@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:19:11 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 17:55:26 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:17:55 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@
 # define ERROR_1 "Minishell: Error: Unexpected EOF: Unclosed "
 # define ERROR_2 "Minishell: Error: Unexpected newline"
 # define ERROR_3 "Minishell: Error: Unexpected token "
-# define ERROR_4 "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory"
-
+# define ERROR_4 "cd: error retrieving current directory: getcwd: cannot "
+# define ERROR_4_2 "access parent directories: No such file or directory"
+# define ERROR_5 "Minishell: Error: Incorrect option: Must be '-c'\n"
+# define ERROR_6 "Minishell: Error: No argument provided\n"
+# define ERROR_7 "Minishell: cd: too many arguments\n"
 # define HERE_DOC_PATH "/tmp/.here_doc_temp" 
 
 /* STRUCT TYPEDEFS */
@@ -120,6 +123,7 @@ bool					valid_input(char *input);
 char					*get_input(t_data *data);
 
 /* process_user_input.c */
+bool					process_user_input_non_int(t_data *data, char *av2);
 bool					process_user_input(t_data *data);
 
 /* token_splitter.c */
@@ -136,10 +140,11 @@ void					remove_tok_quotes(t_tokens *tok);
 void					find_section_end(t_tokens *tok);
 
 /* token_str_join.c */
-int						token_str_join(t_tokens *tok, char *new_var, int var_name_len, char *var_name);
+int						token_str_join(t_tokens *tok, char *new_var,
+							int var_name_len, char *var_name);
 
 /* token_syntax.c */
-bool					sep_syntax(t_tokens * token);
+bool					sep_syntax(t_tokens *token);
 bool					word_syntax(char *str);
 
 /* token_list.c */
@@ -156,7 +161,8 @@ bool					is_a_separator(char c);
 bool					process_heredoc(t_data *data, char *delimiter);
 
 /* token_heredoc_var_insert.c */
-int						hd_var_insert(t_tokens *temp, char *new_var, char *var_name);
+int						hd_var_insert(t_tokens *temp, char *new_var,
+							char *var_name);
 
 /* cmd_list.c */
 void					cmd_list_clear(t_cmd *cmds);
@@ -203,7 +209,7 @@ bool					export_env(t_data *data, char *new_var);
 bool					remove_var(t_data *data, char *var);
 
 /* builtin_var_export_2.c */
-void				    print_ascii_sorted_env(t_data *data);
+void					print_ascii_sorted_env(t_data *data);
 
 /* builtin_var_export_utils.c */
 void					unset_env_all_arg(t_cmd *cmd);
@@ -230,27 +236,22 @@ char					**get_path_array(char **env, char *arg);
 int						exec_command(char **env, char **arg);
 
 /* multi_procesing.c */
-void					waiting_sons_processes(t_cmd *command_array, int *status);
+void					waiting_sons_processes(t_cmd *command_array,
+							int *status);
 
 /* redirection_file_opening.c */
 int						open_file(t_redir *redirection);
 
 /* redirection_handling.c */
-void					redirection_file_checking_and_selection(t_cmd **command_array, int direction);
+void					redirection_file_checking_and_selection(
+							t_cmd **command_array);
 void					redirection_and_execution(t_cmd *command_array);
 void					redirecting_std_input(t_cmd *command_array);
 void					redirecting_std_output(t_cmd *command_array);
 
 /* utils.c */
+bool					command_option(char *str);
 bool					is_whitespace(char *str);
 char					*get_realpwd(void);
-
-/* DEBUG_FUNCS.c */
-void					db_print_with_seps(char *str);
-void					db_print_array(char **array);
-void					db_print_tokens(t_data *data);
-void					db_print_cmds(t_data *data);
-void					db_print_output_redir(t_redir *output);
-void					db_print_input_redir(t_redir *input);
 
 #endif

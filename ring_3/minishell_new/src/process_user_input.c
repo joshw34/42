@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_user_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:26:40 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 16:25:39 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:14:58 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,21 @@ static	bool	get_tokens(t_data *data)
 		return (ft_putstr_fd("Error: failed to create token list", 2), false);
 	if (check_and_expand_tokens(data->tokens) == false)
 		return (false);
-	//db_print_tokens(data);
+	return (true);
+}
+
+bool	process_user_input_non_int(t_data *data, char *av2)
+{
+	if (!data)
+		return (NULL);
+	data->user_input = ft_strdup(av2);
+	if (valid_input(data->user_input) == false)
+		return (false);
+	if (get_tokens(data) == false)
+		return (false);
+	data->cmds = get_cmds(data);
+	if (!data->cmds)
+		return (false);
 	return (true);
 }
 
@@ -39,6 +53,5 @@ bool	process_user_input(t_data *data)
 	data->cmds = get_cmds(data);
 	if (!data->cmds)
 		return (false);
-	db_print_cmds(data);
 	return (true);
 }

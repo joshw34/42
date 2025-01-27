@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:03:53 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 13:03:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:45:45 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	token_str_join(t_tokens *tok, char *new_var, int var_name_len,
 		free(exit_code);
 		return (tok->start);
 	}
-	else if (!new_var)
+	if (!new_var)
 		return (remove_section(tok, var_name_len));
 	else
 		return (insert_var(tok, new_var, var_name_len));

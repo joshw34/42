@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:59:42 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 15:08:25 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:30:02 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ bool	check_and_expand_tokens(t_tokens *token)
 		}
 		else if (temp->sep)
 		{
-			printf("SEP = %s\n", temp->sep);
 			if (sep_syntax(temp) == false)
 				return (false);
 		}

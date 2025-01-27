@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:56:24 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/08 15:40:44 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:16:32 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ t_data	*init_data_struct(char **env)
 {
 	t_data	*data;
 	char	*temp;
+	char	*temp2;
 
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		return (NULL);
 	data->env = init_env(env);
-	temp = ft_strjoin("OLDPWD=", get_var(data->env, "PWD"));
-	export_env(data, temp);
-	free(temp);
+	if (!env[0])
+	{
+		temp = get_realpwd();
+		temp2 = ft_strjoin("PWD=", temp);
+		export_env(data, temp2);
+		multi_free(2, temp, temp2);
+	}
 	return (data);
 }

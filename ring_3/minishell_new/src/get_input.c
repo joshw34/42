@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:57:19 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 15:19:03 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:25:34 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static	char	*get_prompt(void)
 	char	*prompt;
 	char	*pwd;
 
-	user = ft_strjoin(getenv("USER"), "@");
+	if (getenv("USER") == NULL)
+		user = ft_strdup("");
+	else
+		user = ft_strjoin(getenv("USER"), "@");
 	pwd = get_realpwd();
 	if (pwd[0] == '\0')
 		return (user);
 	dir = ft_strjoin(pwd, " $ ");
 	free(pwd);
-	if (dir[0] == '/' && dir[1] == ' ')
-		prompt = ft_strjoin(user, dir);
-	else
-		prompt = ft_strjoin(user, ft_strrchr(dir, '/') + 1);
+	prompt = ft_strjoin(user, dir);
 	multi_free(2, user, dir);
 	return (prompt);
 }
@@ -49,7 +49,7 @@ char	*get_input(t_data *data)
 	ret = readline(prompt);
 	if (!ret)
 	{
-		printf("\nexit\n");
+		printf("exit\n");
 		free(prompt);
 		free_data_struct(data, false);
 		g_last_signal = 127;

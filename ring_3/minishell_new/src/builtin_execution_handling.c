@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 11:46:36 by cngogang          #+#    #+#             */
-/*   Updated: 2025/01/20 20:29:51 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:29:47 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ int	redirection_and_execution_builtin(t_cmd *cmd)
 	int	std_out_save;
 	int	return_value;
 
-	printf("BUILTIN\n");
+	if (!is_a_builtin(cmd))
+		return (0);
 	std_out_save = dup(STDOUT_FILENO);
-	if (cmd->out)
-		redirection_file_checking_and_selection(&cmd, 1);
+	if (cmd->redir)
+		redirection_file_checking_and_selection(&cmd);
 	if (cmd->next)
 		close(cmd->pipe_fd[0]);
 	redirecting_std_output(cmd);

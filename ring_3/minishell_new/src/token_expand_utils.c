@@ -6,22 +6,28 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:29:27 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 13:04:01 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:45:24 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <stdbool.h>
 
 void	expand_tilde(t_tokens *tok)
 {
 	char	*temp1;
 	char	*temp2;
 
-	if (get_var(tok->data->env, "HOME") == NULL)
+	if (tok->word[0] != '~')
+		return ;
+	if (get_var(tok->data->env, "HOME") != NULL)
+		temp1 = get_var(tok->data->env, "HOME");
+	else if (getenv("HOME") != NULL)
 		temp1 = getenv("HOME");
 	else
-		temp1 = get_var(tok->data->env, "HOME");
+	{
+		tok->start = tok->start + 1;
+		return ;
+	}
 	if (tok->word[0] == '~')
 	{
 		temp2 = ft_strdup(tok->word + 1);

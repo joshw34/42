@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:47 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/20 19:51:22 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:27:35 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,12 @@
 
 static	void	echo_print(t_cmd *cmd, int i)
 {
-	int	j;
-
 	while (cmd->args[i])
 	{
-		j = 0;
-		while (cmd->args[i][j])
-		{
-			if (cmd->args[i][j] != 34)
-				ft_putchar_fd(cmd->args[i][j], 1);
-			j++;
-		}
+		printf("%s", cmd->args[i]);
 		i++;
 		if (cmd->args[i])
-			write(1, " ", 1);
+			printf(" ");
 	}
 }
 
@@ -62,15 +54,10 @@ void	echo_cmd(t_cmd *cmd)
 		g_last_signal = 0;
 		return ;
 	}
-	if (only_n_after_minus(cmd->args[i]) == 0)
-	{
-		echo_print(cmd, i);
-		write(1, "\n", 1);
-			return ;
-	}
 	while (cmd->args[i] && only_n_after_minus(cmd->args[i]) == 1)
 		++i;
-	if (cmd->args[i])
-		echo_print(cmd, i);
+	echo_print(cmd, i);
+	if (i <= 1)
+		printf("\n");
 	g_last_signal = 0;
 }

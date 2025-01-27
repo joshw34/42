@@ -6,7 +6,7 @@
 /*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:36:46 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 13:26:22 by jwhitley         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:29:28 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	char	**remove_var_copy(char **old_env, char *var, int size)
 	while (old_env[i] != NULL)
 	{
 		if (ft_strncmp(old_env[i], var, len) == 0 && (var[len] == '='
-			|| var[len] == '\0'))
+				|| var[len] == '\0'))
 		{
 			i++;
 			continue ;
@@ -122,7 +122,7 @@ bool	export_env(t_data *data, char *new_var)
 		return (g_last_signal = 1, false);
 	split = ft_split(new_var, '=');
 	if (!split[0])
-		return (g_last_signal = 1,free_array(split), false);
+		return (g_last_signal = 1, free_array(split), false);
 	old_var = find_var(data->env, split[0]);
 	if (old_var)
 	{

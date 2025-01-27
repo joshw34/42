@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_process_heredoc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cngogang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jwhitley <jwhitley@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:15:07 by jwhitley          #+#    #+#             */
-/*   Updated: 2025/01/21 15:53:52 by cngogang         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:28:44 by jwhitley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ static	char	*expand_line(t_data *data, char *line)
 	return (processed_line);
 }
 
-
-
-static void put_user_input_in_temp_doc(int fd, char *delimiter, t_data *data)
+static	void	put_user_input_in_temp_doc(int fd, char *delimiter,
+				t_data *data)
 {
 	int		i;
 	char	*processed;
@@ -90,7 +89,6 @@ static void put_user_input_in_temp_doc(int fd, char *delimiter, t_data *data)
 	while (1)
 	{
 		line = readline("heredoc> ");
-
 		if (line == NULL)
 		{
 			printf("Minishell: warning: here-document at line %i "
@@ -98,27 +96,22 @@ static void put_user_input_in_temp_doc(int fd, char *delimiter, t_data *data)
 				i, delimiter);
 			return ;
 		}
-		
-		if (ft_strlen(line) == ft_strlen(delimiter) && strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
-			{
-				printf("line == %s\n delimiter = %s\n", line, delimiter);
-				free(line);
-				return ;
-			}
+		if (ft_strlen(line) == ft_strlen(delimiter) && strncmp(line, delimiter,
+				ft_strlen(delimiter)) == 0)
+			return (free(line));
 		processed = expand_line(data, line);
 		write(fd, processed, ft_strlen(processed));
 		multi_free(2, line, processed);
 		++i;
 	}
 	return ;
-			
 }
 
 bool	process_heredoc(t_data *data, char *delimiter)
 {
 	int		fd;
 	int		pid;
-	
+
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (!pid)
@@ -134,7 +127,7 @@ bool	process_heredoc(t_data *data, char *delimiter)
 		exit (1);
 	}
 	waitpid(pid, &g_last_signal, 0);
-	signal(SIGINT,standard_behavior);
+	signal(SIGINT, standard_behavior);
 	if (!access(HERE_DOC_PATH, F_OK))
 		return (true);
 	return (false);
