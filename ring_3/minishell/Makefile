@@ -7,12 +7,45 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_FILES =	$(SRC_DIR)/main.c \
-			$(SRC_DIR)/utils.c \
-			$(SRC_DIR)/read_input.c \
-			$(SRC_DIR)/run_single_command.c \
+			$(SRC_DIR)/init_data_struct.c \
+			$(SRC_DIR)/get_input.c \
+			$(SRC_DIR)/process_user_input.c \
+			$(SRC_DIR)/token_splitter.c \
+			$(SRC_DIR)/token_expand.c \
+			$(SRC_DIR)/token_syntax.c \
+			$(SRC_DIR)/token_expand_utils.c \
+			$(SRC_DIR)/token_str_join.c \
+			$(SRC_DIR)/token_list.c \
+			$(SRC_DIR)/token_utils.c \
+			$(SRC_DIR)/token_process_heredoc.c \
+			$(SRC_DIR)/token_heredoc_insert_var.c \
+			$(SRC_DIR)/cmd_list.c \
+			$(SRC_DIR)/cmd_list_utils.c \
+			$(SRC_DIR)/cmd_list_parse_args.c \
+			$(SRC_DIR)/redir_list.c \
+			$(SRC_DIR)/free.c \
+			$(SRC_DIR)/free_list_clear.c \
+			$(SRC_DIR)/signal_handling.c \
+			$(SRC_DIR)/builtin_cd.c \
+			$(SRC_DIR)/builtin_cd_utils.c \
+			$(SRC_DIR)/builtin_echo.c \
+			$(SRC_DIR)/builtin_execution_handling.c \
+			$(SRC_DIR)/builtin_exit.c \
+			$(SRC_DIR)/builtin_pwd.c \
+			$(SRC_DIR)/builtin_var_export.c \
+			$(SRC_DIR)/builtin_var_export_2.c \
+			$(SRC_DIR)/builtin_var_export_utils.c \
+			$(SRC_DIR)/builtin_var_get_print.c \
+			$(SRC_DIR)/builtin_var_utils.c \
 			$(SRC_DIR)/check_builtins.c \
-			$(SRC_DIR)/free_exit.c \
-			
+			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/execution_handling.c \
+			$(SRC_DIR)/fetch_path_command.c \
+			$(SRC_DIR)/multi_processing_handling.c \
+			$(SRC_DIR)/redirection_file_opening.c \
+			$(SRC_DIR)/redirection_handling.c \
+			$(SRC_DIR)/DEBUG_FUNCS.c \
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 REMOVE = rm -f
